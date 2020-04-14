@@ -1,15 +1,25 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>SkyOS</title>
+    <title>Lonestar Cargo</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
+    <%= favicon_link_tag asset_path('favicon.png') %>
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
-    <%= yield %>
+    <header>
+      <%= render partial: 'layouts/menu' %>
+    </header>
+
+    <main role="main" id="content">
+      <%= render partial: "layouts/alerts" %>
+      <%= yield %>
+    </main>
+
+    <%= render partial: 'layouts/footer' %>
   </body>
 </html>

@@ -1,0 +1,53 @@
+@import "bootstrap/dist/css/bootstrap";
+
+body {
+  background-color: #333;
+}
+
+main {
+  background-color: #fff;
+}
+
+.alert {
+  border-radius: 0;
+  position: absolute;
+  width: 100%;
+  z-index: 1001;
+}
+
+.alert-alert {
+  @extend .alert-primary;
+}
+
+.alert-notice {
+  @extend .alert-warning;
+}
+
+#content {
+  min-height: 90vh;
+}
+
+#footer {
+  @extend .text-light;
+  background-color: #333;
+  bottom: 0;
+  height: 50px;
+  width: 100%;
+
+  a {
+    @extend .text-light;
+  }
+
+  .small {
+    font-size: 0.6em;
+  }
+}
+
+#header {
+  height: 75px;
+  padding-left: 25px;
+}
+
+.navbar-custom {
+  background-color: #0b375b;
+}

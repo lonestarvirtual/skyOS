@@ -1,0 +1,24 @@
+<footer class="footer" id="footer">
+  <div class="container h-100">
+    <div class="row h-100">
+      <div class="col-5 d-flex justify-content-center my-auto small">
+        &copy; 2018-<%= Time.now.strftime("%Y") %>
+        Lonestar Virtual. All Rights Reserved.
+      </div>
+
+      <div class="col-7 d-flex justify-content-end my-auto small">
+        <%= link_to "#", class: "nav-link p-0" do %>
+          <i class="fas fa-angle-right"></i> Privacy Policy
+        <% end %>
+
+        <%= link_to "#", class: "nav-link p-0 pl-1" do %>
+          <i class="fas fa-angle-right"></i> Terms of Use
+        <% end %>
+
+        <%= link_to "#", class: "nav-link p-0 pl-1" do %>
+          <i class="fas fa-angle-right"></i> Contact Us
+        <% end %>
+      </div>
+    </div>
+  </div>
+</footer>
