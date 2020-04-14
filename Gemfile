@@ -37,6 +37,7 @@ group :development, :test do
   gem 'factory_bot'
   gem 'faker', git: 'https://github.com/faker-ruby/faker.git', branch: 'master'
   gem 'rspec-rails', '~> 4.0.0'
+  gem 'shoulda-matchers'
 end
 
 group :development do
