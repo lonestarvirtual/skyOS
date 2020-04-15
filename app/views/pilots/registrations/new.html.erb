@@ -1,0 +1,41 @@
+<section class="pt-3 pb-3 mb-3 bg-dark text-light">
+  <div class="container">
+    <h3>Join Now!</h3>
+  </div>
+</section>
+
+<div class="container pb-2" id="join-container">
+  <div class="row">
+    <div class="col-lg-4 mt-sm-2" id="left-column">
+      <h3>Welcome!</h3>
+      <p>
+        Become a star at one of today's premier virtual airlines!
+        We look forward to flying with you soon.
+      </p>
+
+      <div class="d-none d-lg-block">
+        <h5>Already registered?</h5>
+        <%= render "pilots/shared/links" %>
+      </div>
+    </div>
+
+    <div class="col-lg-8">
+      <div class="card mt-sm-2" id="join-form">
+        <div class="card-header pb-0">
+          <h5>Registration Details</h5>
+        </div>
+
+        <div class="card-body">
+          <%= render partial: "form" %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row d-lg-none mt-4 ml-2">
+    <div col="12">
+      <h5>Already registered?</h5>
+      <%= render "pilots/shared/links" %>
+    </div>
+  </div>
+</div>

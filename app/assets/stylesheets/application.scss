@@ -21,6 +21,7 @@ $fa-font-path: '@fortawesome/fontawesome-free/webfonts';
 
 // Node modules
 @import 'bootstrap/dist/css/bootstrap';
+@import 'cookieconsent/build/cookieconsent.min';
 @import '@fortawesome/fontawesome-free/scss/fontawesome';
 @import '@fortawesome/fontawesome-free/scss/solid';
 @import '@fortawesome/fontawesome-free/scss/regular';
@@ -30,3 +31,4 @@ $fa-font-path: '@fortawesome/fontawesome-free/webfonts';
 // app/assets/stylesheets
 @import 'boostrap_custom';
 @import 'home';
+@import 'devise';

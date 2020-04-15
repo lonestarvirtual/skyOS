@@ -1,0 +1,84 @@
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+  <div class="row">
+    <div class="col">
+      <%= f.label "First Name" %>
+      <%= f.text_field :first_name, class: "form-control", autofocus: true, required: true %>
+
+      <div class="invalid-feedback">
+        <%= resource.errors[:first_name].join(", ") %>
+      </div>
+    </div>
+    <div class="col">
+      <%= f.label "Last Name" %>
+      <%= f.text_field :last_name, class: "form-control", required: true %>
+
+      <div class="invalid-feedback">
+        <%= resource.errors[:last_name].join(", ") %>
+      </div>
+    </div>
+  </div>
+
+  <div class="row mt-1">
+    <div class="col">
+      <%= f.label :email %>
+      <%= f.email_field :email, class: "form-control", autocomplete: "email", required: true %>
+
+      <% if resource.errors[:email].empty? %>
+        <small id="emailHelp" class="form-text text-muted">
+          We'll never share your email with anyone else.
+        </small>
+      <% else %>
+        <div class="invalid-feedback">
+          Email <%= resource.errors[:email].join(", ") %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="row mt-1">
+    <div class="col">
+      <%= f.label :password %>
+      <%= f.password_field :password, class: "form-control", autocomplete: "new-password", required: true %>
+      <% if @minimum_password_length && resource.errors[:password].empty? %>
+        <small id="passwordHelp" class="form-text text-muted">
+          <%= @minimum_password_length %> characters minimum
+        </small>
+      <% else %>
+        <div class="invalid-feedback">
+          Password <%= resource.errors[:password].join(", ") %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="row mt-1">
+    <div class="col">
+      <%= f.label :password_confirmation %>
+      <%= f.password_field :password_confirmation, class: "form-control", autocomplete: "new-password", required: true %>
+
+      <div class="invalid-feedback">
+        Password confirmation <%= resource.errors[:password_confirmation].join(", ") %>
+      </div>
+    </div>
+  </div>
+
+  <%- if ENV['RECAPTCHA_SITE_KEY'] && ENV['RECAPTCHA_SECRET_KEY'] %>
+  <div class="row mt-4">
+    <div class="col">
+      <%= recaptcha_tags %>
+
+      <%- unless resource.errors[:recaptcha].empty? %>
+      <div class="small text-danger">
+        <%= resource.errors[:recaptcha].join(", ") %>
+      </div>
+      <%- end %>
+    </div>
+  </div>
+  <%- end %>
+
+  <div class="row col mt-4">
+    <small>By registering, you agree to the Terms of Use</small>
+  </div>
+
+  <%= f.submit "Join", class: "btn btn-success mt-1 w-100" %>
+<% end %>

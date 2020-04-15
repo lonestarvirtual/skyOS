@@ -1,5 +1,13 @@
 require: rubocop-rails
 
+inherit_mode:
+  merge:
+    - Exclude
+
+AllCops:
+  Exclude:
+    - db/**/*
+
 Lint/RaiseException:
   Enabled: true
 

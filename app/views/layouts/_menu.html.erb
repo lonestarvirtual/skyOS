@@ -1,26 +1,35 @@
 <nav class="navbar navbar-expand-lg navbar-custom navbar-dark">
-  <a class="navbar-brand" href="#">
+  <%= link_to root_path, class: "navbar-brand" do %>
     <%= image_tag "lonestar-logo.png" %>
-  </a>
+  <% end %>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav ml-auto">
-      <li class="nav-item active">
-        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+      <li class="nav-item <%= active_class(root_path) %>">
+        <%= link_to 'Home', root_path, class: 'nav-link' %>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="#">Pilots</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Register</a>
+        <a class="nav-link" href="#">Fleet</a>
+      </li>
+      <li class="nav-item <%= active_class(new_pilot_registration_path) %>">
+        <%= link_to 'Join', new_pilot_registration_path, class: "nav-link" %>
       </li>
     </ul>
 
-    <span class="pl-2">
-      <a class="btn btn-success" href="#">Login</a>
-    </span>
+    <%- if pilot_signed_in? %>
+      <span class="nav-item">
+        <%= link_to 'Logout', destroy_pilot_session_path, method: :delete, class: 'nav-link' %>
+      </span>
+    <%- else %>
+      <span class="pl-2">
+        <%= link_to 'Login', new_pilot_session_path, class: 'btn btn-success' %>
+      </span>
+    <%- end %>
   </div>
 </nav>
