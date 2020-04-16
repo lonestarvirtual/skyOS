@@ -23,15 +23,9 @@
       <%= f.label :email %>
       <%= f.email_field :email, class: "form-control", autocomplete: "email", required: true %>
 
-      <% if resource.errors[:email].empty? %>
-        <small id="emailHelp" class="form-text text-muted">
-          We'll never share your email with anyone else.
-        </small>
-      <% else %>
-        <div class="invalid-feedback">
-          Email <%= resource.errors[:email].join(", ") %>
-        </div>
-      <% end %>
+      <div class="invalid-feedback">
+        Email <%= resource.errors[:email].join(", ") %>
+      </div>
     </div>
   </div>
 
@@ -77,7 +71,21 @@
   <%- end %>
 
   <div class="row col mt-4">
-    <small>By registering, you agree to the Terms of Use</small>
+    <ul class="list-unstyled">
+      <li>
+        <small>
+          You must be at least 13 years of age to join.
+        </small>
+      </li>
+      <li>
+        <small>
+          By registering, you agree to the
+          <%= link_to 'Terms of Use', policy_path('terms') %> and
+          <%= link_to 'Privacy Policy', policy_path('privacy') %>
+        </small>
+      </li>
+    </ul>
+
   </div>
 
   <%= f.submit "Join", class: "btn btn-success mt-1 w-100" %>

@@ -56,7 +56,7 @@
 
             <div class="row mt-1">
               <div class="col">
-                <%= f.label :password %>
+                <%= f.label :new_password %>
                 <%= f.password_field :password, class: "form-control", autocomplete: "new-password", required: true %>
                 <% if @minimum_password_length && resource.errors[:password].empty? %>
                   <small id="passwordHelp" class="form-text text-muted">

@@ -10,6 +10,7 @@ class RegistrationsController < Devise::RegistrationsController
   # verify reCaptcha was valid
   #
   # rubocop:disable Style/GuardClause
+  # rubocop:disable Metrics/MethodLength
   def check_captcha
     # return if recaptcha is not configured
     return unless ENV['RECAPTCHA_SITE_KEY'] && ENV['RECAPTCHA_SECRET_KEY']
@@ -18,10 +19,10 @@ class RegistrationsController < Devise::RegistrationsController
     resource.validate # Look for any other validation errors besides reCAPTCHA
 
     success = verify_recaptcha(
-        action:        'registration',
-        model:         resource,
-        attribute:     :recaptcha,
-        minimum_score: 0.5
+      action: 'registration',
+      model: resource,
+      attribute: :recaptcha,
+      minimum_score: 0.5
     )
 
     unless success
@@ -30,6 +31,7 @@ class RegistrationsController < Devise::RegistrationsController
     end
   end
   # rubocop:enable Style/GuardClause
+  # rubocop:enable Metrics/MethodLength
 
   def sign_up_params
     params.require(:pilot).permit(:first_name,

@@ -12,4 +12,6 @@ Rails.application.routes.draw do
                sign_up: 'join'
              }
   root to: 'home#index'
+
+  resources :policy, only: :show
 end
