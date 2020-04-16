@@ -1,29 +1,24 @@
-# README
+skyOS is the web presence of Lonestar Virtual
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Development Getting Started
 
-Things you may want to cover:
+Developed with Ruby: 2.6.3p62 / Rails: 6.0.2.2
 
-* Ruby version
+To get the Rails server running locally:
 
-* System dependencies
+* Clone this repo
+* `bundle install` to install required dependencies
+* `yarn install --check-files` install front-end dependencies
+* `rake db:setup` to create and seed database
+* `rails s` to start the local server
 
-* Configuration
+# Configuration
 
-* Database creation
+## Environment Variables
 
-* Database initialization
+| Syntax                    |             | Description                     |
+| :---                      |   :----:    | ------------                    |
+| RECAPTCHA_SITE_KEY        | *optional*  | Google reCAPTCHA site key (v3)  |
+| RECAPTCHA_SECRET_KEY      | *optional*  | Google reCAPTCHA secret key (v3)|
 
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-
-## Recaptcha configuration
- 
-export RECAPTCHA_SITE_KEY   = '6Lc6BAAAAAAAAChqRbQZcn_yyyyyyyyyyyyyyyyy'
-export RECAPTCHA_SECRET_KEY = '6Lc6BAAAAAAAAKN3DRm6VA_xxxxxxxxxxxxxxxxx'
+  
