@@ -10,7 +10,7 @@ module GoogleRecaptcha
   SECRET_KEY = Rails.application.credentials.dig(
     :google_recaptcha,
     Rails.env.to_sym,
-    :site_key
+    :secret_key
   )
 
   # Returns true if GoogleAnalytics is enabled

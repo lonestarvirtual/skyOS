@@ -13,5 +13,9 @@ Rails.application.routes.draw do
              }
   root to: 'home#index'
 
+  resource  :contact, only: [:create], as: :contact do
+    get '/' => 'contacts#new'
+  end
+
   resources :policy, only: :show
 end

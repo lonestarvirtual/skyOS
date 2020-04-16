@@ -30,5 +30,9 @@ $fa-font-path: '@fortawesome/fontawesome-free/webfonts';
 
 // app/assets/stylesheets
 @import 'boostrap_custom';
-@import 'home';
+@import 'contacts';
 @import 'devise';
+@import 'home';
+
+// Google reCAPTCHA styling
+.grecaptcha-badge { visibility: hidden; }
