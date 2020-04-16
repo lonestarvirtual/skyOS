@@ -16,6 +16,12 @@ class ContactsController < ApplicationController
 
   def new
     @contact = Contact.new
+    return unless pilot_signed_in?
+
+    # Pre-fill contact form with logged in user details
+    @contact.first_name = current_pilot.first_name
+    @contact.last_name = current_pilot.last_name
+    @contact.email = current_pilot.email
   end
 
   private
@@ -40,10 +46,20 @@ class ContactsController < ApplicationController
 
     render :new unless success
   end
-
   # rubocop:enable Metrics/MethodLength
 
   def contact_params
-    params.require(:contact).permit(:first_name, :last_name, :email, :message)
+    attr = params.require(:contact).permit(
+      :first_name, :last_name, :email, :message
+    )
+
+    return attr unless pilot_signed_in?
+
+    attr = params.require(:contact).permit(:message)
+    attr[:first_name] = current_pilot.first_name
+    attr[:last_name]  = current_pilot.last_name
+    attr[:email]      = current_pilot.email
+
+    attr
   end
 end

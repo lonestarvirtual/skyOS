@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col">
       <%= f.label "First Name" %>
-      <%= f.text_field :first_name, class: "form-control", autofocus: true, required: true %>
+      <%= f.text_field :first_name, class: "form-control", autofocus: true, required: true, disabled: pilot_signed_in? %>
 
       <div class="invalid-feedback">
         First name <%= @contact.errors[:first_name].join(", ") %>
@@ -10,7 +10,7 @@
     </div>
     <div class="col">
       <%= f.label "Last Name" %>
-      <%= f.text_field :last_name, class: "form-control", required: true %>
+      <%= f.text_field :last_name, class: "form-control", required: true, disabled: pilot_signed_in? %>
 
       <div class="invalid-feedback">
         Last name <%= @contact.errors[:last_name].join(", ") %>
@@ -21,7 +21,7 @@
   <div class="row mt-1">
     <div class="col">
       <%= f.label :email %>
-      <%= f.email_field :email, class: "form-control", autocomplete: "email", required: true %>
+      <%= f.email_field :email, class: "form-control", autocomplete: "email", required: true, disabled: pilot_signed_in? %>
 
       <div class="invalid-feedback">
         Email <%= @contact.errors[:email].join(", ") %>
