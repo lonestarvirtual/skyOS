@@ -65,7 +65,7 @@
   <%- if ENV['RECAPTCHA_SITE_KEY'] && ENV['RECAPTCHA_SECRET_KEY'] %>
   <div class="row mt-4">
     <div class="col">
-      <%= recaptcha_tags %>
+      <%= recaptcha_v3(action: 'registration', turbolinks: true) %>
 
       <%- unless resource.errors[:recaptcha].empty? %>
       <div class="small text-danger">
