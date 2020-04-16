@@ -39,7 +39,8 @@ google_recaptcha:
 
 ## Environment Variables
 
-| Syntax                |             | Description                               |
-| :---                  |   :----:    | :-----------                              |
-| RAILS_MASTER_KEY      |**required** | Master key used for credential store      |
-| RECAPTCHA_MIN_SCORE   | *optional*  | Sets the minimum reCAPTCHA required score |
+| Syntax                |             | Description                                                        |
+| :---                  |   :----:    | :-----------                                                       |
+| RAILS_MASTER_KEY      |**required** | Master key used for credential store                               |
+| RECAPTCHA_MIN_SCORE   | *optional*  | Sets the minimum reCAPTCHA required score                          |
+| STAFF_EMAIL           |**required** | Sets the email address to use for contacts and reply-to in mailers |
