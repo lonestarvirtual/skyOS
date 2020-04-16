@@ -17,8 +17,6 @@ To get the Rails server running locally:
 ## Environment Variables
 
 | Syntax                    |             | Description                     |
-| :---                      |   :----:    | ------------                    |
+| :---                      |   :----:    | :-----------                    |
 | RECAPTCHA_SITE_KEY        | *optional*  | Google reCAPTCHA site key (v3)  |
 | RECAPTCHA_SECRET_KEY      | *optional*  | Google reCAPTCHA secret key (v3)|
-
-  
