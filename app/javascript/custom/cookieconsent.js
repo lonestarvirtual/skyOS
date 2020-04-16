@@ -1,5 +1,9 @@
 window.addEventListener('load', function() {
     window.cookieconsent.initialise({
+        'content': {
+            link: 'Privacy Policy',
+            href: '/policy/privacy'
+        },
         'palette': {
             'popup': {
                 'background': '#000'
@@ -11,6 +15,6 @@ window.addEventListener('load', function() {
         law: {
             regionalLaw: false,
         },
-        location: true,
+        location: false,
     });
 });
