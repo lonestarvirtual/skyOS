@@ -12,11 +12,25 @@ To get the Rails server running locally:
 * `rake db:setup` to create and seed database
 * `rails s` to start the local server
 
-# Configuration
+## Configuration
+
+This site uses the Rails encrypted credential store. The following
+credentials may be configured with `rails credentials:edit`
+
+```yaml
+# Google Analytics
+# Remove entire section/environment or leave blank to disable
+google_analytics:
+  development:
+    tracking_id: UA-XXXXXXX-X
+  production:
+    tracking_id: UA-XXXXXXX-X
+```
 
 ## Environment Variables
 
-| Syntax                    |             | Description                     |
-| :---                      |   :----:    | :-----------                    |
-| RECAPTCHA_SITE_KEY        | *optional*  | Google reCAPTCHA site key (v3)  |
-| RECAPTCHA_SECRET_KEY      | *optional*  | Google reCAPTCHA secret key (v3)|
+| Syntax                |             | Description                          |
+| :---                  |   :----:    | :-----------                         |
+| RAILS_MASTER_KEY      |**required** | Master key used for credential store |
+| RECAPTCHA_SITE_KEY    | *optional*  | Google reCAPTCHA site key (v3)       |
+| RECAPTCHA_SECRET_KEY  | *optional*  | Google reCAPTCHA secret key (v3)     |
