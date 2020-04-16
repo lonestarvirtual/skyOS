@@ -25,6 +25,16 @@ google_analytics:
     tracking_id: UA-XXXXXXX-X
   production:
     tracking_id: UA-XXXXXXX-X
+
+# Google reCAPTCHA
+# Remove section/environment or leave blank to disable
+google_recaptcha:
+  development:
+    site_key: <SITE_KEY>
+    secret_key: <SECRET_KEY>
+  production:
+    site_key: <SITE_KEY> 
+    secret_key: <SECRET_KEY>
 ```
 
 ## Environment Variables
@@ -32,5 +42,3 @@ google_analytics:
 | Syntax                |             | Description                          |
 | :---                  |   :----:    | :-----------                         |
 | RAILS_MASTER_KEY      |**required** | Master key used for credential store |
-| RECAPTCHA_SITE_KEY    | *optional*  | Google reCAPTCHA site key (v3)       |
-| RECAPTCHA_SECRET_KEY  | *optional*  | Google reCAPTCHA secret key (v3)     |

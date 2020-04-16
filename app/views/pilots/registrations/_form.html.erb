@@ -56,10 +56,10 @@
     </div>
   </div>
 
-  <%- if ENV['RECAPTCHA_SITE_KEY'] && ENV['RECAPTCHA_SECRET_KEY'] %>
+  <%- if GoogleRecaptcha.enabled? %>
   <div class="row mt-4">
     <div class="col">
-      <%= recaptcha_v3(action: 'registration', turbolinks: true) %>
+      <%= recaptcha_v3(action: 'registration', site_key: GoogleRecaptcha::SITE_KEY, turbolinks: true) %>
 
       <%- unless resource.errors[:recaptcha].empty? %>
       <div class="small text-danger">
