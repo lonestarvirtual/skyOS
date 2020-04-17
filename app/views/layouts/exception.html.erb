@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <%= render partial: 'layouts/head' %>
+  </head>
+
+  <body>
+    <header>
+      <%= render partial: 'layouts/menu' %>
+    </header>
+
+    <main role="main" id="content">
+      <%= render partial: "layouts/alerts" %>
+
+      <div class="row justify-content-center">
+        <div class="col-lg-6">
+          <div class="card mt-4" id="join-form">
+            <div class="card-header pb-0">
+              <h5>Error</h5>
+            </div>
+
+            <div class="card-body">
+              <%= yield %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <%= render partial: 'layouts/footer' %>
+  </body>
+</html>

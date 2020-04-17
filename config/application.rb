@@ -35,5 +35,13 @@ module SkyOS
 
     # Don't generate system test files.
     config.generators.system_tests = nil
+
+    # Custom error pages
+    config.exception_handler = {
+      # dev: true, # enable to test in development
+      exceptions: {
+        all: { layout: 'exception' }
+      }
+    }
   end
 end

@@ -1,18 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Lonestar Cargo</title>
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
-
-    <%= favicon_link_tag asset_path('favicon.png') %>
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
-
-    <%- if GoogleAnalytics.enabled? %>
-      <%= javascript_include_tag GoogleAnalytics::JS_URL, async: true %>
-      <%= javascript_include_tag 'google_analytics', 'data-turbolinks-track': 'reload' %>
-    <% end %>
+    <%= render partial: 'layouts/head' %>
   </head>
 
   <body>
