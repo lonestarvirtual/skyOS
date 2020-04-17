@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class ContactsController < ApplicationController
+  skip_before_action    :authenticate_pilot!
+  skip_after_action     :verify_authorized
   prepend_before_action :check_captcha, only: [:create]
 
   def create
