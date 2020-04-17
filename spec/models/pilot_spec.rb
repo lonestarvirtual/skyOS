@@ -54,4 +54,18 @@ RSpec.describe Pilot, type: :model do
       expect(pilot.pid).to eq 101
     end
   end
+
+  describe 'titleize_name' do
+    it 'should titleize the first name' do
+      first_name = pilot.first_name
+      pilot.valid?
+      expect(pilot.first_name).to eq first_name.titleize
+    end
+
+    it 'should titleize the last name' do
+      last_name = pilot.last_name
+      pilot.valid?
+      expect(pilot.last_name).to eq last_name.titleize
+    end
+  end
 end

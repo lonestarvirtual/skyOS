@@ -6,6 +6,8 @@ class Pilot < ApplicationRecord
   devise :confirmable, :database_authenticatable, :lockable, :registerable,
          :recoverable, :rememberable, :trackable, :timeoutable, :validatable
 
+  after_validation :titleize_name
+
   before_validation :assign_group, only: :create
   before_validation :assign_pid
 
@@ -52,5 +54,14 @@ class Pilot < ApplicationRecord
       last = Pilot.order(pid: :desc).first
       self.pid = (last.pid >= start ? last.pid + 1 : start)
     end
+  end
+
+  # Titleize name
+  #
+  def titleize_name
+    return if first_name.nil? || last_name.nil?
+
+    self.first_name = first_name.titleize
+    self.last_name  = last_name.titleize
   end
 end
