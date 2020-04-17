@@ -10,16 +10,29 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_17_163200) do
+ActiveRecord::Schema.define(version: 2020_04_17_182805) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
 
+  create_table "group_permissions", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "group_id"
+    t.uuid "permission_id"
+    t.index ["group_id"], name: "index_group_permissions_on_group_id"
+    t.index ["permission_id"], name: "index_group_permissions_on_permission_id"
+  end
+
   create_table "groups", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name", null: false
     t.string "description", null: false
     t.index ["name"], name: "index_groups_on_name", unique: true
+  end
+
+  create_table "permissions", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "model", null: false
+    t.string "action", null: false
+    t.string "description", null: false
   end
 
   create_table "pilots", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -63,5 +76,7 @@ ActiveRecord::Schema.define(version: 2020_04_17_163200) do
     t.index ["var"], name: "index_settings_on_var", unique: true
   end
 
+  add_foreign_key "group_permissions", "groups"
+  add_foreign_key "group_permissions", "permissions"
   add_foreign_key "pilots", "groups"
 end

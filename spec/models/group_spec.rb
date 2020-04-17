@@ -10,6 +10,8 @@ RSpec.describe Group, type: :model do
   let(:group) { build(:group) }
 
   describe 'ActiveRecord associations' do
+    it { expect(group).to have_many(:group_permissions) }
+    it { expect(group).to have_many(:permissions).through(:group_permissions) }
     it { expect(group).to have_many(:pilots) }
   end
 

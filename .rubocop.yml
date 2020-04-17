@@ -18,6 +18,10 @@ Metrics/BlockLength:
   Exclude:
     - spec/**/*
 
+Rails/SkipsModelValidations:
+  Exclude:
+    - spec/**/*
+
 Style/Documentation:
   Enabled: false
 

@@ -28,6 +28,22 @@ RSpec.describe Pilot, type: :model do
     # Inclusion/acceptance of values
   end
 
+  describe 'can?' do
+    before :each do
+      @pilot = create(:pilot)
+    end
+
+    it 'should return true if the pilot has the permission' do
+      @pilot.update_attribute(:group, Group.find_by(name: 'Admin'))
+      expect(@pilot.can?(Group, :destroy)).to eq true
+    end
+
+    it 'should return false if the pilot does not have permission' do
+      @pilot.update_attribute(:group, Group.find_by(name: 'Pilot'))
+      expect(@pilot.can?(Group, :destroy)).to eq false
+    end
+  end
+
   describe 'group' do
     it 'should be assigned the pilot group' do
       group = Group.find_by(name: 'Pilot')

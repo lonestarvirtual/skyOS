@@ -2,6 +2,7 @@
 
 class Pilot < ApplicationRecord
   belongs_to :group, optional: false
+  has_many   :permissions, through: :group
 
   devise :confirmable, :database_authenticatable, :lockable, :registerable,
          :recoverable, :rememberable, :trackable, :timeoutable, :validatable
@@ -18,6 +19,13 @@ class Pilot < ApplicationRecord
 
   validates :last_name,  presence: true, null: false
   validates :first_name, presence: true, null: false
+
+  # Returns true or false whether Pilot has permission to perform
+  # an action on a model class
+  #
+  def can?(klass, action)
+    permissions.find_by(model: klass.to_s, action: action).present?
+  end
 
   protected
 
