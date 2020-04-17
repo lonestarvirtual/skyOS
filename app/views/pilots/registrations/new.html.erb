@@ -26,7 +26,15 @@
         </div>
 
         <div class="card-body">
-          <%= render partial: "form" %>
+          <%- if Setting.allow_signup %>
+            <%= render partial: "form" %>
+          <%- else %>
+            <div class="col-12">
+              <p class="justify-content-center">
+                Sorry! We are currently not accepting new members at this time.
+              </p>
+            </div>
+          <%- end %>
         </div>
       </div>
     </div>

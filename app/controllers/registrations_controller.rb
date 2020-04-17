@@ -4,6 +4,7 @@ class RegistrationsController < Devise::RegistrationsController
   # rubocop:disable Rails/LexicallyScopedActionFilter
   prepend_before_action :check_captcha, only: [:create]
   # rubocop:enable Rails/LexicallyScopedActionFilter
+  before_action :check_new_registration_allowed?, only: [:create]
 
   private
 
@@ -33,6 +34,14 @@ class RegistrationsController < Devise::RegistrationsController
   end
   # rubocop:enable Style/GuardClause
   # rubocop:enable Metrics/MethodLength
+
+  # Ensures that new signup is allowed before processing
+  # the registration or redirects back to the join page
+  #
+  def check_new_registration_allowed?
+    flash[:alert] = "New pilot registration is currently disabled"
+    redirect_to root_path unless Setting.allow_signup
+  end
 
   def sign_up_params
     params.require(:pilot).permit(:first_name,
