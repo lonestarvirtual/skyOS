@@ -36,6 +36,10 @@ gem 'pundit'
 gem 'rails-settings-cached', '~> 2.0'
 gem 'recaptcha'
 
+group :test do
+  gem 'database_cleaner-active_record'
+end
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution
   # and get a debugger console

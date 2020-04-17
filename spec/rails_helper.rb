@@ -11,9 +11,6 @@ end
 require 'rspec/rails'
 # Add additional requires below this line. Rails is not loaded until this point!
 
-# Seed the test database
-Rails.application.load_seed
-
 # Requires supporting ruby files with custom matchers and macros, etc, in
 # spec/support/ and its subdirectories. Files matching `spec/**/*_spec.rb` are
 # run as spec files by default. This means that files in spec/support that end
@@ -70,4 +67,17 @@ RSpec.configure do |config|
   config.filter_rails_from_backtrace!
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
+
+  # Configure database cleaning and seed the database before testing
+  config.before(:suite) do
+    DatabaseCleaner.strategy = :transaction
+    DatabaseCleaner.clean_with(:truncation)
+
+    Rails.application.load_seed
+  end
+
+  # Clean the database after the test suite
+  config.after(:suite) do
+    DatabaseCleaner.clean
+  end
 end
