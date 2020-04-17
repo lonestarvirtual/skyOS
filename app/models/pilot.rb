@@ -17,6 +17,15 @@ class Pilot < ApplicationRecord
   validates :last_name,  presence: true, null: false
   validates :first_name, presence: true, null: false
 
+  protected
+
+  # Set the pilot's status to active after they have confirmed their
+  # account (or after reconfirmations)
+  #
+  def after_confirmation
+    self.update_attribute(:active, true)
+  end
+
   private
 
   # Assign the default Pilot group
