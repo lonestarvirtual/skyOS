@@ -37,14 +37,14 @@ google_recaptcha:
     secret_key: <SECRET_KEY>
 ```
 
-# Environment Variables
+### Environment Variables
 
 | Syntax                |             | Description                                                        |
 | :---                  |   :----:    | :-----------                                                       |
 | RAILS_HOSTNAME        |**required** | External hostname for application                                  |
 | RAILS_MASTER_KEY      |**required** | Master key used for credential store                               |
 
-# Rails Settings
+### Rails Settings
 
 The `Setting` model contains settings that can be changed while the application
 is running.
@@ -54,3 +54,12 @@ is running.
 | admin_emails          | Array of staff emails (used for contact us page requests |
 | recaptcha_min_score   | Minimum reCAPTCHA v3 score, values 0 - 1 (default 0.5)   |
 | reply_to              | From address used for default mailer correspondence      |
+
+### Initial administrator
+
+When the database is seeded a temporary administrative 'pilot' user is created.
+This account should only be used long enough to on board an initial real user
+and then deleted.
+
+* Username: `admin@skyos`
+* Password: `deleteme`

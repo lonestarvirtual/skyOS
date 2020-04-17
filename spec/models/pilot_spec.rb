@@ -9,7 +9,13 @@ RSpec.describe Pilot, type: :model do
 
   let(:pilot) { build(:pilot) }
 
-  # describe 'ActiveRecord associations' do; end
+  describe 'ActiveRecord associations' do
+    it do
+      # stub the callback so that default group is not assigned (for this test)
+      allow_any_instance_of(Pilot).to receive(:assign_group).and_return(nil)
+      expect(pilot).to belong_to(:group).required
+    end
+  end
 
   describe 'ActiveRecord validations' do
     # Basic validations
@@ -20,6 +26,14 @@ RSpec.describe Pilot, type: :model do
     it { expect(pilot).to validate_numericality_of(:pid).only_integer }
 
     # Inclusion/acceptance of values
+  end
+
+  describe 'group' do
+    it 'should be assigned the pilot group' do
+      group = Group.find_by(name: 'Pilot')
+      pilot.valid?
+      expect(pilot.group).to eq group
+    end
   end
 
   describe 'ID' do

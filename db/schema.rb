@@ -10,11 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_17_133110) do
+ActiveRecord::Schema.define(version: 2020_04_17_151217) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
+
+  create_table "groups", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "name", null: false
+    t.string "description", null: false
+    t.index ["name"], name: "index_groups_on_name", unique: true
+  end
 
   create_table "pilots", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.integer "pid", null: false
@@ -39,8 +45,10 @@ ActiveRecord::Schema.define(version: 2020_04_17_133110) do
     t.datetime "locked_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.uuid "group_id"
     t.index ["confirmation_token"], name: "index_pilots_on_confirmation_token", unique: true
     t.index ["email"], name: "index_pilots_on_email", unique: true
+    t.index ["group_id"], name: "index_pilots_on_group_id"
     t.index ["pid"], name: "index_pilots_on_pid", unique: true
     t.index ["reset_password_token"], name: "index_pilots_on_reset_password_token", unique: true
     t.index ["unlock_token"], name: "index_pilots_on_unlock_token", unique: true
@@ -54,4 +62,5 @@ ActiveRecord::Schema.define(version: 2020_04_17_133110) do
     t.index ["var"], name: "index_settings_on_var", unique: true
   end
 
+  add_foreign_key "pilots", "groups"
 end

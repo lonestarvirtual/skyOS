@@ -1,9 +1,12 @@
 # frozen_string_literal: true
 
 class Pilot < ApplicationRecord
+  belongs_to :group, required: true
+
   devise :confirmable, :database_authenticatable, :lockable, :registerable,
          :recoverable, :rememberable, :trackable, :timeoutable, :validatable
 
+  before_validation :assign_group, only: :create
   before_validation :assign_pid
 
   validates :pid,
@@ -15,6 +18,13 @@ class Pilot < ApplicationRecord
   validates :first_name, presence: true, null: false
 
   private
+
+  # Assign the default Pilot group
+  #
+  def assign_group
+    return unless group.nil?
+    self.group = Group.find_by(name: 'Pilot')
+  end
 
   # Assign the next available PilotID based on the last pilot and
   # the starting value

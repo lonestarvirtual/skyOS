@@ -14,6 +14,10 @@ Lint/RaiseException:
 Lint/StructNewOverride:
   Enabled: true
 
+Metrics/BlockLength:
+  Exclude:
+    - spec/**/*
+
 Style/Documentation:
   Enabled: false
 
