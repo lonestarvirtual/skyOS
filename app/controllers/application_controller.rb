@@ -22,4 +22,10 @@ class ApplicationController < ActionController::Base
   def skip_authorization?
     devise_controller? || exception_controller?
   end
+
+  # Override pundit user lookup to use Pilot model
+  #
+  def pundit_user
+    current_pilot
+  end
 end

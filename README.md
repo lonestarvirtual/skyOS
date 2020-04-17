@@ -12,6 +12,10 @@ To get the Rails server running locally:
 * `rake db:setup` to create and seed database
 * `rails s` to start the local server
 
+### External Dependencies
+
+* [ImageMagick](https://imagemagick.org/)
+
 ## Configuration
 
 This site uses the Rails encrypted credential store. The following

@@ -1,0 +1,105 @@
+<%= form_for [:admin, @fleet] do |f| %>
+  <div class="form-group row my-auto">
+    <%= f.label :image, class: 'col-sm-2 col-form-label pt-3' %>
+
+    <div class="col-sm-3">
+      <% if @fleet.image.attached? && @fleet.persisted? %>
+        <%= image_tag @fleet.image.variant(resize_to_limit: [170, 260]) %>
+      <% else %>
+        <div class="text-muted mt-3">No image</div>
+      <% end %>
+    </div>
+
+    <div class="col-sm-7 pt-3">
+      <%= f.file_field :image, class: "form-control-file" %>
+
+      <small id="imageHelp" class="form-text text-muted">
+        JPEG or PNG only. Max size 170x260. Images will be resized.
+      </small>
+
+      <div class="invalid-feedback">-->
+        <%= @fleet.errors[:image].join(", ") %>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-2"></div>
+    <div class="col-sm-4">
+      <%- if @fleet.image.attached? && @fleet.persisted? %>
+        <%= f.check_box :remove_image, default: false %>
+        <%= f.label :remove_image %>
+      <%- end %>
+    </div>
+  </div>
+
+  <div class="form-row mt-2">
+    <div class="col">
+      <%= f.label :airline_id, 'Airline' %>
+      <%= f.collection_select :airline_id, Airline.all, :id, :name, {}, { required: true, class: "form-control" } %>
+
+      <div class="invalid-feedback">
+        Airline <%= @fleet.errors[:airline_id].join(", ") %>
+      </div>
+    </div>
+    <div class="col">
+      <%= f.label :icao, class: "text-uppercase" %>
+      <%= f.text_field :icao, class: "form-control text-uppercase", maxlength: 4, autofocus: true, required: true %>
+
+      <div class="invalid-feedback">
+        ICAO <%= @fleet.errors[:icao].join(", ") %>
+      </div>
+    </div>
+  </div>
+
+  <div class="row mt-2">
+    <div class="col">
+      <%= f.label :short_name %>
+      <%= f.text_field :short_name, class: "form-control", required: true %>
+
+      <div class="invalid-feedback">
+        Short name <%= @fleet.errors[:short_name].join(", ") %>
+      </div>
+    </div>
+    <div class="col">
+      <%= f.label :name %>
+      <%= f.text_field :name, class: "form-control", required: true %>
+
+      <div class="invalid-feedback">
+        Name <%= @fleet.errors[:name].join(", ") %>
+      </div>
+    </div>
+  </div>
+
+  <div class="row mt-2">
+    <div class="col">
+      <%= f.label :description %>
+      <%= f.text_area :description, class: "form-control" %>
+
+      <div class="invalid-feedback">
+        Name <%= @fleet.errors[:description].join(", ") %>
+      </div>
+    </div>
+  </div>
+
+  <div class="row mt-2">
+    <div class="col">
+      <div class="card">
+        <div class="card-header">Repaints</div>
+        <div class="card-body">
+          <%= render partial: 'form_repaints', locals: { f: f } %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <%- if @fleet.errors[:base].present? %>
+  <div class="row mt-4 field_with_errors">
+    <div class="ml-4 text-danger">
+      <%= @fleet.errors[:base].join(", ") %>
+    </div>
+  </div>
+  <% end %>
+
+  <%= f.submit "Save", class: "btn btn-success mt-4 w-100" %>
+<% end %>

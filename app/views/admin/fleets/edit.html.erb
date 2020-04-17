@@ -1,0 +1,27 @@
+<section class="pt-3 pb-3 mb-3 bg-dark text-light">
+  <div class="container">
+    <h3>Fleet Administration</h3>
+  </div>
+</section>
+
+<div class="container pt-2 pb-4">
+
+  <div class="col-lg-12">
+    <div class="card card-shadow">
+      <div class="card-header d-flex">
+        <div class="col-8">
+          <h5>Edit Fleet</h5>
+        </div>
+        <div class="col-4 text-right">
+          <%= link_to admin_fleet_path(@fleet), method: :delete, class: 'btn btn-sm btn-danger', 'data-confirm': "Are you sure?" do %>
+            <i class="fas fa-trash"></i> Delete
+          <% end %>
+        </div>
+      </div>
+
+      <div class="card-body ">
+        <%= render partial: 'form' %>
+      </div>
+    </div>
+  </div>
+</div>

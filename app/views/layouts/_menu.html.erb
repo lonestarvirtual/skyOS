@@ -14,14 +14,15 @@
       <li class="nav-item">
         <a class="nav-link" href="#">Pilots</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Fleet</a>
+      <li class="nav-item <%= active_class(fleet_index_path) %>">
+        <%= link_to 'Fleet', fleet_index_path, class: 'nav-link' %>
       </li>
       <%- unless pilot_signed_in? %>
         <li class="nav-item <%= active_class(new_pilot_registration_path) %>">
           <%= link_to 'Join', new_pilot_registration_path, class: "nav-link" %>
         </li>
       <%- end %>
+      <%= render partial: 'layouts/menu/admin' %>
     </ul>
 
     <%- if pilot_signed_in? %>

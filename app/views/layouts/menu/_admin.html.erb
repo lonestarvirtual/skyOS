@@ -1,0 +1,16 @@
+<% if pilot_signed_in? %>
+  <li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      Admin
+    </a>
+    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+      <% if current_pilot.can?(Airline, :create, :update, :destroy) %>
+        <%= link_to 'Airlines', admin_airlines_path, class: "dropdown-item" %>
+      <% end %>
+
+      <% if current_pilot.can?(Fleet, :create, :update, :destroy) %>
+        <%= link_to 'Fleets', admin_fleets_path, class: "dropdown-item" %>
+      <% end %>
+    </div>
+  </li>
+<% end %>

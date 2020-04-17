@@ -8,6 +8,10 @@ AllCops:
   Exclude:
     - db/**/*
 
+Layout/LineLength:
+  Exclude:
+    - spec/**/*
+
 Lint/RaiseException:
   Enabled: true
 

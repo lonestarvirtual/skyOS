@@ -1,0 +1,41 @@
+<%= f.fields_for :repaints do |ff| %>
+  <div class="form-group row text-right">
+    <%= ff.label :name, class: 'col-sm-2 col-form-label' %>
+
+    <div class="col-sm-4">
+      <%= ff.text_field :name, class: "form-control" %>
+
+      <div class="invalid-feedback">
+        Name <%= ff.object.errors[:name].join(", ") %>
+      </div>
+    </div>
+
+    <div class="col-sm-4 my-auto text-left">
+      <% if ff.object.persisted? %>
+        <div class="row">
+          <span class="col-sm-6 small my-auto">
+            <%= ff.object.file.filename %>
+          </span>
+          <span class="col-sm-6 text-right my-auto">
+            <%= ff.check_box :_destroy %>
+            <%= ff.label :_destroy, "Delete" %>
+          </span>
+        </div>
+      <% else %>
+        <%= ff.file_field :file, class: "form-control-file" %>
+
+        <div class="invalid-feedback">
+          File <%= ff.object.errors[:file].join(", ") %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <%- if ff.object.errors[:base].present? %>
+    <div class="row">
+      <div class="text-danger">
+        <%= ff.object.errors[:base].join(", ") %>
+      </div>
+    </div>
+  <%- end %>
+<% end %>

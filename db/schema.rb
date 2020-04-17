@@ -10,11 +10,49 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_17_182805) do
+ActiveRecord::Schema.define(version: 2020_04_19_053153) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
+
+  create_table "active_storage_attachments", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "name", null: false
+    t.string "record_type", null: false
+    t.uuid "record_id", null: false
+    t.uuid "blob_id", null: false
+    t.datetime "created_at", null: false
+    t.index ["blob_id"], name: "index_active_storage_attachments_on_blob_id"
+    t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
+  end
+
+  create_table "active_storage_blobs", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "key", null: false
+    t.string "filename", null: false
+    t.string "content_type"
+    t.text "metadata"
+    t.bigint "byte_size", null: false
+    t.string "checksum", null: false
+    t.datetime "created_at", null: false
+    t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
+  end
+
+  create_table "airlines", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "icao", null: false
+    t.string "iata", null: false
+    t.string "name", null: false
+    t.index ["icao"], name: "index_airlines_on_icao", unique: true
+  end
+
+  create_table "fleets", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "icao", null: false
+    t.string "short_name", null: false
+    t.string "name", null: false
+    t.text "description"
+    t.uuid "airline_id"
+    t.index ["airline_id"], name: "index_fleets_on_airline_id"
+    t.index ["short_name", "airline_id"], name: "index_fleets_on_short_name_and_airline_id", unique: true
+  end
 
   create_table "group_permissions", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "group_id"
@@ -68,6 +106,12 @@ ActiveRecord::Schema.define(version: 2020_04_17_182805) do
     t.index ["unlock_token"], name: "index_pilots_on_unlock_token", unique: true
   end
 
+  create_table "repaints", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "fleet_id"
+    t.string "name", null: false
+    t.index ["fleet_id"], name: "index_repaints_on_fleet_id"
+  end
+
   create_table "settings", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "var", null: false
     t.text "value"
@@ -76,6 +120,7 @@ ActiveRecord::Schema.define(version: 2020_04_17_182805) do
     t.index ["var"], name: "index_settings_on_var", unique: true
   end
 
+  add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "group_permissions", "groups"
   add_foreign_key "group_permissions", "permissions"
   add_foreign_key "pilots", "groups"

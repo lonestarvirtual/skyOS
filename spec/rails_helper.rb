@@ -24,9 +24,9 @@ require 'rspec/rails'
 # directory. Alternatively, in the individual `*_spec.rb` files, manually
 # require only the support files necessary.
 #
-# rubocop:disable Rails/FilePath, Layout/LineLength
+# rubocop:disable Rails/FilePath
 Dir[Rails.root.join('spec', 'support', '**', '*.rb')].sort.each { |f| require f }
-# rubocop:enable Rails/FilePath, Layout/LineLength
+# rubocop:enable Rails/FilePath
 
 # Checks for pending migrations and applies them before tests are run.
 # If you are not using ActiveRecord, you can remove these lines.

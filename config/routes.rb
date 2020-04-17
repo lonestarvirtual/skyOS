@@ -13,9 +13,16 @@ Rails.application.routes.draw do
              }
   root to: 'home#index'
 
+  namespace :admin do
+    resources :airlines, except: [:show]
+    resources :fleets,   except: [:show]
+  end
+
   resource  :contact, only: [:create], as: :contact do
     get '/' => 'contacts#new'
   end
 
   resources :policy, only: :show
+
+  resources :fleet
 end

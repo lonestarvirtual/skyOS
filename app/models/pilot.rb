@@ -21,10 +21,15 @@ class Pilot < ApplicationRecord
   validates :first_name, presence: true, null: false
 
   # Returns true or false whether Pilot has permission to perform
-  # an action on a model class
+  # any supplied action on a model class
   #
-  def can?(klass, action)
-    permissions.find_by(model: klass.to_s, action: action).present?
+  def can?(klass, *actions)
+    actions.each do |action|
+      if permissions.find_by(model: klass.to_s, action: action).present?
+        return true
+      end
+    end
+    false
   end
 
   protected

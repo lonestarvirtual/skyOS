@@ -1,0 +1,71 @@
+<section class="pt-3 pb-3 mb-3 bg-dark text-light">
+  <div class="container">
+    <h3>Fleet Administration</h3>
+  </div>
+</section>
+
+<div class="container pt-2 pb-4">
+
+  <div class="col-lg-12">
+    <div class="card card-shadow">
+      <div class="card-header">
+        <h5>Fleets</h5>
+      </div>
+
+      <div class="card-body p-0">
+        <table class="table table-bordered p-0 mb-0">
+          <thead class="thead-dark">
+            <th scop="col">
+              Image
+            </th>
+            <th scope="col">
+              <%= sort_link(@q, :airline) %>
+            </th>
+            <th scope="col" class="text-uppercase">
+              <%= sort_link(@q, :icao) %>
+            </th>
+            <th scope="col">
+              <%= sort_link(@q, :short_name) %>
+            </th>
+            <th scope="col"><%= sort_link(@q, :name) %></th>
+            <th scope="col" class="text-center">
+              <%= link_to new_admin_fleet_path, class: 'btn btn-sm btn-success' do %>
+                <i class="fas fa-plus"></i> Add
+              <% end %>
+            </th>
+          </thead>
+          <tbody>
+          <% if @fleets.empty? %>
+            <tr>
+              <td colspan="20" class="text-muted text-center">None</td>
+            </tr>
+          <% end %>
+
+          <% @fleets.each do |fleet| %>
+            <tr>
+              <th scope="row" width="160" class="text-center">
+                <%= image_tag fleet.image.variant(resize_to_limit: [150, 25]) if fleet.image.attached? %>
+              </th>
+              <td><%= fleet.airline.name %></td>
+              <td><%= fleet.icao %></td>
+              <td><%= fleet.short_name %></td>
+              <td><%= fleet.name %></td>
+              <td class="text-center">
+                <% if policy(fleet).edit? || policy(fleet).destroy? %>
+                  <%= link_to edit_admin_fleet_path(fleet), class: 'btn btn-sm btn-outline-secondary' do %>
+                    <i class="fas fa-edit"></i> Edit
+                  <% end %>
+                <% end %>
+              </td>
+            </tr>
+          <% end %>
+          </tbody>
+        </table>
+
+        <div class="row justify-content-center mt-3">
+          <%= paginate @fleets, theme: 'twitter-bootstrap-4' %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

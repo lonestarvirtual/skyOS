@@ -1,0 +1,24 @@
+// Place all the styles related to the fleet controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: https://sass-lang.com/
+
+.fleet-img-holder{
+  height: 200px;
+  width: 300px;
+  font-weight: lighter;
+  text-align: center;
+  white-space: nowrap;
+  border: 1px solid red;
+}
+
+.fleet-img-helper{
+  display: inline-block;
+  height: 100%;
+  vertical-align: middle;
+}
+
+.fleet-img{
+  max-height: 170px;
+  max-width: 260px;
+  vertical-align: middle;
+}

@@ -32,7 +32,13 @@ $fa-font-path: '@fortawesome/fontawesome-free/webfonts';
 @import 'boostrap_custom';
 @import 'contacts';
 @import 'devise';
+@import 'fleet';
 @import 'home';
 
 // Google reCAPTCHA styling
 .grecaptcha-badge { visibility: hidden; }
+
+// Ransack overrides
+.sort_link {
+  color: inherit !important;
+}
