@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Pilot < ApplicationRecord
-  belongs_to :group, required: true
+  belongs_to :group, optional: false
 
   devise :confirmable, :database_authenticatable, :lockable, :registerable,
          :recoverable, :rememberable, :trackable, :timeoutable, :validatable
@@ -23,7 +23,9 @@ class Pilot < ApplicationRecord
   # account (or after reconfirmations)
   #
   def after_confirmation
-    self.update_attribute(:active, true)
+    # rubocop:disable Rails/SkipsModelValidations
+    update_attribute(:active, true)
+    # rubocop:enable Rails/SkipsModelValidations
   end
 
   private
@@ -32,6 +34,7 @@ class Pilot < ApplicationRecord
   #
   def assign_group
     return unless group.nil?
+
     self.group = Group.find_by(name: 'Pilot')
   end
 
