@@ -4,6 +4,11 @@ class ContactMailer < ApplicationMailer
   def contact_email(contact)
     @contact = contact
     subject = 'Website contact request'
-    mail(to: ENV['STAFF_EMAIL'], from: contact.email, subject: subject)
+
+    # Email each staff member
+    #
+    Setting.admin_emails.each do |address|
+      mail(to: address, from: contact.email, subject: subject)
+    end
   end
 end

@@ -33,6 +33,7 @@ gem 'bootsnap', '>= 1.4.2', require: false
 # SkyOS gems
 gem 'devise'
 gem 'pundit'
+gem 'rails-settings-cached', '~> 2.0'
 gem 'recaptcha'
 
 group :development, :test do

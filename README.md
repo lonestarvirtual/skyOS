@@ -37,10 +37,20 @@ google_recaptcha:
     secret_key: <SECRET_KEY>
 ```
 
-## Environment Variables
+# Environment Variables
 
 | Syntax                |             | Description                                                        |
 | :---                  |   :----:    | :-----------                                                       |
+| RAILS_HOSTNAME        |**required** | External hostname for application                                  |
 | RAILS_MASTER_KEY      |**required** | Master key used for credential store                               |
-| RECAPTCHA_MIN_SCORE   | *optional*  | Sets the minimum reCAPTCHA required score                          |
-| STAFF_EMAIL           |**required** | Sets the email address to use for contacts and reply-to in mailers |
+
+# Rails Settings
+
+The `Setting` model contains settings that can be changed while the application
+is running.
+
+| Key                   | Description                                              |
+| :-------------------- | :------------------------------------------------------- |
+| admin_emails          | Array of staff emails (used for contact us page requests |
+| recaptcha_min_score   | Minimum reCAPTCHA v3 score, values 0 - 1 (default 0.5)   |
+| reply_to              | From address used for default mailer correspondence      |

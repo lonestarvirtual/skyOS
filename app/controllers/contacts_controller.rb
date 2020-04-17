@@ -42,7 +42,7 @@ class ContactsController < ApplicationController
       action: 'contact',
       model: @contact,
       attribute: :recaptcha,
-      minimum_score: 0.5,
+      minimum_score: Setting.recaptcha_min_score,
       secret_key: GoogleRecaptcha::SECRET_KEY
     )
 

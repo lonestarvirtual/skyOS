@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class ApplicationMailer < ActionMailer::Base
-  default from: ENV['STAFF_EMAIL'],
+  default from: Setting.reply_to,
           'X-skyOS-Organization': 'Lonestar Virtual'
 
   layout 'mailer'

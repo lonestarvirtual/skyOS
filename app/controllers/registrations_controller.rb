@@ -22,7 +22,7 @@ class RegistrationsController < Devise::RegistrationsController
       action: 'registration',
       model: resource,
       attribute: :recaptcha,
-      minimum_score: 0.5,
+      minimum_score: Setting.recaptcha_min_score,
       secret_key: GoogleRecaptcha::SECRET_KEY
     )
 
