@@ -8,6 +8,10 @@
         <%= link_to 'Airlines', admin_airlines_path, class: "dropdown-item" %>
       <% end %>
 
+      <% if current_pilot.can?(Airport, :create, :update, :destroy) %>
+        <%= link_to 'Airports', admin_airports_path, class: "dropdown-item" %>
+      <% end %>
+
       <% if current_pilot.can?(Fleet, :create, :update, :destroy) %>
         <%= link_to 'Fleets', admin_fleets_path, class: "dropdown-item" %>
       <% end %>

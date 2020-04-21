@@ -15,6 +15,7 @@ Rails.application.routes.draw do
 
   namespace :admin do
     resources :airlines, except: [:show]
+    resources :airports, except: [:show]
     resources :fleets,   except: [:show]
   end
 

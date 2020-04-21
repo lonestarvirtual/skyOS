@@ -35,12 +35,14 @@ gem 'bootstrap4-kaminari-views'
 gem 'devise'
 gem 'exception_handler', '~> 0.8.0.0'
 gem 'friendly_id', '~> 5.2.4'
+gem 'geocoder'
 gem 'image_processing', '~> 1.0'
 gem 'kaminari'
 gem 'pundit'
 gem 'rails-settings-cached', '~> 2.0'
 gem 'ransack'
 gem 'recaptcha'
+gem 'timezone_finder'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution

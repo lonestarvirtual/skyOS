@@ -1,0 +1,87 @@
+<%= form_for [:admin, @airport] do |f| %>
+  <div class="form-row mt-2">
+    <div class="col">
+      <%= f.label :icao, class: "text-uppercase" %>
+      <%= f.text_field :icao, class: "form-control text-uppercase", maxlength: 4, autofocus: true, required: true %>
+
+      <div class="invalid-feedback">
+        ICAO <%= @airport.errors[:icao].join(", ") %>
+      </div>
+    </div>
+    <div class="col">
+      <%= f.label :iata, class: "text-uppercase" %>
+      <%= f.text_field :iata, class: "form-control text-uppercase", maxlength: 3 %>
+
+      <div class="invalid-feedback">
+        IATA <%= @airport.errors[:iata].join(", ") %>
+      </div>
+    </div>
+  </div>
+
+  <div class="row mt-2">
+    <div class="col">
+      <%= f.label :name %>
+      <%= f.text_field :name, class: "form-control", required: true %>
+
+      <small id="nameHelp" class="form-text text-muted">
+        <b>Example:</b> George Bush International Airport
+      </small>
+
+      <div class="invalid-feedback">
+        Name <%= @airport.errors[:name].join(", ") %>
+      </div>
+    </div>
+  </div>
+
+  <div class="row mt-2">
+    <div class="col">
+      <%= f.label :city %>
+      <%= f.text_field :city, class: "form-control", required: true %>
+
+      <small id="cityHelp" class="form-text text-muted">
+        <b>Domestic:</b> City ST <b>International:</b> City Country
+      </small>
+
+      <div class="invalid-feedback">
+        City <%= @airport.errors[:city].join(", ") %>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-row mt-2">
+    <div class="col-3">
+      <%= f.label :latitude %>
+      <%= f.text_field :latitude, class: "form-control", required: true %>
+
+      <div class="invalid-feedback">
+        Latitude <%= @airport.errors[:latitude].join(", ") %>
+      </div>
+    </div>
+    <div class="col-3">
+      <%= f.label :longitude %>
+      <%= f.text_field :longitude, class: "form-control", required: true %>
+
+      <div class="invalid-feedback">
+        Longitude <%= @airport.errors[:longitude].join(", ") %>
+      </div>
+    </div>
+    <div class="col-6">
+      <%= f.label :time_zone %>
+      <%= f.time_zone_select :time_zone, TZInfo::Timezone.all.sort, {model: TZInfo::Timezone, include_blank: "Set from Latitude/Longitude"}, { class: "form-control "} %>
+
+      <div class="invalid-feedback">
+        Time zone <%= @airport.errors[:time_zone].join(", ") %>
+      </div>
+    </div>
+  </div>
+
+  <%- if @airport.errors[:base].present? %>
+  <div class="row mt-4 field_with_errors">
+    <div class="ml-4 text-danger">
+      <%= @airport.errors[:base].join(", ") %>
+    </div>
+  </div>
+  <% end %>
+
+  <%= f.submit "Save", class: "btn btn-success mt-4 w-100" %>
+<% end %>

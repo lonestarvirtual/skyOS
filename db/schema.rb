@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_19_053153) do
+ActiveRecord::Schema.define(version: 2020_04_21_142035) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -42,6 +42,17 @@ ActiveRecord::Schema.define(version: 2020_04_19_053153) do
     t.string "iata", null: false
     t.string "name", null: false
     t.index ["icao"], name: "index_airlines_on_icao", unique: true
+  end
+
+  create_table "airports", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "icao", limit: 4, null: false
+    t.string "iata", limit: 4
+    t.string "name"
+    t.string "city"
+    t.string "time_zone", default: "UTC", null: false
+    t.decimal "latitude", precision: 8, scale: 5
+    t.decimal "longitude", precision: 8, scale: 5
+    t.index ["icao"], name: "index_airports_on_icao", unique: true
   end
 
   create_table "fleets", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|

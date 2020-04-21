@@ -10,7 +10,7 @@
 
 # Defined Permissions
 #
-models = %w(Airline Fleet Group Pilot)
+models = %w(Airline Airport Fleet Group Pilot)
 
 models.each do |model|
   Permission.create(model: model, action: 'create',  description: "Create #{model}s")
