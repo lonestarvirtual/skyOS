@@ -1,0 +1,139 @@
+<%= form_for [:admin, @flight] do |f| %>
+  <div class="form-row mt-2">
+    <div class="col-8">
+      <%= f.label :airline_id, 'Airline' %>
+      <%= f.collection_select :airline_id, Airline.all, :id, :name, {}, { required: true, class: "form-control" } %>
+
+      <div class="invalid-feedback">
+        Airline <%= @flight.errors[:airline_id].join(", ") %>
+      </div>
+    </div>
+
+    <div class="col-2">
+      <%= f.label :number, 'Flight' %>
+      <%= f.text_field :number, class: 'form-control', required: true %>
+
+      <div class="invalid-feedback">
+        Flight <%= @flight.errors[:number].join(", ") %>
+      </div>
+    </div>
+
+    <div class="col-2">
+      <%= f.label :leg, 'Leg' %>
+      <%= f.select :leg, options_for_select(1..9, selected: @flight.leg), {}, class: "form-control", required: true %>
+
+      <div class="invalid-feedback">
+        Leg <%= @flight.errors[:leg].join(", ") %>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-row mt-2">
+    <div class="col-2">
+      <%= f.label :origin, 'Origin ICAO' %>
+      <%= f.text_field :orig_icao, class: "form-control text-uppercase" %>
+
+      <div class="invalid-feedback">
+        Origin <%= @flight.errors[:orig_id].join(", ") %>
+      </div>
+    </div>
+    <div class="col-4">
+      <%= f.label :origin_airport, 'Origin Airport' %>
+      <% default = (@flight.orig.present? ? @flight.orig.name : nil ) %>
+      <%= text_field_tag :airport_orig, default, class: "form-control", disabled: true %>
+
+      <%- if @flight.errors[:orig_id].present? %>
+        <div class="row field_with_errors">
+          <div class="ml-4 text-danger">
+            Origin <%= @flight.errors[:orig_id].join(", ") %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+
+    <div class="col-2">
+      <%= f.label :destination, 'Dest ICAO' %>
+      <%= f.text_field :dest_icao, class: "form-control text-uppercase" %>
+    </div>
+    <div class="col-4">
+      <%= f.label :destination_airport, 'Destination Airport' %>
+      <% default = (@flight.dest.present? ? @flight.dest.name : nil ) %>
+      <%= text_field_tag :airport_dest, default, class: "form-control", disabled: true %>
+
+      <%- if @flight.errors[:dest_id].present? %>
+        <div class="row field_with_errors">
+          <div class="ml-4 text-danger">
+            Destination <%= @flight.errors[:dest_id].join(", ") %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="form-row d-flex mt-2">
+    <div class="col-4">
+      <%= f.label :out_time, "Departure Time (UTC)" %>
+      <div class="form-row">
+        <%= f.time_select :out_time, {time_separator: ''}, class: "form-control col-3 ml-1", required: true %>
+      </div>
+    </div>
+
+    <div class="col-4 text-center align-self-end">
+      <h4><i class="fas fa-plane"></i></h4>
+    </div>
+
+    <div class="col-4 ml-auto text-right">
+      <%= f.label :in_time, "Arrival Time (UTC)" %>
+      <div class="form-row justify-content-end">
+        <%= f.time_select :in_time, {time_separator: ''}, class: "form-control col-3 ml-1", required: true %>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-row mt-2">
+    <div class="col-6">
+      <%= f.label :equipment_id, 'Equipment Type' %>
+      <%= f.collection_select :equipment_id, Equipment.all, :id, :short_name, {}, { required: true, class: "form-control" } %>
+
+      <div class="invalid-feedback">
+        Equipment <%= @flight.errors[:equipment_id].join(", ") %>
+      </div>
+    </div>
+
+    <div class="col-3">
+      <%= f.label :duration, 'Duration (hours)' %>
+      <%= f.text_field :duration, class: "form-control" %>
+
+      <small id="durationHelp" class="form-text text-muted">
+        Leave blank to calculate
+      </small>
+
+      <div class="invalid-feedback">
+        Duration <%= @flight.errors[:duration].join(", ") %>
+      </div>
+    </div>
+
+    <div class="col-3">
+      <%= f.label :distance, 'Distance (nm)' %>
+      <%= f.text_field :distance, class: "form-control" %>
+
+      <small id="distanceHelp" class="form-text text-muted">
+        Leave blank to calculate
+      </small>
+
+      <div class="invalid-feedback">
+        Distance <%= @flight.errors[:distance].join(", ") %>
+      </div>
+    </div>
+  </div>
+
+  <%- if @flight.errors[:base].present? %>
+  <div class="row mt-4 field_with_errors">
+    <div class="ml-4 text-danger">
+      <%= @flight.errors[:base].join(", ") %>
+    </div>
+  </div>
+  <% end %>
+
+  <%= f.submit "Save", class: "btn btn-success mt-4 w-100" %>
+<% end %>

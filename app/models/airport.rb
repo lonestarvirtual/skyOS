@@ -5,6 +5,18 @@ class Airport < ApplicationRecord
   friendly_id :icao
   reverse_geocoded_by :latitude, :longitude
 
+  has_many :flight_origins,
+           class_name: 'Flight',
+           foreign_key: :orig_id,
+           inverse_of: :orig,
+           dependent: :restrict_with_error
+
+  has_many :flight_destinations,
+           class_name: 'Flight',
+           foreign_key: :dest_id,
+           inverse_of: :dest,
+           dependent: :restrict_with_error
+
   validates :icao, :name, :city, presence: true
   validates :icao, length: { maximum: 4 }
   validates :iata, length: { maximum: 3 }
@@ -24,6 +36,12 @@ class Airport < ApplicationRecord
   validate :valid_time_zone
 
   before_validation :set_time_zone, :upcase_iata, :upcase_icao
+
+  default_scope { order(:city) }
+
+  def to_s
+    "#{city} (#{icao})"
+  end
 
   private
 

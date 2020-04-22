@@ -19,6 +19,10 @@
       <% if current_pilot.can?(Fleet, :create, :update, :destroy) %>
         <%= link_to 'Fleets', admin_fleets_path, class: "dropdown-item" %>
       <% end %>
+
+      <% if current_pilot.can?(Flight, :create, :update, :destroy) %>
+        <%= link_to 'Flight Schedule', admin_flights_path, class: "dropdown-item" %>
+      <% end %>
     </div>
   </li>
 <% end %>

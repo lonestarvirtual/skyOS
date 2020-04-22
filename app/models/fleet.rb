@@ -7,6 +7,7 @@ class Fleet < ApplicationRecord
   belongs_to :equipment, optional: false
 
   has_many   :repaints, dependent: :destroy
+  has_many   :flights,  through: :equipment, dependent: :restrict_with_error
   has_one_attached :image # fleet image max-size: 170x260
 
   after_save :purge_image, if: :remove_image

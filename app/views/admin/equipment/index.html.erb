@@ -1,8 +1,4 @@
-<section class="pt-3 pb-3 mb-3 bg-dark text-light">
-  <div class="container">
-    <h3>Equipment Type Administration</h3>
-  </div>
-</section>
+<%= content_for :section, 'Equipment Type Administration' %>
 
 <div class="container pt-2 pb-4">
 
@@ -53,11 +49,11 @@
 
           <% @equipment.each do |type| %>
             <tr>
-              <td><%= type.short_name %></td>
-              <td><%= type.icao %></td>
-              <td><%= type.iata %></td>
-              <td><%= type.name %></td>
-              <td class="text-center">
+              <td class="align-middle"><%= type.short_name %></td>
+              <td class="align-middle"><%= type.icao %></td>
+              <td class="align-middle"><%= type.iata %></td>
+              <td class="align-middle"><%= type.name %></td>
+              <td class="text-center align-middle">
                 <% if policy(type).edit? || policy(type).destroy? %>
                   <%= link_to edit_admin_equipment_path(type), class: 'btn btn-sm btn-outline-secondary' do %>
                     <i class="fas fa-edit"></i> Edit

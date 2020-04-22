@@ -54,6 +54,7 @@ group :development, :test do
   gem 'pundit-matchers', '~> 1.6.0'
   gem 'rails-controller-testing'
   gem 'rspec-rails', '~> 4.0.0'
+  gem 'shoulda-callback-matchers'
   gem 'shoulda-matchers'
 end
 

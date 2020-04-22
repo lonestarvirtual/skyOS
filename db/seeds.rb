@@ -12,7 +12,7 @@ require 'csv'
 
 # Defined Permissions
 #
-models = %w(Airline Airport Equipment Fleet Group Pilot)
+models = %w(Airline Airport Equipment Fleet Flight Group Pilot)
 
 models.each do |model|
   Permission.create(model: model, action: 'create',  description: "Create #{model}s")

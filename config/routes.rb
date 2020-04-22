@@ -18,6 +18,7 @@ Rails.application.routes.draw do
     resources :airports,  except: [:show]
     resources :equipment, except: [:show]
     resources :fleets,    except: [:show]
+    resources :flights,   except: [:show]
   end
 
   resource  :contact, only: [:create], as: :contact do
@@ -27,4 +28,6 @@ Rails.application.routes.draw do
   resources :policy, only: :show
 
   resources :fleet
+
+  resources :flights, only: [:index]
 end

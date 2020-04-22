@@ -1,8 +1,4 @@
-<section class="pt-3 pb-3 mb-3 bg-dark text-light">
-  <div class="container">
-    <h3>Airport Administration</h3>
-  </div>
-</section>
+<%= content_for :section, 'Airport Administration' %>
 
 <div class="container pt-2 pb-4">
 
@@ -49,11 +45,11 @@
 
           <% @airports.each do |airport| %>
             <tr>
-              <td><%= airport.icao %></td>
-              <td><%= airport.iata %></td>
-              <td><%= airport.name %></td>
-              <td><%= airport.city %></td>
-              <td class="text-center">
+              <td class="align-middle"><%= airport.icao %></td>
+              <td class="align-middle"><%= airport.iata %></td>
+              <td class="align-middle"><%= airport.name %></td>
+              <td class="align-middle"><%= airport.city %></td>
+              <td class="text-center align-middle">
                 <% if policy(airport).edit? || policy(airport).destroy? %>
                   <%= link_to edit_admin_airport_path(airport), class: 'btn btn-sm btn-outline-secondary' do %>
                     <i class="fas fa-edit"></i> Edit

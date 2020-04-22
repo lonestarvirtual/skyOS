@@ -1,0 +1,67 @@
+<%= search_form_for @q do |f| %>
+  <div class="form-row d-flex">
+    <div class="col-4">
+      <%= f.label 'Airline' %>
+      <%= f.collection_select :airline_icao_eq, Airline.all, :icao, :name, {include_blank: 'All'}, {class: 'form-control form-control-sm'} %>
+    </div>
+    <div class="col-1">
+      <%= f.label :flight %>
+      <%= f.text_field :number_eq, class: 'form-control form-control-sm' %>
+    </div>
+    <div class="col-1">
+      <%= f.label :leg %>
+      <%= f.text_field :leg_eq, class: 'form-control form-control-sm' %>
+    </div>
+
+    <div class="col-4 ml-auto">
+      <%= f.label 'Equipment' %>
+      <%= f.collection_select :equipment_short_name_eq, Equipment.all, :short_name, :short_name, {include_blank: "All"}, {class: "form-control form-control-sm"} %>
+    </div>
+
+    <div class="col-1">
+      <%= f.label 'ICAO', class: 'text-uppercase' %>
+      <%= f.text_field :equipment_icao_matches, class: 'form-control form-control-sm text-uppercase' %>
+    </div>
+  </div>
+
+  <div class="form-row pt-2">
+    <div class="col-4">
+      <%= f.label :origin %>
+      <%= f.collection_select :orig_icao_eq, Airport.joins(:flight_origins), :icao, :to_s, {include_blank: "All"}, {class: "form-control form-control-sm"} %>
+    </div>
+
+    <div class="col-1 mr-auto">
+      <%= f.label 'ICAO', class: 'text-uppercase' %>
+      <%= f.text_field :orig_icao_matches, class: 'form-control form-control-sm text-uppercase' %>
+    </div>
+
+    <div class="col-4">
+      <%= f.label :destination %>
+      <%= f.collection_select :dest_icao_eq, Airport.joins(:flight_destinations), :icao, :to_s, {include_blank: "All"}, {class: "form-control form-control-sm"} %>
+    </div>
+
+    <div class="col-1">
+      <%= f.label 'ICAO', class: 'text-uppercase' %>
+      <%= f.text_field :dest_icao_matches, class: 'form-control form-control-sm text-uppercase' %>
+    </div>
+  </div>
+
+  <div class="form-row pt-2">
+    <div class="col-4">
+      <%= f.label :duration, 'Duration (between)' %>
+      <div class="form-inline">
+        <%= f.text_field :duration_gteq, class: 'form-control form-control-sm col-2 mr-1' %>
+        and
+        <%= f.text_field :duration_lteq, class: 'form-control form-control-sm col-2 ml-1' %>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-row mt-3">
+    <div class="col text-center">
+      <%= f.button :submit, class: "btn btn-sm btn-primary" do %>
+        <i class="fa fa-search"></i> Search Schedule
+      <% end %>
+    </div>
+  </div>
+<% end %>

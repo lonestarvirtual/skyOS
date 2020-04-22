@@ -4,7 +4,8 @@ class Equipment < ApplicationRecord
   extend FriendlyId
   friendly_id :short_name
 
-  has_many :fleets, dependent: :restrict_with_error
+  has_many :fleets,  dependent: :restrict_with_error
+  has_many :flights, dependent: :restrict_with_error
 
   validates :icao, :name, :short_name, presence: true
 

@@ -1,4 +1,4 @@
-<%= content_for :section, 'Airline Administration' %>
+<%= content_for :section, 'Flight Schedule Administration' %>
 
 <div class="container pt-2 pb-4">
 
@@ -6,10 +6,10 @@
     <div class="card card-shadow">
       <div class="card-header d-flex">
         <div class="col-8">
-          <h5>Edit Airline</h5>
+          <h5>Edit Flight</h5>
         </div>
         <div class="col-4 text-right">
-          <%= link_to admin_airline_path(@airline), method: :delete, class: 'btn btn-sm btn-danger', 'data-confirm': "Are you sure?" do %>
+          <%= link_to admin_flight_path(@flight), method: :delete, class: 'btn btn-sm btn-danger', 'data-confirm': "Are you sure?" do %>
             <i class="fas fa-trash"></i> Delete
           <% end %>
         </div>

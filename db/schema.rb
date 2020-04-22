@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_22_134809) do
+ActiveRecord::Schema.define(version: 2020_04_22_170726) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -70,6 +70,26 @@ ActiveRecord::Schema.define(version: 2020_04_22_134809) do
     t.index ["airline_id", "equipment_id"], name: "index_fleets_on_airline_id_and_equipment_id", unique: true
     t.index ["airline_id"], name: "index_fleets_on_airline_id"
     t.index ["equipment_id"], name: "index_fleets_on_equipment_id"
+  end
+
+  create_table "flights", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "airline_id", null: false
+    t.uuid "equipment_id", null: false
+    t.integer "number", limit: 2, null: false
+    t.integer "leg", limit: 2, default: 1, null: false
+    t.uuid "orig_id", null: false
+    t.uuid "dest_id", null: false
+    t.time "out_time", null: false
+    t.time "in_time", null: false
+    t.decimal "duration", precision: 3, scale: 1, null: false
+    t.integer "distance", limit: 2, null: false
+    t.string "slug", null: false
+    t.index ["airline_id", "number", "leg"], name: "index_flights_on_airline_id_and_number_and_leg", unique: true
+    t.index ["airline_id"], name: "index_flights_on_airline_id"
+    t.index ["dest_id"], name: "index_flights_on_dest_id"
+    t.index ["equipment_id"], name: "index_flights_on_equipment_id"
+    t.index ["orig_id"], name: "index_flights_on_orig_id"
+    t.index ["slug"], name: "index_flights_on_slug", unique: true
   end
 
   create_table "group_permissions", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -139,6 +159,10 @@ ActiveRecord::Schema.define(version: 2020_04_22_134809) do
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "flights", "airlines"
+  add_foreign_key "flights", "airports", column: "dest_id"
+  add_foreign_key "flights", "airports", column: "orig_id"
+  add_foreign_key "flights", "equipment"
   add_foreign_key "group_permissions", "groups"
   add_foreign_key "group_permissions", "permissions"
   add_foreign_key "pilots", "groups"
