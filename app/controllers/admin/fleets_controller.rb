@@ -7,7 +7,8 @@ module Admin
     def index
       authorize Fleet, :index?
       @q = policy_scope(Fleet).ransack(params[:q])
-      @q.sorts = 'airline,icao asc' if @q.sorts.empty?
+      default_sort = ['airline_name asc', 'equipment_short_name asc']
+      @q.sorts = default_sort if @q.sorts.empty?
       @fleets = @q.result.page(params[:page])
     end
 
@@ -21,6 +22,7 @@ module Admin
         flash[:success] = 'Fleet created'
         redirect_to admin_fleets_path
       else
+        @fleet.repaints.build
         render :new
       end
     end
@@ -30,7 +32,7 @@ module Admin
       authorize @fleet, :destroy?
 
       if @fleet.destroy
-        flash[:success] = "#{@fleet.name} deleted"
+        flash[:success] = 'Fleet deleted'
         redirect_to admin_fleets_path
       else
         flash[:danger] = 'Unable to delete fleet'

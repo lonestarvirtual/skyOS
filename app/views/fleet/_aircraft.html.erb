@@ -1,23 +1,29 @@
-<div class="card flex-row flex-wrap mt-4">
+<div class="card flex-row flex-wrap mt-4" class="fleet-card">
   <div class="card-header border-0 fleet-img-holder">
     <span class="fleet-img-helper"></span>
     <%- if fleet.image.attached? %>
       <%= image_tag fleet.image.variant(resize_to_limit: [170, 260]) %>
     <% else %>
-      No image
+      <%- if fleet.airline.logo.attached? %>
+        <%= image_tag fleet.airline.logo.variant(resize_to_limit: [170, 260]) %>
+      <%- else %>
+        <span class="h6"><%= fleet.airline.name %></span>
+      <%- end %>
     <%- end %>
   </div>
-  <div class="card-block px-2 p-4 col-8">
-    <h4 class="card-title"><%= fleet.name %></h4>
+  <div class="card-block px-2 p-4 col-lg-8 col-md-12">
+    <h4 class="card-title"><%= fleet.equipment.name %></h4>
     <p class="card-text small">
-      <%= fleet.description %>
+      <%= fleet.equipment.description %>
     </p>
   </div>
   <div class="w-100"></div>
-  <%- if pilot_signed_in? && !fleet.repaints.empty? %>
+  <%- if pilot_signed_in? %>
   <div class="card-footer w-100">
     <div class="d-flex">
-      <div class="mr-auto"></div>
+      <div class="mr-auto my-auto">
+        <%= fleet.equipment.short_name %>
+      </div>
 
       <%- fleet.repaints.each do |repaint| %>
         <%- if repaint.file.attached? %>

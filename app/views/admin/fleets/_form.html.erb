@@ -43,46 +43,16 @@
       </div>
     </div>
     <div class="col">
-      <%= f.label :icao, class: "text-uppercase" %>
-      <%= f.text_field :icao, class: "form-control text-uppercase", maxlength: 4, autofocus: true, required: true %>
+      <%= f.label :equipment_id, 'Equipment Type' %>
+      <%= f.collection_select :equipment_id, Equipment.all, :id, :name, {}, { required: true, class: "form-control" } %>
 
       <div class="invalid-feedback">
-        ICAO <%= @fleet.errors[:icao].join(", ") %>
+        Equipment <%= @fleet.errors[:equipment_id].join(", ") %>
       </div>
     </div>
   </div>
 
-  <div class="row mt-2">
-    <div class="col">
-      <%= f.label :short_name %>
-      <%= f.text_field :short_name, class: "form-control", required: true %>
-
-      <div class="invalid-feedback">
-        Short name <%= @fleet.errors[:short_name].join(", ") %>
-      </div>
-    </div>
-    <div class="col">
-      <%= f.label :name %>
-      <%= f.text_field :name, class: "form-control", required: true %>
-
-      <div class="invalid-feedback">
-        Name <%= @fleet.errors[:name].join(", ") %>
-      </div>
-    </div>
-  </div>
-
-  <div class="row mt-2">
-    <div class="col">
-      <%= f.label :description %>
-      <%= f.text_area :description, class: "form-control" %>
-
-      <div class="invalid-feedback">
-        Name <%= @fleet.errors[:description].join(", ") %>
-      </div>
-    </div>
-  </div>
-
-  <div class="row mt-2">
+  <div class="row mt-4">
     <div class="col">
       <div class="card">
         <div class="card-header">Repaints</div>

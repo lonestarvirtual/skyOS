@@ -7,7 +7,8 @@ class FleetController < ApplicationController
   # rubocop:enable Rails/LexicallyScopedActionFilter
 
   def index
-    fleet = Fleet.joins(:airline).order('airlines.name', :name)
+    fleet = Fleet.joins(:airline, :equipment)
+    fleet = fleet.order('airlines.name').order('equipment.name')
     @fleet = fleet.page(params[:page]).per(10)
   end
 end

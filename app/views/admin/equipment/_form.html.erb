@@ -1,0 +1,60 @@
+<%= form_for [:admin, @equipment] do |f| %>
+  <div class="row mt-2">
+    <div class="col">
+      <%= f.label :short_name %>
+      <%= f.text_field :short_name, class: "form-control text-uppercase", required: true %>
+
+      <div class="invalid-feedback">
+        Short name <%= @equipment.errors[:short_name].join(", ") %>
+      </div>
+    </div>
+    <div class="col">
+      <%= f.label :name %>
+      <%= f.text_field :name, class: "form-control", required: true %>
+
+      <div class="invalid-feedback">
+        Name <%= @equipment.errors[:name].join(", ") %>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-row mt-2">
+    <div class="col">
+      <%= f.label :icao, class: "text-uppercase" %>
+      <%= f.text_field :icao, class: "form-control text-uppercase", maxlength: 4, autofocus: true, required: true %>
+
+      <div class="invalid-feedback">
+        ICAO <%= @equipment.errors[:icao].join(", ") %>
+      </div>
+    </div>
+    <div class="col">
+      <%= f.label :iata, class: "text-uppercase" %>
+      <%= f.text_field :iata, class: "form-control text-uppercase", maxlength: 3 %>
+
+      <div class="invalid-feedback">
+        IATA <%= @equipment.errors[:iata].join(", ") %>
+      </div>
+    </div>
+  </div>
+
+  <div class="row mt-2">
+    <div class="col">
+      <%= f.label :description %>
+      <%= f.text_area :description, class: "form-control" %>
+
+      <div class="invalid-feedback">
+        Description <%= @equipment.errors[:description].join(", ") %>
+      </div>
+    </div>
+  </div>
+
+  <%- if @equipment.errors[:base].present? %>
+    <div class="row mt-4 field_with_errors">
+      <div class="ml-4 text-danger">
+        <%= @equipment.errors[:base].join(", ") %>
+      </div>
+    </div>
+  <% end %>
+
+  <%= f.submit "Save", class: "btn btn-success mt-4 w-100" %>
+<% end %>

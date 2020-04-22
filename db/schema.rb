@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_21_142035) do
+ActiveRecord::Schema.define(version: 2020_04_22_134809) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -46,7 +46,7 @@ ActiveRecord::Schema.define(version: 2020_04_21_142035) do
 
   create_table "airports", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "icao", limit: 4, null: false
-    t.string "iata", limit: 4
+    t.string "iata", limit: 3
     t.string "name"
     t.string "city"
     t.string "time_zone", default: "UTC", null: false
@@ -55,14 +55,21 @@ ActiveRecord::Schema.define(version: 2020_04_21_142035) do
     t.index ["icao"], name: "index_airports_on_icao", unique: true
   end
 
-  create_table "fleets", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.string "icao", null: false
+  create_table "equipment", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "short_name", null: false
+    t.string "icao", limit: 4, null: false
+    t.string "iata", limit: 3
     t.string "name", null: false
     t.text "description"
+    t.index ["short_name"], name: "index_equipment_on_short_name", unique: true
+  end
+
+  create_table "fleets", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "airline_id"
+    t.uuid "equipment_id"
+    t.index ["airline_id", "equipment_id"], name: "index_fleets_on_airline_id_and_equipment_id", unique: true
     t.index ["airline_id"], name: "index_fleets_on_airline_id"
-    t.index ["short_name", "airline_id"], name: "index_fleets_on_short_name_and_airline_id", unique: true
+    t.index ["equipment_id"], name: "index_fleets_on_equipment_id"
   end
 
   create_table "group_permissions", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|

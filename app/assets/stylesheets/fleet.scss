@@ -3,7 +3,7 @@
 // You can use Sass (SCSS) here: https://sass-lang.com/
 
 .fleet-img-holder{
-  height: 200px;
+  min-height: 200px;
   width: 300px;
   font-weight: lighter;
   text-align: center;
@@ -21,4 +21,11 @@
   max-height: 170px;
   max-width: 260px;
   vertical-align: middle;
+}
+
+// Small devices
+@media (max-width: 1024px) {
+  .fleet-img-holder{
+    width: 100%;
+  }
 }

@@ -9,7 +9,21 @@
   <div class="col-lg-12">
     <div class="card card-shadow">
       <div class="card-header">
-        <h5>Fleets</h5>
+        <div class="d-flex justify-content-between">
+          <div class="pt-2">
+            <h5>Fleets</h5>
+          </div>
+          <div class="text-right pt-1">
+            <%= search_form_for @q, url: admin_fleets_path, class: 'form-inline' do |f| %>
+              <%= f.label :airline, 'Airline', class: 'form-inline' %>
+              <%= f.collection_select :airline_id_eq, Airline.all, :id, :name, {}, class: 'form-control form-inline ml-2' %>
+
+              <%= f.label :icao, class: 'form-inline text-uppercase ml-2' %>
+              <%= f.search_field :equipment_icao_cont, class: 'form-control form-inline text-uppercase ml-2', maxlength: 4 %>
+              <%= f.submit class: 'btn btn-sm btn-primary ml-2' %>
+            <% end %>
+          </div>
+        </div>
       </div>
 
       <div class="card-body p-0">
@@ -19,15 +33,15 @@
               Image
             </th>
             <th scope="col">
-              <%= sort_link(@q, :airline) %>
-            </th>
-            <th scope="col" class="text-uppercase">
-              <%= sort_link(@q, :icao) %>
+              <%= sort_link(@q, :airline_name) %>
             </th>
             <th scope="col">
-              <%= sort_link(@q, :short_name) %>
+              <%= sort_link(@q, :equipment_short_name, 'Short Name') %>
             </th>
-            <th scope="col"><%= sort_link(@q, :name) %></th>
+            <th scope="col" class="text-uppercase">
+              <%= sort_link(@q, :equipment_icao, 'ICAO') %>
+            </th>
+            <th scope="col"><%= sort_link(@q, :equipment_name, 'Name') %></th>
             <th scope="col" class="text-center">
               <%= link_to new_admin_fleet_path, class: 'btn btn-sm btn-success' do %>
                 <i class="fas fa-plus"></i> Add
@@ -47,9 +61,9 @@
                 <%= image_tag fleet.image.variant(resize_to_limit: [150, 25]) if fleet.image.attached? %>
               </th>
               <td><%= fleet.airline.name %></td>
-              <td><%= fleet.icao %></td>
-              <td><%= fleet.short_name %></td>
-              <td><%= fleet.name %></td>
+              <td><%= fleet.equipment.short_name %></td>
+              <td><%= fleet.equipment.icao %></td>
+              <td><%= fleet.equipment.name %></td>
               <td class="text-center">
                 <% if policy(fleet).edit? || policy(fleet).destroy? %>
                   <%= link_to edit_admin_fleet_path(fleet), class: 'btn btn-sm btn-outline-secondary' do %>

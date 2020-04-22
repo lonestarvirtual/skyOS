@@ -8,9 +8,11 @@
 #  movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #  Character.create(name: 'Luke', movie: movies.first)
 
+require 'csv'
+
 # Defined Permissions
 #
-models = %w(Airline Airport Fleet Group Pilot)
+models = %w(Airline Airport Equipment Fleet Group Pilot)
 
 models.each do |model|
   Permission.create(model: model, action: 'create',  description: "Create #{model}s")
@@ -42,3 +44,17 @@ admin_attributes = {
 admin = Pilot.new(admin_attributes)
 admin.skip_confirmation!
 admin.save!
+
+# Default equipment types
+#
+equip_csv = File.read(Rails.root.join('lib', 'seeds', 'equipment.csv'))
+equip_csv = CSV.parse(equip_csv, headers: true)
+equip_csv.each do |row|
+  e = Equipment.new
+  e.short_name = row['short_name']
+  e.icao = row['icao']
+  e.iata = row['iata']
+  e.name = row['name']
+  e.description = row['description']
+  e.save
+end

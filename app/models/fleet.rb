@@ -4,15 +4,18 @@ class Fleet < ApplicationRecord
   attribute :remove_image, :boolean
 
   belongs_to :airline, optional: false
+  belongs_to :equipment, optional: false
+
   has_many   :repaints, dependent: :destroy
   has_one_attached :image # fleet image max-size: 170x260
 
   after_save :purge_image, if: :remove_image
-  after_validation :upcase_icao, :upcase_shortname
 
-  validates :icao, :name, :short_name, presence: true
-  validates :short_name, uniqueness: { scope: :airline_id }
-  validates :icao, length: { maximum: 4 }
+  validates :equipment_id, uniqueness: {
+    scope: :airline_id,
+    case_sensitive: false,
+    message: 'already in use with this airline'
+  }
 
   validate :acceptable_image
 
@@ -37,17 +40,5 @@ class Fleet < ApplicationRecord
   #
   def purge_image
     image.purge_later
-  end
-
-  def upcase_icao
-    return if icao.nil?
-
-    self.icao = icao.upcase
-  end
-
-  def upcase_shortname
-    return if short_name.nil?
-
-    self.short_name = short_name.upcase
   end
 end
