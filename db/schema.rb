@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_22_170726) do
+ActiveRecord::Schema.define(version: 2020_04_23_205912) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -156,6 +156,13 @@ ActiveRecord::Schema.define(version: 2020_04_22_170726) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["var"], name: "index_settings_on_var", unique: true
+  end
+
+  create_table "simulators", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "short_name", limit: 15
+    t.string "name"
+    t.index ["name"], name: "index_simulators_on_name", unique: true
+    t.index ["short_name"], name: "index_simulators_on_short_name", unique: true
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"

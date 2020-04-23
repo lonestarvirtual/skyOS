@@ -14,11 +14,12 @@ Rails.application.routes.draw do
   root to: 'home#index'
 
   namespace :admin do
-    resources :airlines,  except: [:show]
-    resources :airports,  except: [:show]
-    resources :equipment, except: [:show]
-    resources :fleets,    except: [:show]
-    resources :flights,   except: [:show]
+    resources :airlines,   except: [:show]
+    resources :airports,   except: [:show]
+    resources :equipment,  except: [:show]
+    resources :fleets,     except: [:show]
+    resources :flights,    except: [:show]
+    resources :simulators, except: [:show]
   end
 
   resource  :contact, only: [:create], as: :contact do

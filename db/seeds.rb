@@ -12,7 +12,7 @@ require 'csv'
 
 # Defined Permissions
 #
-models = %w(Airline Airport Equipment Fleet Flight Group Pilot)
+models = %w(Airline Airport Equipment Fleet Flight Group Pilot Simulator)
 
 models.each do |model|
   Permission.create(model: model, action: 'create',  description: "Create #{model}s")
@@ -58,3 +58,13 @@ equip_csv.each do |row|
   e.description = row['description']
   e.save
 end
+
+# Default simulators
+#
+Simulator.create(short_name: 'FS2004', name: 'Microsoft Flight Simulator 2004')
+Simulator.create(short_name: 'FSX', name: 'Microsoft Flight Simulator X')
+Simulator.create(short_name: 'P3Dv3', name: 'Lockheed Prepar3D v3')
+Simulator.create(short_name: 'P3Dv4', name: 'Lockheed Prepar3D v4')
+Simulator.create(short_name: 'P3Dv5', name: 'Lockheed Prepar3D v5')
+Simulator.create(short_name: 'XP10', name: 'Laminar Research X-Plane 10')
+Simulator.create(short_name: 'XP11', name: 'Laminar Research X-Plane 11')

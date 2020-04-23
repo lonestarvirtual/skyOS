@@ -1,0 +1,30 @@
+<%= form_for [:admin, @simulator] do |f| %>
+  <div class="form-row mt-2">
+    <div class="col-3">
+      <%= f.label :short_name %>
+      <%= f.text_field :short_name, class: "form-control", maxlength: 15, autofocus: true, required: true %>
+
+      <div class="invalid-feedback">
+        Short name <%= @simulator.errors[:short_name].join(", ") %>
+      </div>
+    </div>
+    <div class="col">
+      <%= f.label :name %>
+      <%= f.text_field :name, class: "form-control", required: true %>
+
+      <div class="invalid-feedback">
+        Name <%= @simulator.errors[:name].join(", ") %>
+      </div>
+    </div>
+  </div>
+
+  <%- if @simulator.errors[:base].present? %>
+    <div class="row mt-4 field_with_errors">
+      <div class="ml-4 text-danger">
+        <%= @simulator.errors[:base].join(", ") %>
+      </div>
+    </div>
+  <% end %>
+
+  <%= f.submit "Save", class: "btn btn-success mt-4 w-100" %>
+<% end %>
