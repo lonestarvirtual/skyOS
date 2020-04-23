@@ -27,7 +27,7 @@
   <div class="form-row pt-2">
     <div class="col-4">
       <%= f.label :origin %>
-      <%= f.collection_select :orig_icao_eq, Airport.joins(:flight_origins), :icao, :to_s, {include_blank: "All"}, {class: "form-control form-control-sm"} %>
+      <%= f.collection_select :orig_icao_eq, Airport.joins(:flight_origins).uniq, :icao, :to_s, {include_blank: "All"}, {class: "form-control form-control-sm"} %>
     </div>
 
     <div class="col-1 mr-auto">
@@ -37,7 +37,7 @@
 
     <div class="col-4">
       <%= f.label :destination %>
-      <%= f.collection_select :dest_icao_eq, Airport.joins(:flight_destinations), :icao, :to_s, {include_blank: "All"}, {class: "form-control form-control-sm"} %>
+      <%= f.collection_select :dest_icao_eq, Airport.joins(:flight_destinations).uniq, :icao, :to_s, {include_blank: "All"}, {class: "form-control form-control-sm"} %>
     </div>
 
     <div class="col-1">
@@ -47,12 +47,21 @@
   </div>
 
   <div class="form-row pt-2">
-    <div class="col-4">
+    <div class="col-4 mr-auto">
       <%= f.label :duration, 'Duration (between)' %>
       <div class="form-inline">
         <%= f.text_field :duration_gteq, class: 'form-control form-control-sm col-2 mr-1' %>
         and
         <%= f.text_field :duration_lteq, class: 'form-control form-control-sm col-2 ml-1' %>
+      </div>
+    </div>
+
+    <div class="col-4">
+      <%= f.label :distance, 'Distance (between)' %>
+      <div class="form-inline">
+        <%= f.text_field :distance_gteq, class: 'form-control form-control-sm col-2 mr-1' %>
+        and
+        <%= f.text_field :distance_lteq, class: 'form-control form-control-sm col-2 ml-1' %>
       </div>
     </div>
   </div>
