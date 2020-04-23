@@ -14,9 +14,10 @@ require("channels")
 require("custom/cookieconsent")
 
 // Enable Bootstrap4 tooltips
-
-$(function () {
-    $('[data-toggle="tooltip"]').tooltip()
+$(document).on("turbolinks:load", function(){
+    $(function () {
+        $('[data-toggle="tooltip"]').tooltip()
+    })
 })
 
 // Uncomment to copy all static images under ../images to the output folder and reference
