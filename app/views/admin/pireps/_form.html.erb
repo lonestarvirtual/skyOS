@@ -1,0 +1,160 @@
+<%= form_for [:admin, @pirep] do |f| %>
+  <div class="form-row d-flex mt-2">
+    <div class="col-4">
+      <%= f.label :date %>
+      <div class="form-row">
+        <%= f.date_select :date, {order: [:month, :day, :year], use_short_month: true}, class: "form-control col-3 ml-1" %>
+
+        <div class="invalid-feedback ml-2">
+          Date <%= @pirep.errors[:date].join(", ") %>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-4">
+      <%= f.label :pilot %>
+      <%= f.text_field :pilot, class: 'form-control', disabled: true %>
+    </div>
+
+    <div class="col-4 ml-auto">
+      <%= f.label :equipment_id, 'Equipment Type' %>
+      <%= f.collection_select :equipment_id, Equipment.all, :id, :short_name, {include_blank: true}, { class: "form-control", required: true } %>
+
+      <div class="invalid-feedback">
+        Equipment <%= @pirep.errors[:equipment_id].join(", ") %>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-row mt-2">
+    <div class="col-8">
+      <%= f.label :airline_id, 'Airline' %>
+      <%= f.collection_select :airline_id, Airline.all, :id, :name, {include_blank: true}, { class: "form-control", required: true } %>
+
+      <div class="invalid-feedback">
+        Airline <%= @pirep.errors[:airline_id].join(", ") %>
+      </div>
+    </div>
+
+    <div class="col-2">
+      <%= f.label :flight, 'Flight' %>
+      <%= f.text_field :flight, class: 'form-control', required: true %>
+
+      <div class="invalid-feedback">
+        Flight <%= @pirep.errors[:flight].join(", ") %>
+      </div>
+    </div>
+
+    <div class="col-2">
+      <%= f.label :leg, 'Leg' %>
+      <%= f.select :leg, options_for_select(1..9, selected: @pirep.leg), {}, class: "form-control", required: true %>
+
+      <div class="invalid-feedback">
+        Leg <%= @pirep.errors[:leg].join(", ") %>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-row mt-2">
+    <div class="col-2">
+      <%= f.label :origin, 'Origin ICAO' %>
+      <%= f.text_field :orig_icao, class: "form-control text-uppercase", maxlength: 4, required: true %>
+
+      <div class="invalid-feedback">
+        Origin <%= @pirep.errors[:orig_id].join(", ") %>
+      </div>
+    </div>
+    <div class="col-4">
+      <%= f.label :origin_airport, 'Origin Airport' %>
+      <% default = (@pirep.orig.present? ? @pirep.orig.name : nil ) %>
+      <%= text_field_tag :airport_orig, default, class: "form-control", disabled: true %>
+
+      <%- if @pirep.errors[:orig_id].present? %>
+        <div class="row field_with_errors">
+          <div class="ml-4 text-danger">
+            Origin <%= @pirep.errors[:orig_id].join(", ") %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+
+    <div class="col-2">
+      <%= f.label :destination, 'Dest ICAO' %>
+      <%= f.text_field :dest_icao, class: "form-control text-uppercase", maxlength: 4, required: true %>
+    </div>
+    <div class="col-4">
+      <%= f.label :destination_airport, 'Destination Airport' %>
+      <% default = (@pirep.dest.present? ? @pirep.dest.name : nil ) %>
+      <%= text_field_tag :airport_dest, default, class: "form-control", disabled: true %>
+
+      <%- if @pirep.errors[:dest_id].present? %>
+        <div class="row field_with_errors">
+          <div class="ml-4 text-danger">
+            Destination <%= @pirep.errors[:dest_id].join(", ") %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="form-row mt-2">
+    <div class="col-12">
+      <%= f.label :route %>
+      <%= f.text_area :route, class: "form-control text-uppercase", rows: 1 %>
+
+      <div class="invalid-feedback">
+        Route <%= @pirep.errors[:route].join(", ") %>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-row d-flex mt-2">
+    <div class="col-2">
+      <%= f.label :duration, 'Duration (hours)' %>
+      <%= f.text_field :duration, class: "form-control", required: true %>
+
+      <div class="invalid-feedback">
+        Duration <%= @pirep.errors[:duration].join(", ") %>
+      </div>
+    </div>
+
+    <div class="col-4">
+      <%= f.label :simulator %>
+      <%= f.collection_select :simulator_id, Simulator.all, :id, :name, {include_blank: true}, { class: "form-control", required: true } %>
+
+      <div class="invalid-feedback">
+        Simulator <%= @pirep.errors[:simulator_id].join(", ") %>
+      </div>
+    </div>
+
+    <div class="col-4">
+      <%= f.label :network %>
+      <%= f.collection_select :network_id, Network.all, :id, :name, {include_blank: 'Offline'}, { class: "form-control" } %>
+
+      <div class="invalid-feedback">
+        Network <%= @pirep.errors[:network_id].join(", ") %>
+      </div>
+    </div>
+
+    <div class="col-2 ml-auto">
+      <%= f.label :status %>
+      <%= f.collection_select :status_id, PirepStatus.all, :id, :name, {}, { class: "form-control", required: true } %>
+
+      <div class="invalid-feedback">
+        Status <%= @pirep.errors[:status_id].join(", ") %>
+      </div>
+    </div>
+  </div>
+
+  <%= render partial: 'form_comments', locals: { f: f } %>
+
+  <%- if @pirep.errors[:base].present? %>
+    <div class="row mt-4 field_with_errors">
+      <div class="ml-4 text-danger">
+        <%= @pirep.errors[:base].join(", ") %>
+      </div>
+    </div>
+  <% end %>
+
+  <%= f.submit "Submit", class: "btn btn-success mt-4 w-100" %>
+<% end %>

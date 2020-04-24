@@ -1,0 +1,119 @@
+<%= content_for :section, 'PIREP Administration' %>
+
+<div class="container-fluid pt-2 pb-4">
+
+  <div class="col-lg-12">
+    <div class="card card-shadow">
+      <div class="card-header">
+        <div class="d-flex justify-content-between">
+          <div class="pt-2">
+            <h5>PIREPs</h5>
+          </div>
+          <div class="pt-1">
+            <%= search_form_for @q, url: admin_pireps_path, class: 'form-inline justify-content-end' do |f| %>
+              <%= f.label :pid, 'Pilot ID', class: 'form-inline' %>
+              <%= f.search_field :pilot_slug_cont, class: 'form-control form-control-sm form-inline text-uppercase ml-2 col-3' %>
+
+              <%= f.label :status, 'Status', class: 'form-inline ml-2' %>
+              <%= f.collection_select :status_name_eq, PirepStatus.all, :name, :name, {}, class: 'form-control form-control-sm form-inline ml-2' %>
+
+              <%= f.submit class: 'btn btn-sm btn-primary ml-2' %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+
+      <div class="card-body p-0">
+        <table class="table table-bordered text-center p-0 mb-0">
+          <thead class="thead-dark">
+            <th scop="col">
+              <%= sort_link(@q, :date) %>
+            </th>
+            <th col="col">
+              <%= sort_link(@q, :pilot_pid, 'Pilot') %>
+            </th>
+            <th scope="col">
+              <%= sort_link(@q, :flight, 'Flight') %>
+            </th>
+            <th scope="col">
+              <%= sort_link(@q, :orig_icao, 'Origin') %>
+            </th>
+            <th scope="col">
+              <%= sort_link(@q, :dest_icao, 'Destination') %>
+            </th>
+            <th scope="col">
+              <%= sort_link(@q, :equipment_short_name, 'Equipment') %>
+            </th>
+            <th scope="col">
+              <%= sort_link(@q, :duration, 'Duration') %>
+            </th>
+            <th scope="col">Manage</th>
+          </thead>
+          <tbody>
+          <% if @pireps.empty? %>
+            <tr>
+              <td colspan="20" class="text-muted text-center">None</td>
+            </tr>
+          <% end %>
+
+          <% @pireps.each do |pirep| %>
+            <tr bgcolor="<%= pirep.status.color %>">
+              <td scope="row" class="text-center align-middle">
+                <%= pirep.date.strftime("%m-%d-%Y") %>
+              </td>
+              <td class="align-middle" data-toggle="tooltip" data-placement="bottom" title="<%= pirep.pilot %>">
+                <%= pirep.pilot.slug %>
+              </td>
+              <td class="align-middle">
+                <%= pirep %>
+              </td>
+              <td class="align-middle" data-toggle="tooltip" data-placement="bottom" title="<%= pirep.orig.name %>">
+                <%= pirep.orig %>
+              </td>
+              <td class="align-middle" data-toggle="tooltip" data-placement="bottom" title="<%= pirep.dest.name %>">
+                <%= pirep.dest %>
+              </td>
+              <td class="align-middle">
+                <%= pirep.equipment.short_name %>
+              </td>
+              <td class="align-middle">
+                <%= pirep.duration %>
+              </td>
+              <td class="text-center align-middle">
+                <% if policy(pirep).edit? || policy(pirep).destroy? %>
+                  <%= link_to edit_admin_pirep_path(pirep), class: 'btn btn-sm btn-outline-secondary' do %>
+                    <i class="fas fa-edit"></i> Edit
+                  <% end %>
+                <% end %>
+              </td>
+            </tr>
+          <% end %>
+
+          <tr>
+            <td colspan="20" class="text-muted text-center pt-1 pb-1">
+              <div class="row">
+                <div class="col-12">
+                  <table class="table p-0 m-0 text-center">
+                    <tr class="d-flex justify-content-center">
+                      <% PirepStatus.all.pluck(:name, :color).each do |status, color| %>
+                        <th class="col-1 p-1 m-1" bgcolor="<%= color %>">
+                          <%= status %>
+                        </th>
+                      <% end %>
+                    </tr>
+                  </table>
+                </div>
+              </div>
+            </td>
+          </tr>
+
+          </tbody>
+        </table>
+
+        <div class="row justify-content-center mt-3">
+          <%= paginate @pireps, theme: 'twitter-bootstrap-4' %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

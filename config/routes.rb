@@ -19,12 +19,20 @@ Rails.application.routes.draw do
     resources :equipment,  except: [:show]
     resources :fleets,     except: [:show]
     resources :flights,    except: [:show]
+    resources :networks,   except: [:show]
+    resources :pireps,     except: %i[show new create]
     resources :simulators, except: [:show]
   end
 
   resource  :contact, only: [:create], as: :contact do
     get '/' => 'contacts#new'
   end
+
+  resources :pilots, only: [:index] do
+    resource :logbook, only: [:show]
+  end
+
+  resources :pireps, except: [:index]
 
   resources :policy, only: :show
 

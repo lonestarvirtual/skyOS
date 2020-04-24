@@ -9,8 +9,12 @@ RSpec.describe Airport, type: :model do
 
   let(:airport) { build(:airport) }
 
-  # describe 'ActiveRecord associations' do
-  # end
+  describe 'ActiveRecord associations' do
+    it { expect(airport).to have_many(:flight_origins) }
+    it { expect(airport).to have_many(:flight_destinations) }
+    it { expect(airport).to have_many(:pirep_origins) }
+    it { expect(airport).to have_many(:pirep_destinations) }
+  end
 
   describe 'ActiveRecord validations' do
     # Basic validations

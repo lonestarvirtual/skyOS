@@ -61,6 +61,7 @@ is running.
 | :-------------------- | :------------------------------------------------------- |
 | admin_emails          | Array of staff emails (used for contact us page requests |
 | allow_signup          | Turn on or off new user registration (default true)      |
+| organization_icao     | Set the organization ICAO (callsign) for Pilot IDs, etc  |
 | recaptcha_min_score   | Minimum reCAPTCHA v3 score, values 0 - 1 (default 0.5)   |
 | reply_to              | From address used for default mailer correspondence      |
 

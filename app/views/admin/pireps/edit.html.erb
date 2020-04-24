@@ -1,0 +1,29 @@
+<%= content_for :section, 'PIREP Administration' %>
+
+<div class="container pt-2 pb-4">
+
+  <div class="col-lg-12">
+    <div class="card card-shadow">
+      <div class="card-header d-flex pl-1">
+        <div class="col mt-2">
+          <h6>
+            PIREP Review for
+            <%= @pirep.airline.icao %><%= @pirep.flight %> Leg <%= @pirep.leg %>
+            (<%= @pirep.orig.icao %> - <%= @pirep.dest.icao %>)
+          </h6>
+        </div>
+        <div class="col-4 text-right">
+          <%- if policy(@pirep).destroy? %>
+            <%= link_to admin_pirep_path(@pirep), method: :delete, class: 'btn btn-sm btn-danger', 'data-confirm': "Are you sure?" do %>
+              <i class="fas fa-trash"></i> Delete
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+
+      <div class="card-body ">
+        <%= render partial: 'form' %>
+      </div>
+    </div>
+  </div>
+</div>

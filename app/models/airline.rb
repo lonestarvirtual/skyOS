@@ -8,6 +8,7 @@ class Airline < ApplicationRecord
 
   has_many :fleets,  dependent: :restrict_with_error
   has_many :flights, dependent: :restrict_with_error
+  has_many :pireps,  dependent: :restrict_with_error
   has_one_attached :logo
 
   after_save :purge_logo, if: :remove_logo

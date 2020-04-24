@@ -1,0 +1,29 @@
+<%= f.fields_for :comments do |ff| %>
+  <% if ff.object.persisted? %>
+  <div class="form-row mt-2">
+    <div class="col">
+      <%= ff.label :comments, "Comment by #{ff.object.author} - #{ff.object.created_at.strftime("%m-%d-%Y %H:%M %Z")}" %>
+      <%= ff.text_area :body, class: 'form-control', disabled: true, rows: 1 %>
+    </div>
+  </div>
+  <% else %>
+    <div class="form-row mt-2">
+      <div class="col">
+        <%= ff.label :add_comment %>
+        <%= ff.text_area :body, class: 'form-control', rows: 1 %>
+
+        <div class="invalid-feedback">
+          Comment <%= @pirep.errors[:body].join(", ") %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+
+  <%- if ff.object.errors[:base].present? %>
+    <div class="row mt-4 field_with_errors">
+      <div class="ml-4 text-danger">
+        <%= ff.object.errors[:base].join(", ") %>
+      </div>
+    </div>
+  <% end %>
+<% end %>

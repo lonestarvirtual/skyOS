@@ -24,6 +24,14 @@
         <%= link_to 'Flight Schedule', admin_flights_path, class: "dropdown-item" %>
       <% end %>
 
+      <% if current_pilot.can?(Network, :create, :update, :destroy) %>
+        <%= link_to 'Networks', admin_networks_path, class: "dropdown-item" %>
+      <% end %>
+
+      <% if current_pilot.can?(Pirep, :create, :update, :destroy) %>
+        <%= link_to 'PIREPs', admin_pireps_path, class: "dropdown-item" %>
+      <% end %>
+
       <% if current_pilot.can?(Simulator, :create, :update, :destroy) %>
         <%= link_to 'Simulators', admin_simulators_path, class: "dropdown-item" %>
       <% end %>

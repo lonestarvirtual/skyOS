@@ -10,6 +10,8 @@ RSpec.describe Pilot, type: :model do
   let(:pilot) { build(:pilot) }
 
   describe 'ActiveRecord associations' do
+    it { expect(pilot).to have_many(:pireps) }
+
     it do
       # stub the callback so that default group is not assigned (for this test)
       allow_any_instance_of(Pilot).to receive(:assign_group).and_return(nil)

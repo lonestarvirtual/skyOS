@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_23_205912) do
+ActiveRecord::Schema.define(version: 2020_04_25_183249) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -105,6 +105,11 @@ ActiveRecord::Schema.define(version: 2020_04_23_205912) do
     t.index ["name"], name: "index_groups_on_name", unique: true
   end
 
+  create_table "networks", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "name", null: false
+    t.index ["name"], name: "index_networks_on_name", unique: true
+  end
+
   create_table "permissions", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "model", null: false
     t.string "action", null: false
@@ -136,12 +141,60 @@ ActiveRecord::Schema.define(version: 2020_04_23_205912) do
     t.datetime "updated_at", precision: 6, null: false
     t.uuid "group_id"
     t.boolean "active", default: false
+    t.string "slug", null: false
     t.index ["confirmation_token"], name: "index_pilots_on_confirmation_token", unique: true
     t.index ["email"], name: "index_pilots_on_email", unique: true
     t.index ["group_id"], name: "index_pilots_on_group_id"
     t.index ["pid"], name: "index_pilots_on_pid", unique: true
     t.index ["reset_password_token"], name: "index_pilots_on_reset_password_token", unique: true
+    t.index ["slug"], name: "index_pilots_on_slug", unique: true
     t.index ["unlock_token"], name: "index_pilots_on_unlock_token", unique: true
+  end
+
+  create_table "pirep_comments", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "pirep_id", null: false
+    t.uuid "author_id", null: false
+    t.text "body", null: false
+    t.datetime "created_at"
+    t.index ["author_id"], name: "index_pirep_comments_on_author_id"
+    t.index ["pirep_id"], name: "index_pirep_comments_on_pirep_id"
+  end
+
+  create_table "pirep_statuses", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "name", limit: 15, null: false
+    t.boolean "editable", default: true
+    t.boolean "approved", default: false
+    t.boolean "pending", default: false
+    t.string "color", limit: 7
+    t.integer "sequence", limit: 2, null: false
+    t.index ["name"], name: "index_pirep_statuses_on_name", unique: true
+    t.index ["sequence"], name: "index_pirep_statuses_on_sequence", unique: true
+  end
+
+  create_table "pireps", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "pilot_id", null: false
+    t.date "date", default: -> { "CURRENT_TIMESTAMP" }, null: false
+    t.uuid "airline_id", null: false
+    t.integer "flight", limit: 2, null: false
+    t.integer "leg", limit: 2, null: false
+    t.uuid "orig_id", null: false
+    t.uuid "dest_id", null: false
+    t.string "route", null: false
+    t.uuid "equipment_id", null: false
+    t.uuid "simulator_id", null: false
+    t.decimal "duration", precision: 3, scale: 1, null: false
+    t.integer "distance", limit: 2, null: false
+    t.uuid "status_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.uuid "network_id"
+    t.index ["airline_id"], name: "index_pireps_on_airline_id"
+    t.index ["dest_id"], name: "index_pireps_on_dest_id"
+    t.index ["equipment_id"], name: "index_pireps_on_equipment_id"
+    t.index ["orig_id"], name: "index_pireps_on_orig_id"
+    t.index ["pilot_id"], name: "index_pireps_on_pilot_id"
+    t.index ["simulator_id"], name: "index_pireps_on_simulator_id"
+    t.index ["status_id"], name: "index_pireps_on_status_id"
   end
 
   create_table "repaints", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -173,4 +226,14 @@ ActiveRecord::Schema.define(version: 2020_04_23_205912) do
   add_foreign_key "group_permissions", "groups"
   add_foreign_key "group_permissions", "permissions"
   add_foreign_key "pilots", "groups"
+  add_foreign_key "pirep_comments", "pilots", column: "author_id"
+  add_foreign_key "pirep_comments", "pireps"
+  add_foreign_key "pireps", "airlines"
+  add_foreign_key "pireps", "airports", column: "dest_id"
+  add_foreign_key "pireps", "airports", column: "orig_id"
+  add_foreign_key "pireps", "equipment"
+  add_foreign_key "pireps", "networks"
+  add_foreign_key "pireps", "pilots"
+  add_foreign_key "pireps", "pirep_statuses", column: "status_id"
+  add_foreign_key "pireps", "simulators"
 end

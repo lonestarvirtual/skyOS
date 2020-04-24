@@ -11,6 +11,7 @@ RSpec.describe Equipment, type: :model do
 
   describe 'ActiveRecord associations' do
     it { expect(equipment).to have_many(:fleets) }
+    it { expect(equipment).to have_many(:pireps) }
   end
 
   describe 'ActiveRecord validations' do

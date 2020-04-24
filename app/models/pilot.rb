@@ -1,8 +1,12 @@
 # frozen_string_literal: true
 
 class Pilot < ApplicationRecord
+  extend FriendlyId
+  friendly_id :slug_candidates, use: :slugged
+
   belongs_to :group, optional: false
   has_many   :permissions, through: :group
+  has_many   :pireps, dependent: :destroy
 
   devise :confirmable, :database_authenticatable, :lockable, :registerable,
          :recoverable, :rememberable, :trackable, :timeoutable, :validatable
@@ -30,6 +34,18 @@ class Pilot < ApplicationRecord
       end
     end
     false
+  end
+
+  def normalize_friendly_id(string)
+    super.upcase # ensure friendly id is always upcase
+  end
+
+  def should_generate_new_friendly_id?
+    pid_changed? || !persisted? || super
+  end
+
+  def to_s
+    "#{first_name} #{last_name} (#{Setting.organization_icao}#{pid})"
   end
 
   protected
@@ -67,6 +83,15 @@ class Pilot < ApplicationRecord
       last = Pilot.order(pid: :desc).first
       self.pid = (last.pid >= start ? last.pid + 1 : start)
     end
+  end
+
+  def slug_candidates
+    # slug_candidates seems to get called prior to assign_pid on creation
+    assign_pid if pid.nil?
+
+    [
+      ["#{Setting.organization_icao.upcase}#{pid}"]
+    ]
   end
 
   # Titleize name

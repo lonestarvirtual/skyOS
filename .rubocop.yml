@@ -20,6 +20,7 @@ Lint/StructNewOverride:
 
 Metrics/BlockLength:
   Exclude:
+    - config/routes.rb
     - spec/**/*
 
 Rails/SkipsModelValidations:

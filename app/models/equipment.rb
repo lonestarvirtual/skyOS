@@ -6,6 +6,7 @@ class Equipment < ApplicationRecord
 
   has_many :fleets,  dependent: :restrict_with_error
   has_many :flights, dependent: :restrict_with_error
+  has_many :pireps,  dependent: :restrict_with_error
 
   validates :icao, :name, :short_name, presence: true
 

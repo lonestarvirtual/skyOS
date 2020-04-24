@@ -17,6 +17,18 @@ class Airport < ApplicationRecord
            inverse_of: :dest,
            dependent: :restrict_with_error
 
+  has_many :pirep_origins,
+           class_name: 'Pirep',
+           foreign_key: :orig_id,
+           inverse_of: :orig,
+           dependent: :restrict_with_error
+
+  has_many :pirep_destinations,
+           class_name: 'Pirep',
+           foreign_key: :dest_id,
+           inverse_of: :dest,
+           dependent: :restrict_with_error
+
   validates :icao, :name, :city, presence: true
   validates :icao, length: { maximum: 4 }
   validates :iata, length: { maximum: 3 }
