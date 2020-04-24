@@ -1,3 +1,7 @@
+# SkyOS
+
+[![Build Status](https://travis-ci.com/lonestarvirtual/skyOS.svg?token=K5U93Dpwry1XesnyC3r8&branch=development)](https://travis-ci.com/lonestarvirtual/skyOS)
+
 skyOS is the web presence of Lonestar Virtual
 
 ## Development Getting Started
