@@ -44,6 +44,9 @@
                 Duration
               </th>
               <th scope="col">
+                <%= sort_link(@q, :distance) %>
+              </th>
+              <th scope="col">
                 <%= sort_link(@q, :equipment_short_name, 'Equipment') %>
               </th>
 <!--              <th scope="col" class="text-center"></th>-->
@@ -78,6 +81,9 @@
                 <td class="align-middle text-center">
                   <%= flight.duration %>
                 </td>
+                  <td class="align-middle text-center">
+                    <%= flight.distance %> nm
+                  </td>
                 <td class="align-middle">
                   <%= flight.equipment.short_name %>
                 </td>
