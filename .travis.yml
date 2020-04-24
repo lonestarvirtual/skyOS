@@ -1,5 +1,4 @@
 language: ruby
-sudo: false
 
 notifications:
   email: false
@@ -12,6 +11,9 @@ services:
 
 bundler_args: --jobs 3 --retry 3
 
+before_install:
+  - nvm install 8.16.0
+
 before_script:
   - psql -c "CREATE DATABASE travis_ci_test;" -U postgres
   - cp config/database.yml.travis config/database.yml
@@ -21,9 +23,6 @@ before_script:
 env:
   global:
     - "RAILS_ENV=test"
-
-matrix:
-  fast_finish: true
 
 jobs:
   fast_finish: true
