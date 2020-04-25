@@ -28,6 +28,10 @@ Rails.application.routes.draw do
     get '/' => 'contacts#new'
   end
 
+  resources :fleet
+
+  resources :flights, only: [:index]
+
   resources :pilots, only: [:index] do
     resource :logbook, only: [:show]
   end
@@ -36,7 +40,5 @@ Rails.application.routes.draw do
 
   resources :policy, only: :show
 
-  resources :fleet
-
-  resources :flights, only: [:index]
+  resources :pilots, only: [:index]
 end

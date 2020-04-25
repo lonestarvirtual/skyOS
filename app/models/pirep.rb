@@ -61,6 +61,8 @@ class Pirep < ApplicationRecord
               less_than_or_equal_to: 99.9
             }
 
+  scope :approved, -> { joins(:status).where('pirep_statuses.approved': true) }
+
   def dest_icao
     dest.try(:icao)
   end

@@ -36,6 +36,24 @@ class Pilot < ApplicationRecord
     false
   end
 
+  # Return first and last name as string
+  #
+  def full_name
+    "#{first_name} #{last_name}"
+  end
+
+  # Return the last approved PIREP
+  #
+  def last_flight
+    approved_flights.order(date: :desc).first
+  end
+
+  # Format the Pilot ID into ICAO#
+  #
+  def pid_to_s
+    "#{Setting.organization_icao}#{pid}"
+  end
+
   def normalize_friendly_id(string)
     super.upcase # ensure friendly id is always upcase
   end
@@ -45,7 +63,19 @@ class Pilot < ApplicationRecord
   end
 
   def to_s
-    "#{first_name} #{last_name} (#{Setting.organization_icao}#{pid})"
+    "#{full_name} (#{pid_to_s})"
+  end
+
+  # Return the total number of approved flights
+  #
+  def total_flights
+    approved_flights.count
+  end
+
+  # Return the total hours of approved flights
+  #
+  def total_hours
+    approved_flights.sum(:duration)
   end
 
   protected
@@ -60,6 +90,12 @@ class Pilot < ApplicationRecord
   end
 
   private
+
+  # Return records of approved flights
+  #
+  def approved_flights
+    pireps.approved
+  end
 
   # Assign the default Pilot group
   #
