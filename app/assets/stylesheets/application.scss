@@ -46,9 +46,13 @@ main {
 
 .alert {
   border-radius: 0;
+  position: relative;
+  z-index: 1001;
+}
+
+#alert-container {
   position: absolute;
   width: 100%;
-  z-index: 1001;
 }
 
 .alert-alert {
@@ -93,7 +97,7 @@ main {
 
 .navbar-custom {
   background-color: #0b375b;
-  z-index: 1001;
+  z-index: 1005;
 }
 
 // Ransack overrides
