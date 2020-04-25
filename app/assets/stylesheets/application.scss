@@ -21,7 +21,6 @@ $fa-font-path: '@fortawesome/fontawesome-free/webfonts';
 @import '_boostrap_custom';
 
 // Node modules
-//@import 'bootstrap/dist/css/bootstrap';
 @import 'bootstrap/scss/bootstrap';
 @import 'cookieconsent/build/cookieconsent.min';
 @import '@fortawesome/fontawesome-free/scss/fontawesome';
@@ -36,8 +35,66 @@ $fa-font-path: '@fortawesome/fontawesome-free/webfonts';
 @import 'fleet';
 @import 'home';
 
+body {
+  background-color: #333;
+}
+
+main {
+  background-color: #fff;
+  font-size: 12px;
+}
+
+.alert {
+  border-radius: 0;
+  position: absolute;
+  width: 100%;
+  z-index: 1001;
+}
+
+.alert-alert {
+  @extend .alert-primary;
+}
+
+.alert-notice {
+  @extend .alert-warning;
+}
+
+.card-shadow {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+#content {
+  min-height: 90vh;
+}
+
+#footer {
+  @extend .text-light;
+  background-color: #333;
+  bottom: 0;
+  height: 50px;
+  width: 100%;
+
+  a {
+    @extend .text-light;
+  }
+
+  .small {
+    font-size: 0.6em;
+  }
+}
+
 // Google reCAPTCHA styling
 .grecaptcha-badge { visibility: hidden; }
+
+#header {
+  height: 75px;
+  padding-left: 25px;
+}
+
+.navbar-custom {
+  background-color: #0b375b;
+  z-index: 1001;
+}
 
 // Ransack overrides
 .sort_link {
