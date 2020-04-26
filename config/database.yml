@@ -81,6 +81,7 @@ test:
 #
 production:
   <<: *default
-  database: skyOS_production
-  username: skyOS
-  password: <%= ENV['SKYOS_DATABASE_PASSWORD'] %>
+  host: <%= ENV['POSTGRES_HOST'] %>
+  database: <%= ENV['POSTGRES_DB'] %>
+  username: <%= ENV['POSTGRES_USER'] %>
+  password: <%= ENV['POSTGRES_PASSWORD'] %>

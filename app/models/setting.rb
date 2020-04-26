@@ -6,5 +6,4 @@ class Setting < RailsSettings::Base
   field :allow_signup, { default: true, type: :bool }
   field :organization_icao, { default: 'LSX' }
   field :recaptcha_min_score, { default: 0.5, type: :float }
-  field :reply_to, { type: :string, default: 'noreply@example.com' }
 end

@@ -1,0 +1,79 @@
+$fa-font-path: '~@fortawesome/fontawesome-free/webfonts';
+
+// Bootstrap custom overrides
+@import '_boostrap_custom';
+
+// Node modules
+@import '~bootstrap/scss/bootstrap';
+@import '~cookieconsent/build/cookieconsent.min';
+@import '~@fortawesome/fontawesome-free/scss/fontawesome';
+@import '~@fortawesome/fontawesome-free/scss/solid';
+@import '~@fortawesome/fontawesome-free/scss/regular';
+@import '~@fortawesome/fontawesome-free/scss/brands';
+@import '~@fortawesome/fontawesome-free/scss/v4-shims';
+
+body {
+  background-color: #333;
+}
+
+main {
+  background-color: #fff;
+  font-size: 12px;
+}
+
+.alert {
+  border-radius: 0;
+  position: relative;
+  z-index: 1001;
+}
+
+#alert-container {
+  position: absolute;
+  width: 100%;
+}
+
+.card-shadow {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+#content {
+  min-height: 90vh;
+}
+
+.card-shadow {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+#footer {
+  @extend .text-light;
+  background-color: #333;
+  bottom: 0;
+  height: 50px;
+  width: 100%;
+
+  a {
+    @extend .text-light;
+  }
+
+  .small {
+    font-size: 0.6em;
+  }
+}
+
+// Google reCAPTCHA styling
+.grecaptcha-badge { visibility: hidden; }
+
+#header {
+  height: 75px;
+  padding-left: 25px;
+}
+
+.navbar-custom {
+  background-color: #0b375b;
+  z-index: 1005;
+}
+
+// Ransack overrides
+.sort_link {
+  color: inherit !important;
+}

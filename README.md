@@ -20,6 +20,30 @@ To get the Rails server running locally:
 
 * [ImageMagick](https://imagemagick.org/)
 
+## Getting Started with Docker
+
+This repository comes equipped to be run within Docker. You will need 
+`docker-compose` to build the image. An example ```docker-compose.yml```
+is included.
+
+Build the Docker image using:
+
+```
+% docker-compose build
+```
+
+On first boot, you will need to setup and seed the database:
+
+```
+% docker-compose run --rm app rake db:setup 
+```
+
+After setting up, you can run the application and dependencies:
+
+```
+% docker-compose up -d
+```
+
 ## Configuration
 
 This site uses the Rails encrypted credential store per environment. The 
@@ -35,17 +59,24 @@ google_analytics:
 # Google reCAPTCHA
 # Remove section/environment or leave blank to disable
 google_recaptcha:
-  production:
-    site_key: <SITE_KEY> 
-    secret_key: <SECRET_KEY>
+  site_key: <SITE_KEY> 
+  secret_key: <SECRET_KEY>
+
+# Mail server settings
+smtp:
+  address: 'smtp.server.com'
+  domain: 'this-app.com'
+  username: 'someuser@this-app.com'
+  password: 'password'
 ```
 
 ### Environment Variables
 
-| Syntax                |             | Description                                                        |
-| :---                  |   :----:    | :-----------                                                       |
-| RAILS_HOSTNAME        |**required** | External hostname for application                                  |
-| RAILS_MASTER_KEY      |**required** | Master key used for credential store                               |
+| Syntax                |             | Description                                         |
+| :---                  |   :----:    | :-----------                                        |
+| RAILS_HOSTNAME        |**required** | External hostname for application                   |
+| RAILS_MASTER_KEY      |**required** | Master key used for credential store                |
+| SKY_OS_REPLY_TO       |**required** | From address used for default mailer correspondence |
 
 ### Rails Settings
 
@@ -58,7 +89,6 @@ is running.
 | allow_signup          | Turn on or off new user registration (default true)      |
 | organization_icao     | Set the organization ICAO (callsign) for Pilot IDs, etc  |
 | recaptcha_min_score   | Minimum reCAPTCHA v3 score, values 0 - 1 (default 0.5)   |
-| reply_to              | From address used for default mailer correspondence      |
 
 ### Initial administrator
 

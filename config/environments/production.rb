@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require Rails.root.join('config/initializers/smtp')
+
 Rails.application.configure do
   # Settings specified here will take precedence over those in
   # config/application.rb.
@@ -71,6 +73,8 @@ Rails.application.configure do
 
   config.action_mailer.perform_caching = false
 
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = SMTP_SETTINGS
   config.action_mailer.default_url_options = { host: ENV['RAILS_HOSTNAME'] }
 
   # Ignore bad email addresses and do not raise email delivery errors.
