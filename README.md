@@ -22,24 +22,19 @@ To get the Rails server running locally:
 
 ## Configuration
 
-This site uses the Rails encrypted credential store. The following
-credentials may be configured with `rails credentials:edit`
+This site uses the Rails encrypted credential store per environment. The 
+following credentials may be configured with 
+`rails credentials:edit --environment development`
 
 ```yaml
 # Google Analytics
 # Remove entire section/environment or leave blank to disable
 google_analytics:
-  development:
-    tracking_id: UA-XXXXXXX-X
-  production:
-    tracking_id: UA-XXXXXXX-X
+  tracking_id: UA-XXXXXXX-X
 
 # Google reCAPTCHA
 # Remove section/environment or leave blank to disable
 google_recaptcha:
-  development:
-    site_key: <SITE_KEY>
-    secret_key: <SECRET_KEY>
   production:
     site_key: <SITE_KEY> 
     secret_key: <SECRET_KEY>
