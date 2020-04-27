@@ -12,16 +12,16 @@
           <div class="text-right pt-1">
             <%= search_form_for @q, url: admin_flights_path, class: 'form-inline' do |f| %>
               <%= f.label :airline, 'Airline', class: 'form-inline' %>
-              <%= f.collection_select :airline_id_eq, Airline.all, :id, :name, {}, class: 'form-control form-inline ml-2' %>
+              <%= f.collection_select :airline_id_eq, Airline.all, :id, :name, {}, class: 'form-control form-control-sm form-inline ml-2' %>
 
               <%= f.label :flight, class: 'form-inline ml-1' %>
-              <%= f.search_field :number_cont, class: 'form-control form-inline text-uppercase ml-2', maxlength: 4 %>
+              <%= f.search_field :number_cont, class: 'form-control form-control-sm form-inline text-uppercase ml-2', maxlength: 4 %>
 
               <%= f.label :origin, 'Orig', class: 'form-inline ml-1' %>
-              <%= f.search_field :orig_icao_cont, class: 'form-control form-inline text-uppercase ml-2', maxlength: 4 %>
+              <%= f.search_field :orig_icao_cont, class: 'form-control form-control-sm form-inline text-uppercase ml-2', maxlength: 4 %>
 
               <%= f.label :dest, 'Dest', class: 'form-inline ml-1' %>
-              <%= f.search_field :dest_icao_cont, class: 'form-control form-inline text-uppercase ml-2', maxlength: 4 %>
+              <%= f.search_field :dest_icao_cont, class: 'form-control form-control-sm form-inline text-uppercase ml-2', maxlength: 4 %>
               <%= f.submit class: 'btn btn-sm btn-primary ml-2' %>
             <% end %>
           </div>
