@@ -36,6 +36,8 @@ RUN mv config/credentials/production.yml.enc.bak \
 
 RUN rm -rf .git node_modules tmp/cache vendor/bundle test spec
 
+RUN mkdir -p tmp/pids
+
 ###########################################################
 
 FROM ruby:2.6.3-alpine
