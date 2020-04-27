@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require Rails.root.join('config/initializers/smtp')
+require Rails.root.join('config/smtp')
 
 Rails.application.configure do
   # Settings specified here will take precedence over those in

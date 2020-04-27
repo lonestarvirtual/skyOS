@@ -28,8 +28,6 @@ services:
       # RAILS_MASTER_KEY: blahblahblah
       RAILS_SERVE_STATIC_FILES: 1
       SKY_OS_REPLY_TO: staff@lonestar-virtual.org
-    # expose:
-      # - "3000"
     volumes:
       - storage:/app/storage
     ports:
