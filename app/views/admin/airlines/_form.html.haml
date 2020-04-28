@@ -1,0 +1,39 @@
+= simple_form_for [:admin, @airline] do |f|
+  .row.form-group.my-auto
+    = f.label :logo, class: 'col-sm-2 col-form-label pt-3'
+
+    .col-sm-5
+      - if @airline.logo.attached? && @airline.persisted?
+        = image_tag @airline.logo.variant(resize_to_limit: [260, 40])
+      - else
+        .text-muted.mt-3
+          No image
+
+    .col-sm-5.pt-3
+      = f.file_field :logo, class: "form-control-file"
+
+      %small#logoHelp.form-text.text-muted
+        JPEG or PNG only. Max 1MB.
+      .invalid-feedback
+        = @airline.errors[:logo].join(', ')
+
+  .row
+    .col-sm-4.offset-sm-2
+      - if @airline.logo.attached? && @airline.persisted?
+        = f.check_box :remove_logo, default: false
+        = f.label :remove_logo
+
+  .form-row
+    .col
+      = f.input :icao, label_html: { class: 'text-uppercase' }, input_html: { class: 'text-uppercase' }
+    .col
+      = f.input :iata, label_html: { class: 'text-uppercase' }, input_html: { class: 'text-uppercase' }
+
+  .row
+    .col
+      = f.input :name
+
+  .field_with_errors
+    .text-danger= f.error :base
+
+  = f.submit "Save", class: "btn btn-success w-100"

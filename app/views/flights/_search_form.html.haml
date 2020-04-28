@@ -1,0 +1,51 @@
+= search_form_for @q do |f|
+  .form-row
+    .col-4
+      = f.label 'Airline'
+      = f.collection_select :airline_icao_eq, Airline.all, :icao, :name, {include_blank: 'All'}, {class: 'form-control form-control-sm'}
+    .col-1
+      = f.label 'Flight'
+      = f.text_field :number_eq, class: 'form-control form-control-sm'
+    .col-1
+      = f.label 'Leg'
+      = f.text_field :leg_eq, class: 'form-control form-control-sm'
+    .col-4.ml-auto
+      = f.label 'Equipment'
+      = f.collection_select :equipment_short_name_eq, Equipment.all, :short_name, :short_name, {include_blank: "All"}, {class: "form-control form-control-sm"}
+    .col-1
+      = f.label 'ICAO', class: 'text-uppercase'
+      = f.text_field :equipment_icao_matches, class: 'form-control form-control-sm text-uppercase'
+
+  .form-row.pt-2
+    .col-4
+      = f.label :origin
+      = f.collection_select :orig_icao_eq, unique_origins, :icao, :to_s, {include_blank: "All"}, {class: "form-control form-control-sm"}
+    .col-1.mr-auto.text-uppercase
+      = f.label 'ICAO'
+      = f.text_field :orig_icao_matches, class: 'form-control form-control-sm text-uppercase'
+    .col-4
+      = f.label :destination
+      = f.collection_select :dest_icao_eq, unique_destinations, :icao, :to_s, {include_blank: "All"}, {class: "form-control form-control-sm"}
+    .col-1.text-uppercase
+      = f.label 'ICAO'
+      = f.text_field :dest_icao_matches, class: 'form-control form-control-sm text-uppercase'
+
+  .form-row.pt-2
+    .col-4
+      = f.label :duration, 'Duration (between)'
+      .form-inline
+        = f.text_field :duration_gteq, class: 'form-control form-control-sm col-2 mr-1'
+        and
+        = f.text_field :duration_lteq, class: 'form-control form-control-sm col-2 ml-1'
+    .col-4.ml-auto.text-right
+      = f.label :distance, 'Distance (between)'
+      .form-inline.d-flex.justify-content-end
+        = f.text_field :distance_gteq, class: 'form-control form-control-sm col-2 mr-1'
+        and
+        = f.text_field :distance_lteq, class: 'form-control form-control-sm col-2 ml-1'
+
+  .form-row.mt-3
+    .col.text-center
+      = f.button :submit, class: "btn btn-sm btn-primary" do
+        %i.fa.fa-search
+        Search Schedule

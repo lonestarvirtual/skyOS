@@ -1,0 +1,17 @@
+= content_for :section, 'Login'
+
+.container.pb-2
+  .row.justify-content-center
+    .col-lg-8
+      .card-mt-sm-2#login-card
+        .card-header
+          %h5= 'Member Login'
+
+        .card-body
+          .row
+            .col-4
+              = image_tag 'icons/headshot.png', width: '80%'
+              %span.row.col-12.justify-content-center#login-crew
+                CREW
+            .col-8
+              = render partial: 'form'

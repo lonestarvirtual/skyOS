@@ -24,6 +24,10 @@ class Fleet < ApplicationRecord
                                 allow_destroy: true,
                                 reject_if: :all_blank
 
+  delegate :short_name, to: :equipment
+  delegate :icao, to: :equipment
+  delegate :name, to: :equipment
+
   private
 
   def acceptable_image

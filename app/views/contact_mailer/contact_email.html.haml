@@ -1,0 +1,10 @@
+%p
+  New contact request submitted
+
+%p
+  %ul
+    %li= "From: #{@contact.first_name} #{@contact.last_name}"
+    %li= "Email: #{@contact.email}"
+
+%h4= 'Message'
+%p= @contact.message

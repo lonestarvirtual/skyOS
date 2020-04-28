@@ -1,0 +1,27 @@
+!!!
+%html
+  %head
+    %meta{content: "text/html; charset=UTF-8", "http-equiv": "Content-Type"}/
+    = render partial: 'layouts/head'
+
+  %body
+    %header
+      = render partial: 'layouts/menu'
+
+    %main#content{role: "main"}
+      = render partial: "layouts/alerts"
+
+      %section.pt-3.pb-3.mb-3.bg-dark.text-light
+        .pl-4
+          %h3= 'Error'
+
+      .row.justify-content-center
+        .col-lg-6
+          .card.mt-4#join-form
+            .card-header.pb-0
+              %h5= 'Oops! Something when wrong...'
+
+            .card-body
+              = yield
+
+    = render partial: 'layouts/footer'

@@ -1,0 +1,39 @@
+= simple_form_for [:admin, @flight] do |f|
+  .form-row
+    .col-8
+      = f.association :airline
+    .col-2
+      = f.input :number, label: 'Flight'
+    .col-2
+      = f.input :leg
+
+  .form-row
+    .col-2
+      = f.input :orig_icao, label: 'ICAO'
+    .col-4
+      = f.label 'Origin Airport'
+      = text_field_tag :airport_orig, origin_airport_name(@flight), class: "form-control", disabled: true
+    .col-2
+      = f.input :dest_icao, label: 'ICAO'
+    .col-4
+      = f.label 'Destination Airport'
+      = text_field_tag :airport_orig, dest_airport_name(@flight), class: "form-control", disabled: true
+
+  .form-row
+    .col-4
+      = f.input :out_time, label: "Departure Time (UTC)"
+    .col-4.offset-4
+      = f.input :in_time, label: "Arrival Time (UTC)"
+
+  .form-row
+    .col-6
+      = f.association :equipment
+    .col-3
+      = f.input :duration, label: "Duration", hint: "Hours (leave blank to calculate)"
+    .col-3
+      = f.input :distance, label: "Distance", hint: "Nautical Miles (leave blank to calculate)"
+
+  .field_with_errors
+    .text-danger= f.error :base
+
+  = f.submit "Save", class: "btn btn-success w-100"

@@ -1,0 +1,10 @@
+= form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post }) do |f|
+  .row
+    .col
+      = f.label :email
+      = f.email_field :email, class: "form-control", autofocus: true, autocomplete: "email", required: true, value: (resource.pending_reconfirmation? ? resource.unconfirmed_email : resource.email)
+
+      .invalid-feedback
+        Email #{resource.errors[:email].join(', ')}
+
+  = f.submit "Resend confirmation instructions", class: "btn btn-success mt-4 w-100"

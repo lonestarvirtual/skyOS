@@ -1,0 +1,12 @@
+= content_for :section, 'Confirmation'
+
+= content_for :left_column do
+  %h3= 'Missing confirmation?'
+  %p
+    Did you not receive a confirmation?
+    Fill out the form to send a new one.
+
+= content_for :card_header, 'Resend Confirmation Instructions'
+
+= render 'pilots/devise_layout' do
+  = render partial: 'form'

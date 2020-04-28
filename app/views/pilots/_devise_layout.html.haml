@@ -1,0 +1,20 @@
+.container.pb-2#join-container
+  .row
+    .col-lg-4.mt-sm-2#left-column
+      = yield :left_column
+
+      .d-none.d-lg-block
+        %h5= 'Looking for something else?'
+        = render partial: 'pilots/shared/links'
+
+    .col-lg-8
+      .card.mt-sm-2#join-form
+        .card-header.pb-0
+          %h5= yield :card_header
+        .card-body
+          = yield
+
+  .row.d-lg-none.mt-4.ml-2
+    .col-12
+      %h5= 'Looking for something else?'
+      = render partial: 'pilots/shared/links'

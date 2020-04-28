@@ -1,0 +1,21 @@
+!!!
+%html
+  %head
+    %meta{content: "text/html; charset=UTF-8", "http-equiv": "Content-Type"}/
+    = render partial: 'layouts/head'
+
+  %body
+    %header
+      = render partial: 'layouts/menu'
+
+    %main#content{role: "main"}
+      = render partial: "layouts/alerts"
+
+      - if content_for? :section
+        %section.pt-3.pb-3.mb-3.bg-dark.text-light
+          .pl-4
+            %h3= yield :section
+
+      = yield
+
+    = render partial: 'layouts/footer'

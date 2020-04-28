@@ -1,0 +1,29 @@
+= content_for :section, 'Network Administration'
+
+= content_for :card_header do
+  %h5.pt-2= :Networks
+
+= render 'admin/layout' do
+  %table.table.table-bordered.text-center.p-0.mb-0
+    %thead.thead-dark
+      %th{scope: 'col'}= sort_link @q, :name
+      %th.col-2{scope: 'col'}
+        = link_to new_admin_network_path, class: 'btn btn-sm btn-success' do
+          %i.fas.fa-plus
+          Add
+
+    %tbody
+      - if @networks.empty?
+        %tr
+          %td.text-muted{colspan: 20}= :None
+      - @networks.each do |network|
+        %tr
+          %td.align-middle= network.name
+          %td.align-middle
+            - if policy(network).edit? || policy(network).destroy?
+              = link_to edit_admin_network_path(network), class: 'btn btn-sm btn-outline-secondary' do
+                %i.fas.fa-edit
+                Edit
+
+  .row.justify-content-center.mt-3
+    = paginate @networks, theme: 'twitter-bootstrap-4'

@@ -1,0 +1,16 @@
+= f.fields_for :comments do |ff|
+  - if ff.object.persisted?
+    .form-row
+      .col
+        = ff.label :comments, "Comment by #{ff.object.author} - #{ff.object.created_at.strftime("%m-%d-%Y %H:%M %Z")}"
+        = ff.text_area :body, class: 'form-control', disabled: true, rows: 1
+
+      - if options[:comment_management]
+        .col-2.pl-4.pt-4.my-auto
+          = ff.check_box :_destroy
+          = ff.label :_destroy, 'Delete'
+
+  - else
+    .form-row.mt-2
+      .col
+        = ff.input :body, label: 'Add Comment', rows: 1, required: false

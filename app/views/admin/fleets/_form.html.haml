@@ -1,0 +1,33 @@
+= simple_form_for [:admin, @fleet] do |f|
+  .form-row
+    .col-sm-5
+      = f.input :image, hint: 'JPEG or PNG only. Max size 170x260. Images will be resized'
+
+    .col-sm-7
+      - if @fleet.image.attached? && @fleet.persisted?
+        .row
+          .col-sm-4.offset-sm-4
+            = image_tag @fleet.image.variant(resize_to_limit: [170, 260])
+          .col-sm-3.my-auto.pt-2.ml-4
+            = f.check_box :remove_image, default: false
+            = f.label :remove_image
+      - else
+        .text-muted.mt-3= 'No image'
+
+  .form-row
+    .col
+      = f.association :airline
+    .col
+      = f.association :equipment
+
+  .form-row
+    .col
+      .card.mb-3
+        .card-header= :Repaints
+        .card-body.pt-0
+          = render partial: 'form_repaints', locals: { f: f }
+
+  .field_with_errors
+    .text-danger= f.error :base
+
+  = f.submit "Save", class: "btn btn-success w-100"

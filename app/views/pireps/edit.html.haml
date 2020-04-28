@@ -1,0 +1,9 @@
+= content_for :section, 'Edit PIREP'
+
+.container.pt-2.pb-4
+  .col-lg-12
+    .card.card-shadow
+      .card-header
+        %h5.pt-2= 'Edit PIREP'
+      .card-body
+        = render partial: 'form', locals: { target: @pirep, options: {} }

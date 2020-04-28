@@ -1,0 +1,44 @@
+= content_for :section, 'Flight Schedule'
+
+.container-fluid.pt-2.pb-4
+  .row
+    .col-lg-12
+      .card.card-shadow.p-1
+        .card-body= render partial: 'search_form'
+
+  .row.pt-4
+    .col-lg-12
+      .card.card-shadow.p-0
+        .card-header
+          %h5.pt-2= 'Flight Schedule'
+
+        .card-body.p-0
+          %table.table.table-bordered.text-center.p-0.mb-0
+            %thead.thead-dark
+              %th{scope: 'col'}= sort_link @q, :airline_name
+              %th{scope: 'col'}= sort_link @q, :number, 'Flight'
+              %th{scope: 'col'}= sort_link @q, :orig_icao, 'Origin'
+              %th{scope: 'col'}= sort_link @q, :dest_icao, 'Destination'
+              %th{scope: 'col'}= sort_link @q, :out_time, 'Departs'
+              %th{scope: 'col'}= sort_link @q, :in_time, 'Arrives'
+              %th{scope: 'col'}= sort_link @q, :duration
+              %th{scope: 'col'}= sort_link @q, :distance
+              %th{scope: 'col'}= sort_link @q, :equipment_short_name, 'Equipment'
+            %tbody
+              - if @flights.empty?
+                %tr
+                  %td.text-muted{colspan: 20}= :None
+              - @flights.each do |flight|
+                %tr
+                  %th.align-middle{scope: 'row', width: 160}= airline_logo(flight.airline)
+                  %td.align-middle= "#{flight.number} Leg #{flight.leg}"
+                  %td.align-middle{'data-toggle': 'tooltip', title: flight.orig.name}= flight.orig
+                  %td.align-middle{'data-toggle': 'tooltip', title: flight.dest.name}= flight.dest
+                  %td.align-middle= flight.out_time_local.strftime("%l:%M %P (%Z)")
+                  %td.align-middle= flight.in_time_local.strftime("%l:%M %P (%Z)")
+                  %td.align-middle= flight.duration
+                  %td.align-middle= "#{flight.distance} nm"
+                  %td.align-middle= flight.equipment.short_name
+
+          .row.justify-content-center.mt-3
+            = paginate @flights, theme: 'twitter-bootstrap-4'

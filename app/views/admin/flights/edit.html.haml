@@ -1,0 +1,13 @@
+= content_for :section, 'Flight Schedule Administration'
+
+= content_for :card_header do
+  .col-8.pt-1
+    %h5= 'Edit Flight'
+  .col-4.text-right
+    = link_to admin_flight_path(@flight), method: :delete, class: 'btn btn-sm btn-danger', 'data-confirm': "Are you sure?" do
+      %i.fas.fa-trash
+      Delete
+
+= render 'admin/layout' do
+  .p-4
+    = render partial: 'form'
