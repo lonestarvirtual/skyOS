@@ -39,7 +39,7 @@ class RegistrationsController < Devise::RegistrationsController
   # the registration or redirects back to the join page
   #
   def check_new_registration_allowed?
-    return if Setting.allow_signup
+    return true if Setting.allow_signup?
 
     redirect_to root_path
     flash[:alert] = 'New pilot registration is currently disabled'

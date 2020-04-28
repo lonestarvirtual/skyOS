@@ -10,5 +10,5 @@ if Rails.env.production? && !ENV['RAILS_BUILD_IN_PROGRESS']
     user_name: Rails.application.credentials.smtp[:username]
   }.freeze
 elsif Rails.env.production?
-  SMTP_SETTINGS = {}
+  SMTP_SETTINGS = {}.freeze
 end
