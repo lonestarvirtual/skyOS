@@ -90,6 +90,14 @@ RSpec.describe Pilot, type: :model do
     end
   end
 
+  describe '#last_flight' do
+    it 'should return the last approved Pirep by flight date' do
+      pirep = create(:pirep, :approved)
+      pilot = pirep.pilot
+      expect(pilot.last_flight).to eq pirep
+    end
+  end
+
   describe '#pid_to_s' do
     it 'should return the display string for the pilot ID' do
       expect(pilot.pid_to_s).to eq "#{Setting.organization_icao}#{pilot.pid}"
@@ -113,6 +121,25 @@ RSpec.describe Pilot, type: :model do
   describe '#to_s' do
     it 'should return the display string for the user' do
       expect(pilot.to_s).to eq "#{pilot.full_name} (#{pilot.pid_to_s})"
+    end
+  end
+
+  describe '#total_flights' do
+    it 'should return the total number of approved flights' do
+      pilot = create(:pilot)
+      create_list(:pirep, 4, :approved, pilot: pilot)
+      expect(pilot.total_flights).to eq 4
+    end
+  end
+
+  describe '#total_hours' do
+    it 'should return the total hours of approved flights' do
+      sum    = 0
+      pilot  = create(:pilot)
+      pireps = create_list(:pirep, 4, :approved, pilot: pilot)
+      pireps.each { |p| sum += p.duration }
+
+      expect(pilot.total_hours).to eq sum
     end
   end
 end

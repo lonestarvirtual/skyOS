@@ -1,13 +1,13 @@
 # frozen_string_literal: true
 
-require "rake/clean"
+require 'rake/clean'
 
 namespace :spec do
-  Rake::Cleaner.cleanup_files(["coverage"])
+  Rake::Cleaner.cleanup_files(['coverage'])
 
-  desc "Run all specs and generate coverage report"
+  desc 'Run all specs and generate coverage report'
   task coverage: :environment do
-    ENV["COVERAGE"] = "true"
-    Rake::Task["spec"].invoke
+    ENV['COVERAGE'] = 'true'
+    Rake::Task['spec'].invoke
   end
 end

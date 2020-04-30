@@ -2,8 +2,9 @@
 
 FactoryBot.define do
   factory :airline do
-    sequence(:icao, &:to_s)
-    sequence(:iata, &:to_s)
+    sequence(:icao) { |i| ('AAA'..'ZZZ').to_a[i] }
     sequence(:name) { |n| "Airline #{n}" }
+
+    iata { ('AA'..'ZZ').to_a.sample }
   end
 end

@@ -5,7 +5,7 @@ if ENV['COVERAGE']
 
   SimpleCov.minimum_coverage 90
   SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter.new(
-      [SimpleCov::Formatter::HTMLFormatter]
+    [SimpleCov::Formatter::HTMLFormatter]
   )
 
   SimpleCov.start 'rails'

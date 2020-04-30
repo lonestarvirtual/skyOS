@@ -30,21 +30,6 @@ Group.create(name: 'Pilot', description: 'Default user/pilot group')
 admin_group = Group.find_by(name: 'Admin')
 admin_group.update_attribute(:permissions, Permission.all)
 
-# Default administrator
-#
-admin_attributes = {
-    pid:        0,
-    first_name: 'Default',
-    last_name:  'Administrator',
-    email:      "admin@skyos",
-    password:   'deleteme',
-    group:      Group.find_by(name: 'Admin')
-}
-
-admin = Pilot.new(admin_attributes)
-admin.skip_confirmation!
-admin.save!
-
 # Default equipment types
 #
 equip_csv = File.read(Rails.root.join('lib', 'seeds', 'equipment.csv'))

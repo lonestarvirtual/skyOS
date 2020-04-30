@@ -20,5 +20,9 @@ FactoryBot.define do
     after(:build) do |pirep|
       create(:fleet, airline: pirep.airline, equipment: pirep.equipment)
     end
+
+    trait :approved do
+      status { PirepStatus.find_by(approved: true) }
+    end
   end
 end

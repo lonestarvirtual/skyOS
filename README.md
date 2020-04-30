@@ -92,9 +92,12 @@ is running.
 
 ### Initial administrator
 
-When the database is seeded a temporary administrative 'pilot' user is created.
-This account should only be used long enough to on board an initial real user
-and then deleted.
+When users are registered, they automatically join the default Pilot user group.
+To create an initial administrative user run the following rake task:
 
-* Username: `admin@skyos`
-* Password: `deleteme`
+```
+rake skyos:create_admin
+```
+
+This will prompt you for the user attributes and assign the user administrative
+privileges.
