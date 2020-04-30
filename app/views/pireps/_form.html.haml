@@ -13,15 +13,15 @@
     .col-2
       = f.input :leg
 
-  .form-row
+  .form-row{'data-controller': :pireps}
     .col-2
-      = f.input :orig_icao, label: 'Origin ICAO', input_html: { class: 'text-uppercase' }
+      = f.input :orig_icao, label: 'Origin ICAO', input_html: { class: 'text-uppercase', maxlength: 4, 'data-target': 'pireps.orig_icao', 'data-action': 'keyup->pireps#find_origin' }
     .col-4
-      = f.input :orig, label: 'Origin Airport', input_html: { disabled: true, value: origin_airport_name(@pirep) }
+      = f.input :orig, label: 'Origin Airport', input_html: { disabled: true, value: origin_airport_name(@pirep), 'data-target': 'pireps.orig' }
     .col-2
-      = f.input :dest_icao, label: 'Dest ICAO', input_html: { class: 'text-uppercase' }
+      = f.input :dest_icao, label: 'Dest ICAO', input_html: { class: 'text-uppercase', maxlength: 4, 'data-target': 'pireps.dest_icao', 'data-action': 'keyup->pireps#find_destination' }
     .col-4
-      = f.input :dest, label: 'Destination Airport', input_html: { disabled: true, value: dest_airport_name(@pirep) }
+      = f.input :dest, label: 'Destination Airport', input_html: { disabled: true, value: dest_airport_name(@pirep), 'data-target': 'pireps.dest' }
 
   .form-row
     .col-12
