@@ -41,6 +41,12 @@ RSpec.describe Airport, type: :model do
     end
   end
 
+  describe '#to_s' do
+    it 'returns the display string for the airport' do
+      expect(airport.to_s).to eq "#{airport.city} (#{airport.icao})"
+    end
+  end
+
   describe '#upcase_iata' do
     it 'upcases the IATA code' do
       airport.iata = 'aaa'
@@ -50,7 +56,7 @@ RSpec.describe Airport, type: :model do
   end
 
   describe '#upcase_icao' do
-    it 'upcases teh ICAO code' do
+    it 'upcases the ICAO code' do
       airport.icao = 'aaaa'
       airport.valid?
       expect(airport.icao).to eq 'AAAA'
@@ -58,14 +64,23 @@ RSpec.describe Airport, type: :model do
   end
 
   describe '#valid_time_zone' do
+    it 'is valid with a real time zone' do
+      airport.time_zone = 'America/New_York'
+      expect(airport).to be_valid
+    end
+
     it 'is not valid if the time zone does not exist' do
       airport.time_zone = 'Fake/Timezone'
       expect(airport).to_not be_valid
     end
 
-    it 'is valid with a real time zone' do
-      airport.time_zone = 'America/New_York'
-      expect(airport).to be_valid
+    it 'is not valid if time zone is not present' do
+      airport.time_zone = nil
+      airport.send(:valid_time_zone)
+
+      # use send to test private method as validation will set
+      # time zone to UTC if normally left blank
+      expect(airport.errors).to have_key :time_zone
     end
   end
 end

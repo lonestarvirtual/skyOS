@@ -14,9 +14,6 @@ class Airline < ApplicationRecord
   after_save :purge_logo, if: :remove_logo
   after_validation :titleize_name, :upcase_iata, :upcase_icao
 
-  # TODO: - is this necessary or will ActiveStorage do it automagically?
-  before_destroy :purge_logo
-
   validates :icao, :name, presence: true, uniqueness: { case_sensitive: false }
   validates :icao, length: { maximum: 3 }
   validates :iata, length: { maximum: 2 }

@@ -30,6 +30,17 @@ RSpec.describe Pilot, type: :model do
     # Inclusion/acceptance of values
   end
 
+  describe '#after_confirmation' do
+    it 'should set the user active after confirming their email' do
+      pilot = create(:pilot, :confirmed)
+
+      # after_confirmation is a Devise hook, we just need to
+      # validate it updates our 'active' attribute when called
+      pilot.send(:after_confirmation)
+      expect(pilot.active?).to be_truthy
+    end
+  end
+
   describe 'can?' do
     before :each do
       @pilot = create(:pilot)
@@ -43,6 +54,12 @@ RSpec.describe Pilot, type: :model do
     it 'should return false if the pilot does not have permission' do
       @pilot.update_attribute(:group, Group.find_by(name: 'Pilot'))
       expect(@pilot.can?(Group, :destroy)).to eq false
+    end
+  end
+
+  describe '#full_name' do
+    it 'should return the users full name' do
+      expect(pilot.full_name).to eq "#{pilot.first_name} #{pilot.last_name}"
     end
   end
 
@@ -73,6 +90,12 @@ RSpec.describe Pilot, type: :model do
     end
   end
 
+  describe '#pid_to_s' do
+    it 'should return the display string for the pilot ID' do
+      expect(pilot.pid_to_s).to eq "#{Setting.organization_icao}#{pilot.pid}"
+    end
+  end
+
   describe 'titleize_name' do
     it 'should titleize the first name' do
       first_name = pilot.first_name
@@ -84,6 +107,12 @@ RSpec.describe Pilot, type: :model do
       last_name = pilot.last_name
       pilot.valid?
       expect(pilot.last_name).to eq last_name.titleize
+    end
+  end
+
+  describe '#to_s' do
+    it 'should return the display string for the user' do
+      expect(pilot.to_s).to eq "#{pilot.full_name} (#{pilot.pid_to_s})"
     end
   end
 end

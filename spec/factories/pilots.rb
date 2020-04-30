@@ -11,5 +11,9 @@ FactoryBot.define do
     trait :admin do
       group { Group.find_by(name: 'Admin') }
     end
+
+    trait :confirmed do
+      confirmed_at { Time.now }
+    end
   end
 end

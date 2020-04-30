@@ -13,6 +13,9 @@
 !/log/.keep
 !/tmp/.keep
 
+# Ignore SimpleCov results
+/coverage
+
 # Ignore uploaded files in development.
 /storage/*
 !/storage/.keep

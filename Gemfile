@@ -58,6 +58,7 @@ group :development, :test do
   gem 'rspec-rails', '~> 4.0.0'
   gem 'shoulda-callback-matchers'
   gem 'shoulda-matchers'
+  gem 'simplecov', require: false
 end
 
 group :development do
