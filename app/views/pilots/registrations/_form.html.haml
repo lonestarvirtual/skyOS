@@ -16,6 +16,14 @@
 
   .row.mt-1
     .col
+      = f.label "Email"
+      = f.email_field :email, class: "form-control", required: true
+
+      .invalid-feedback
+        = resource.errors[:email].join(", ")
+
+  .row.mt-1
+    .col
       = f.label :password
       = f.password_field :password, class: "form-control", autocomplete: "new-password", required: true
 
