@@ -22,7 +22,7 @@
               %table.table.m-0
                 %tr
                   %th{width: "40%"}= 'Last Flight'
-                  %td= @pilot.last_flight.present? ? @pilot.last_flight.strftime("%m-%d-%Y") : 'Never'
+                  %td= @pilot.last_flight.present? ? @pilot.last_flight.date.strftime("%m-%d-%Y") : 'Never'
                 %tr
                   %th= 'Total Hours'
                   %td= number_with_delimiter(@pilot.total_hours)
