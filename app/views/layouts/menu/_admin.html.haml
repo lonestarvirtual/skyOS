@@ -1,4 +1,4 @@
-- if pilot_signed_in?
+- if pilot_signed_in? && current_pilot.group.name == 'Admin'
   %li.nav-item.dropdown
     %a.nav-link.dropdown-toggle#navbarDropdown{href: '#', role: 'button', 'data-toggle': 'dropdown', 'aria-haspopup': 'true', 'aria-expanded': 'false'}
       Admin
