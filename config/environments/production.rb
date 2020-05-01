@@ -2,6 +2,7 @@
 
 require Rails.root.join('config/smtp')
 
+# rubocop:disable Metrics/BlockLength
 Rails.application.configure do
   # Settings specified here will take precedence over those in
   # config/application.rb.
@@ -75,7 +76,11 @@ Rails.application.configure do
 
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = SMTP_SETTINGS
-  config.action_mailer.default_url_options = { host: ENV['RAILS_HOSTNAME'] }
+
+  config.action_mailer.default_url_options = {
+    protocol: 'https',
+    host: ENV['RAILS_HOSTNAME']
+  }
 
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery
@@ -130,3 +135,4 @@ Rails.application.configure do
   # config.active_record.database_resolver_context = ActiveRecord::Middleware::DatabaseSelector::Resolver::Session
   # rubocop:enable Layout/LineLength
 end
+# rubocop:enable Metrics/BlockLength
