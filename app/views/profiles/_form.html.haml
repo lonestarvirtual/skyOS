@@ -21,7 +21,16 @@
 
   .form-row
     .col
-      = f.input :email, hint: 'Changes require confirmation'
+      .form-group
+        = f.label :email
+        = f.text_field :email, class: 'form-control'
+        - if @pilot.unconfirmed_email?
+          %small.text-danger
+            Email pending change to #{@pilot.unconfirmed_email}. Please check
+            your email and confirm.
+        - else
+          %small.form-text.text-muted
+            Changes will require confirmation.
 
   .form-row
     .col

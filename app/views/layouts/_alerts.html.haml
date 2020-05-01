@@ -4,10 +4,13 @@
     -# we just need to dump the key so that users do not see a blank flash
     - next if key.to_s == 'timedout'
 
-    .alert.mb-0.fade.show{class: "alert-#{key}", role: 'alert'}
-      .container
-        = value
+    .alert.mb-0.p-2.fade.show{class: "alert-#{key}", role: 'alert'}
+      -#.container
+      .d-flex.justify-content-between
+        .col
+          = value
 
-        %button.close.mb-2{type: 'button', 'data-dismiss': 'alert', 'aria-label': 'Close'}
-          %span{'aria-hidden': 'true'}
-            &times;
+        .col
+          %button.close.pt-0{type: 'button', 'data-dismiss': 'alert', 'aria-label': 'Close'}
+            %span{'aria-hidden': 'true'}
+              &times;
