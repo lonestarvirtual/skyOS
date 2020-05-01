@@ -2,6 +2,13 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
 
+.home-box {
+  max-height: 225px;
+  width: 100%;
+  object-fit: cover;
+  overflow: hidden;
+}
+
 #home-card {
   border-radius: 0px;
 }
