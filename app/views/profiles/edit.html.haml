@@ -1,0 +1,41 @@
+= content_for :section, 'Profile'
+
+.container-fluid.pt-2.pb-4
+  .row.d-flex.justify-content-center
+    .col-md-3.pb-2
+      .row
+        .col-12
+          .card.card-shadow
+            .card-body.text-center
+              = image_tag current_pilot.gravatar_url
+            .card-header
+              .row
+                .col-8.font-weight-bold= :Gravatar
+                .col-4.text-right
+                  = link_to 'https://gravatar.com', target: '_new' do
+                    %i.fas.fa-edit
+
+      .row.pt-4.pb-3
+        .col-12
+          .card.card-shadow
+            .card-body.p-0.m-0
+              %table.table.m-0
+                %tr
+                  %th{width: "40%"}= 'Last Flight'
+                  %td= @pilot.last_flight.present? ? @pilot.last_flight.strftime("%m-%d-%Y") : 'Never'
+                %tr
+                  %th= 'Total Hours'
+                  %td= number_with_delimiter(@pilot.total_hours)
+                %tr
+                  %th= 'Total Flights'
+                  %td= number_with_delimiter(@pilot.total_flights)
+            .card-header.font-weight-bold= :Statistics
+
+    .col-md-9
+      .card.card-shadow
+        .card-header
+          %h5.pt-2= @pilot
+
+        .card-body
+          .col-8
+            = render partial: 'form'

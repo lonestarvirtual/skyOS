@@ -8,9 +8,18 @@ Rails.application.routes.draw do
              path: '',
              path_names: {
                sign_in: 'login',
-               sign_out: 'logout',
-               sign_up: 'join'
-             }
+               sign_out: 'logout'
+             },
+             skip: :registrations
+
+  devise_scope :pilot do
+    resource :registrations,
+             only: %i[new create],
+             path: '',
+             path_names: { new: 'join' },
+             as: :pilot_registration
+  end
+
   root to: 'home#index'
 
   namespace :admin do
@@ -35,7 +44,6 @@ Rails.application.routes.draw do
   end
 
   resources :fleet
-
   resources :flights, only: [:index]
 
   resources :pilots, only: [:index] do
@@ -43,8 +51,7 @@ Rails.application.routes.draw do
   end
 
   resources :pireps, except: [:index]
-
   resources :policy, only: :show
-
   resources :pilots, only: [:index]
+  resource  :profile, only: %i[edit update]
 end

@@ -4,12 +4,13 @@ class ApplicationController < ActionController::Base
   include Pundit
   protect_from_forgery
 
+  around_action :use_time_zone, if: :current_pilot
   before_action :authenticate_pilot!, unless: :exception_controller?
   after_action  :verify_authorized, unless: :skip_authorization?
 
   private
 
-  # Return true if it's an exception_controller. false to all other controllers.
+  # Return true if it's an exception_controller. false to all other controllers
   # This allows custom error pages to work in production without having verify
   # a member is logged in or authorized to view the page
   #
@@ -27,5 +28,9 @@ class ApplicationController < ActionController::Base
   #
   def pundit_user
     current_pilot
+  end
+
+  def use_time_zone(&block)
+    Time.use_zone(current_pilot.time_zone, &block)
   end
 end

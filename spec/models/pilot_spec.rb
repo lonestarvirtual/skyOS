@@ -142,4 +142,25 @@ RSpec.describe Pilot, type: :model do
       expect(pilot.total_hours).to eq sum
     end
   end
+
+  describe '#valid_time_zone' do
+    it 'is valid with a real time zone' do
+      pilot.time_zone = 'America/New_York'
+      expect(pilot).to be_valid
+    end
+
+    it 'is not valid if the time zone does not exist' do
+      pilot.time_zone = 'Fake/Timezone'
+      expect(pilot).to_not be_valid
+    end
+
+    it 'is not valid if time zone is not present' do
+      pilot.time_zone = nil
+      pilot.send(:valid_time_zone)
+
+      # use send to test private method as validation will set
+      # time zone to UTC if normally left blank
+      expect(pilot.errors).to have_key :time_zone
+    end
+  end
 end

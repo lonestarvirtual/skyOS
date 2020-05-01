@@ -1,8 +1,12 @@
 # frozen_string_literal: true
 
 class Pilot < ApplicationRecord
+  include Timezoneable
   extend FriendlyId
   friendly_id :slug_candidates, use: :slugged
+
+  include Gravtastic
+  gravtastic secure: true, filetype: :png, default: :identicon
 
   belongs_to :group, optional: false
   has_many   :permissions, through: :group
@@ -23,6 +27,8 @@ class Pilot < ApplicationRecord
 
   validates :last_name,  presence: true, null: false
   validates :first_name, presence: true, null: false
+
+  validate :valid_time_zone
 
   # Returns true or false whether Pilot has permission to perform
   # any supplied action on a model class

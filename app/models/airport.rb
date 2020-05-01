@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class Airport < ApplicationRecord
+  include Timezoneable
   extend FriendlyId
   friendly_id :icao
   reverse_geocoded_by :latitude, :longitude
@@ -81,15 +82,5 @@ class Airport < ApplicationRecord
     return if icao.nil?
 
     self.icao = icao.upcase
-  end
-
-  def valid_time_zone
-    if time_zone.present?
-      return if ActiveSupport::TimeZone.new(time_zone).present?
-
-      errors.add(:time_zone, 'must be valid')
-    else
-      errors.add(:time_zone, "can't be blank")
-    end
   end
 end

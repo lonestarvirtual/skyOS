@@ -1,0 +1,39 @@
+= simple_form_for @pilot, url: profile_path, method: :patch do |f|
+  .form-row
+    .col-6
+      .form-group
+        = label_tag :pid, 'Pilot ID'
+        = text_field_tag :pid, @pilot.pid_to_s, disabled: true, class: 'form-control'
+        %small.form-text.text-muted
+          This is your assigned Pilot ID
+
+  .form-row
+    .col
+      .form-group
+        = label_tag :first_name, 'First Name'
+        = text_field_tag :first_name, @pilot.first_name, disabled: true, class: 'form-control'
+        %small.form-text.text-muted
+          Contact staff to make name changes
+    .col
+      .form-group
+        = label_tag :last_name, 'Last Name'
+        = text_field_tag :first_name, @pilot.last_name, disabled: true, class: 'form-control'
+
+  .form-row
+    .col
+      = f.input :email, hint: 'Changes require confirmation'
+
+  .form-row
+    .col
+      = f.input :password, label: 'New password'
+  .form-row
+    .col
+      = f.input :password_confirmation
+
+  .form-row
+    .col
+      = f.input :time_zone, model: TZInfo::Timezone, include_blank: false
+
+  .form-row
+    .col
+      = f.submit 'Save', class: 'btn btn-success'

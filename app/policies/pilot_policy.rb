@@ -23,5 +23,15 @@ class PilotPolicy < ApplicationPolicy
     @user.can?(Pilot, :update)
   end
 
+  # Profile actions
+  #
+  def profile_show?
+    true if @record == @user
+  end
+
+  def profile_update?
+    true if @record == @user
+  end
+
   def permitted_attributes; end
 end
