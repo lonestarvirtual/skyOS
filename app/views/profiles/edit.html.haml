@@ -40,11 +40,15 @@
                     - else
                       %i= :Never
                 %tr
+                  %th= 'Total Flights'
+                  %td= number_with_delimiter(@pilot.total_flights)
+                %tr
                   %th= 'Total Hours'
                   %td= number_with_delimiter(@pilot.total_hours)
                 %tr
-                  %th= 'Total Flights'
-                  %td= number_with_delimiter(@pilot.total_flights)
+                  %th= 'Total Distance'
+                  %td= "#{number_with_delimiter(@pilot.total_distance)} nm"
+
             .card-header.font-weight-bold= :Statistics
 
     .col-md-9

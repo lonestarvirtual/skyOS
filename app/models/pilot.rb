@@ -72,6 +72,12 @@ class Pilot < ApplicationRecord
     "#{full_name} (#{pid_to_s})"
   end
 
+  # Return the total distance of approved flights
+  #
+  def total_distance
+    approved_flights.sum(:distance)
+  end
+
   # Return the total number of approved flights
   #
   def total_flights
