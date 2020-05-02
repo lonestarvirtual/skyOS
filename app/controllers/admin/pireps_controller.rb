@@ -13,6 +13,19 @@ module Admin
       @pireps = @q.result.page(params[:page])
     end
 
+    def destroy
+      @pirep = Pirep.find(params[:id])
+      authorize @pirep, :destroy?
+
+      if @pirep.destroy
+        flash[:success] = 'PIREP deleted'
+        redirect_to admin_pireps_path
+      else
+        flash[:danger] = 'Unable to delete PIREP'
+        render :edit
+      end
+    end
+
     def edit
       @pirep = Pirep.find(params[:id])
       authorize @pirep, :edit?
