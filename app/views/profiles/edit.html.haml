@@ -36,7 +36,7 @@
                         %li
                           = @pilot.last_flight.date.strftime("%b %d, %Y")
                         %li
-                          (#{time_ago_in_words(@pilot.created_at)} ago)
+                          (#{time_ago_in_words(@pilot.last_flight.date)} ago)
                     - else
                       %i= :Never
                 %tr
