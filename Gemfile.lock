@@ -67,6 +67,8 @@ GEM
     addressable (2.7.0)
       public_suffix (>= 2.0.2, < 5.0)
     ast (2.4.0)
+    audited (4.9.0)
+      activerecord (>= 4.2, < 6.1)
     bcrypt (3.1.13)
     bindex (0.8.1)
     bootsnap (1.4.6)
@@ -337,6 +339,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  audited (~> 4.9)
   bootsnap (>= 1.4.2)
   bootstrap4-kaminari-views
   byebug

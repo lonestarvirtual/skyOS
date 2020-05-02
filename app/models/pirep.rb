@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class Pirep < ApplicationRecord
+  audited only: :status_id, on: :update
+
   belongs_to :pilot, optional: false
   belongs_to :airline, optional: false
   belongs_to :orig, class_name: 'Airport', optional: false

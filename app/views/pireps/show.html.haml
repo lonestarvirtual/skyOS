@@ -24,7 +24,7 @@
                 = link_to "Logbook", pilot_logbook_path(@pirep.pilot)
             %tr
               %th.text-right{scope: 'col'}= :Status
-              %td{bgcolor: @pirep.status.color}= @pirep.status
+              %td{bgcolor: @pirep.status.color}= pirep_display_audit(@pirep)
             %tr
               %th.text-right{scope: 'col'}= :Created
               %td= @pirep.created_at.strftime("%m-%d-%Y %H:%M %Z")
@@ -52,7 +52,7 @@
               %td= @pirep.network || 'Offline'
             %tr
               %th.text-right{scope: 'col'}= :Distance
-              %td= "#{@pirep.distance} nm"
+              %td= "#{number_with_delimiter(@pirep.distance)} nm"
             %tr
               %th.text-right{scope: 'col'}= :Duration
               %td= '%.1f' % @pirep.duration + ' hours'
