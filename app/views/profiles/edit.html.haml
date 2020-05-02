@@ -21,8 +21,24 @@
             .card-body.p-0.m-0
               %table.table.m-0
                 %tr
+                  %th{width: "40%"}= 'Join Date'
+                  %td
+                    %ul.list-unstyled.mb-0
+                      %li
+                        = @pilot.created_at.strftime("%b %d, %Y")
+                      %li
+                        (#{time_ago_in_words(@pilot.created_at)} ago)
+                %tr
                   %th{width: "40%"}= 'Last Flight'
-                  %td= @pilot.last_flight.present? ? @pilot.last_flight.date.strftime("%m-%d-%Y") : 'Never'
+                  %td
+                    - if @pilot.last_flight.present?
+                      %ul.list-unstyled.mb-0
+                        %li
+                          = @pilot.last_flight.date.strftime("%b %d, %Y")
+                        %li
+                          (#{time_ago_in_words(@pilot.created_at)} ago)
+                    - else
+                      %i= :Never
                 %tr
                   %th= 'Total Hours'
                   %td= number_with_delimiter(@pilot.total_hours)
