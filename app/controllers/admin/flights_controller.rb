@@ -2,6 +2,8 @@
 
 module Admin
   class FlightsController < ApplicationController
+    skip_around_action :use_time_zone # use UTC not the Pilot's TZ
+
     def index
       authorize Flight, :index?
       @q = policy_scope(Flight).ransack(params[:q])
