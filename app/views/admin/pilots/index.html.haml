@@ -1,0 +1,48 @@
+= content_for :section, 'Pilot Administration'
+
+= content_for :card_header do
+  %h5.pt-2= :Pilots
+
+  .text-right.pt-1
+    = search_form_for @q, url: admin_pilots_path, class: 'form-inline justify-content-end' do |f|
+      = f.label 'PID', class: 'form-inline text-uppercase'
+      = f.search_field :pid_eq, class: 'form-control form-control-sm form-inline text-uppercase ml-2 col-2'
+
+      = f.label :last_name, class: 'form-inline ml-2'
+      = f.search_field :last_name_cont, class: 'form-control form-control-sm form-inline ml-2'
+
+      = f.submit class: 'btn btn-sm btn-primary ml-2'
+
+= render 'admin/layout' do
+  %table.table.table-bordered.text-center.p-0.mb-0
+    %thead.thead-dark
+      %th{scope: 'col'}= sort_link @q, :pid, 'Pilot ID'
+      %th{scope: 'col'}= sort_link @q, :last_name, 'Name'
+      %th{scope: 'col'}= sort_link @q, :active
+      %th{scope: 'col'}= :Flights
+      %th{scope: 'col'}= :Hours
+      %th{scope: 'col'}= 'Last Flight'
+      %th{scope: 'col'}= sort_link @q, :created_at, 'Join Date'
+      %th{scope: 'col'}
+
+    %tbody
+      - if @pilots.empty?
+        %tr
+          %td.text-muted{colspan: 20}= :None
+      - @pilots.each do |pilot|
+        %tr
+          %th.align-middle{scope: 'row', width: 160}= pilot.pid_to_s
+          %td.align-middle= pilot.full_name
+          %td.align-middle= pilot.active? ? 'Yes' : 'No'
+          %td.align-middle= number_with_delimiter(pilot.total_flights)
+          %td.align-middle= number_with_delimiter(pilot.total_hours)
+          %td.align-middle= pilot_last_flight(pilot)
+          %td.align-middle= pilot.created_at.strftime("%m-%d-%Y")
+          %td
+            - if policy(pilot).edit? || policy(pilot).destroy?
+              = link_to edit_admin_pilot_path(pilot), class: 'btn btn-sm btn-outline-secondary' do
+                %i.fas.fa-edit
+                Edit
+
+  .row.justify-content-center.mt-3
+    = paginate @pilots, theme: 'twitter-bootstrap-4'

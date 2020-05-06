@@ -29,6 +29,7 @@ Rails.application.routes.draw do
     resources :fleets,     except: [:show]
     resources :flights,    except: [:show]
     resources :networks,   except: [:show]
+    resources :pilots,     except: %i[show new create]
     resources :pireps,     except: %i[show new create]
     resources :simulators, except: [:show]
   end

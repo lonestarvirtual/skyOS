@@ -33,5 +33,12 @@ class PilotPolicy < ApplicationPolicy
     true if @record == @user
   end
 
-  def permitted_attributes; end
+  def permitted_attributes
+    if @user.can?(Pilot, :update)
+      %i[pid active first_name last_name email password
+         password_confirmation time_zone]
+    else
+      []
+    end
+  end
 end

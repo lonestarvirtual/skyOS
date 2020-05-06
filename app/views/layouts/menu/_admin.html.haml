@@ -22,6 +22,9 @@
       - if current_pilot.can? Network, [:create, :update, :destroy]
         = link_to 'Networks', admin_networks_path, class: 'dropdown-item'
 
+      - if current_pilot.can? Pilot, [:create, :update, :destroy]
+        = link_to 'Pilots', admin_pilots_path, class: 'dropdown-item'
+
       - if current_pilot.can? Pirep, [:create, :update, :destroy]
         = link_to 'PIREPs', admin_pireps_path, class: 'dropdown-item'
 
