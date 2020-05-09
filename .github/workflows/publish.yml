@@ -28,4 +28,5 @@ jobs:
           name: lonestarvirtual/skyOS/skyos
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
+          registry: docker.pkg.github.com
           tags: "latest,${{ env.RELEASE_VERSION }}"
