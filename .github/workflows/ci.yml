@@ -18,23 +18,23 @@ jobs:
           --health-retries 5
 
     steps:
-    - uses: actions/checkout@v2
-    - name: Set up Ruby
-    - uses: ruby/setup-ruby@v1
-      with:
-        ruby-version: 2.6
-    - uses: borales/actions-yarn@v2.0.0
-      with:
-        cmd: install
-    - name: Install dependencies
-      env:
-        RAILS_ENV: test
-      run: |
-        sudo apt-get -yqq install libpq-dev
-        gem install bundler
-        bundle install --jobs 4 --retry 3
-        bundle exec rails db:prepare
-    - name: Rubocop
-      run: bundle exec rubocop
-    - name: RSpec
-      run: bundle exec rake
+      - uses: actions/checkout@v2
+      - name: Set up Ruby
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 2.6
+      - uses: borales/actions-yarn@v2.0.0
+        with:
+          cmd: install
+      - name: Install dependencies
+        env:
+          RAILS_ENV: test
+        run: |
+          sudo apt-get -yqq install libpq-dev
+          gem install bundler
+          bundle install --jobs 4 --retry 3
+          bundle exec rails db:prepare
+      - name: Rubocop
+        run: bundle exec rubocop
+      - name: RSpec
+        run: bundle exec rake
