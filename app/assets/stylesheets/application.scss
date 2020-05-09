@@ -1,0 +1,11 @@
+// All SCSS/CSS redies in 'app/javascript/stylesheets/application.scss'
+// to be included via Webpacker.
+//
+// Only controller specific CSS is add here.
+//
+
+// app/assets/stylesheets
+@import 'contacts';
+@import 'devise';
+@import 'fleet';
+@import 'home';

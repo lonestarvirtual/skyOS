@@ -1,0 +1,8 @@
+= content_for :section, 'Airport Administration'
+
+= content_for :card_header do
+  %h5= 'Add Airport'
+
+= render 'admin/layout' do
+  .p-4
+    = render partial: 'form'

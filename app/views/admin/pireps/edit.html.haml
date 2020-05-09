@@ -1,0 +1,16 @@
+= content_for :section, 'PIREP Administration'
+
+= content_for :card_header do
+  .col-8.pt-1
+    %h5= "PIREP Review for #{@pirep.pilot}"
+
+  .col-4.text-right
+    - if policy(@pirep).destroy?
+      = link_to admin_pirep_path(@pirep), method: :delete, class: 'btn btn-sm btn-danger', 'data-confirm': "Are you sure?" do
+        %i.fas.fa-trash
+        Delete
+
+= render 'admin/layout' do
+  .p-4
+    - options = { comment_management: true, status_management: true }
+    = render partial: 'pireps/form', locals: { target: [:admin, @pirep], options: options }

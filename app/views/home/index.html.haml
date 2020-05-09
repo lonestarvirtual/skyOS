@@ -1,0 +1,47 @@
+.carousel.slide#home-carousel{'data-ride': :carousel}
+  .overlay
+  %ol.carousel-indicators
+    %li.active{'data-target': '#home-carousel', 'data-slide-to': 0}
+    %li{'data-target': '#home-carousel', 'data-slide-to': 1}
+    %li{'data-target': '#home-carousel', 'data-slide-to': 2}
+
+  .carousel-inner
+    .carousel-item.active= image_tag 'header1.png', class: 'carousel-image'
+
+.card.bg-dark.text-light#home-card
+  .card-body.container.mt-0
+    .row
+      .col-7.offset-1
+        %h5.card-title.mb-0= 'Lonestar Cargo'
+        %span.card-text.text-center
+          Today's premier virtual airline.
+      .col-4
+        = link_to 'Join today', new_pilot_registration_path, class: 'btn btn-warning btn-lg ml-2'
+
+.container
+  .row.mt-4
+    .col-lg-4
+      .card.mb-4.box-shadow
+        = image_tag 'box1.png', class: 'home-box'
+        .card-body
+          %p.card-text
+            Lonestar Cargo is a virtual cargo airline based at the San Antonio
+            International Airport in San Antonio, Texas. Other international
+            hubs include Europe, Asia, South America, and Australia.
+
+    .col-lg-4
+      .card.mb-4.box-shadow
+        = image_tag 'box2.png', class: 'home-box'
+        .card-body
+          %p.card-text
+            We have a diverse fleet of custom aircraft featuring the Boeing
+            737, 747, 757, and 777.
+
+    .col-lg-4
+      .card.mb-4.box-shadow
+        = image_tag 'box3.png', class: 'home-box'
+        .card-body
+          %p.card-text
+            Lonestar Cargo has two ways to fly: Scheduled flights for those
+            who want a set schedule and charter, for those interested
+            in wherever, whenever operations.

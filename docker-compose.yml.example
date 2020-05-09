@@ -1,0 +1,46 @@
+version: "2"
+
+networks:
+  backend:
+    driver: bridge
+  public:
+    external:
+      name: public
+
+volumes:
+  db:
+    external: false
+  storage:
+    external: false
+
+services:
+  db:
+    environment:
+      POSTGRES_DB: skyOS_production
+      POSTGRES_USER: skyOS
+      POSTGRES_PASSWORD: super_secret_password
+    image: postgres:10-alpine
+    networks:
+      - backend
+    volumes:
+      - db:/var/lib/postgresql/data
+
+  app:
+    image: docker.pkg.github.com/lonestarvirtual/skyos/skyos:latest
+    environment:
+      POSTGRES_DB: skyOS_production
+      POSTGRES_USER: skyOS
+      POSTGRES_PASSWORD: super_secret_password
+      POSTGRES_HOST: db
+      RAILS_HOSTNAME: my_va_url.org
+      RAILS_LOG_TO_STDOUT: 1
+      RAILS_MASTER_KEY: super_secret_rails_master_key_here
+      RAILS_SERVE_STATIC_FILES: 1
+      SKY_OS_REPLY_TO: noreply@my_va_url.org
+    networks:
+      - backend
+      - public
+    volumes:
+      - storage:/app/storage
+    depends_on:
+      - db

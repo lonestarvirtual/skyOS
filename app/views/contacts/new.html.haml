@@ -1,0 +1,16 @@
+= content_for :section, 'Contact Us'
+
+.container.pb-2
+  .row
+    .col-lg-4.mt-sm-2
+      %h3= 'Questions?'
+      %p
+        Have a question or concern? Use this form to contact us.
+        A member of the staff will respond as soon as practical.
+
+    .col-lg-8
+      .card.card-shadow.mt-sm-2
+        .card-header.pb-0
+          %h5= 'Contact'
+        .card-body
+          = render partial: 'form'

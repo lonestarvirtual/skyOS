@@ -1,0 +1,40 @@
+= content_for :section, 'Equipment Type Administration'
+
+= content_for :card_header do
+  %h5.pt-2= 'Equipment Types'
+
+  .text-right.pt-1
+    = search_form_for @q, url: admin_equipment_index_path, class: 'form-inline' do |f|
+      = f.label :icao, class: 'form-inline text-uppercase'
+      = f.search_field :icao_cont, class: 'form-control form-control-sm form-inline text-uppercase ml-2', maxlength: 4
+      = f.submit class: 'btn btn-sm btn-primary ml-2'
+
+= render 'admin/layout' do
+  %table.table.table-bordered.p-0.mb-0.text-center
+    %thead.thead-dark
+      %th{scope: 'col'}= sort_link @q, :short_name
+      %th{scope: 'col'}= sort_link @q, :icao, 'ICAO'
+      %th{scope: 'col'}= sort_link @q, :iata, 'IATA'
+      %th{scope: 'col'}= sort_link @q, :name
+      %th{scope: 'col'}
+        = link_to new_admin_equipment_path, class: 'btn btn-sm btn-success' do
+          %i.fa.fa-plus
+          Add
+    %tbody
+      - if @equipment.empty?
+        %tr
+          %td.text-muted{colspan: 20}= :None
+      - @equipment.each do |type|
+        %tr
+          %td.align-middle= type.short_name
+          %td.align-middle= type.icao
+          %td.align-middle= type.iata
+          %td.align-middle= type.name
+          %td.align-middle
+            - if policy(type).edit? || policy(type).destroy?
+              = link_to edit_admin_equipment_path(type), class: 'btn btn-sm btn-outline-secondary' do
+                %i.fas.fa-edit
+                Edit
+
+  .row.justify-content-center.mt-3
+    = paginate @equipment, theme: 'twitter-bootstrap-4'

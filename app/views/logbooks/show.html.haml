@@ -1,0 +1,48 @@
+= content_for :section, 'Logbook'
+
+.container-fluid.pt-2.pb-4
+  .row
+    .col-lg-12
+      .card.card-shadow
+        .card-header
+          %h5.pt-2= "Logbook for #{@pilot}"
+
+        .card-body.p-0
+          %table.table.table-bordered.p-0.mb-0.text-center
+            %thead.thead-dark
+              %th{scope: 'col'}= sort_link @q, :date
+              %th{scope: 'col'}= sort_link @q, :flight
+              %th{scope: 'col'}= :Airports
+              %th{scope: 'col'}= sort_link @q, :equipment_short_name, 'Equipment'
+              %th{scope: 'col'}= sort_link @q, :simulator_short_name, 'Simulator'
+              %th{scope: 'col'}= sort_link @q, :duration
+              %th{scope: 'col'}
+            %tbody
+              - if @pireps.empty?
+                %tr
+                  %td.text-muted{colspan: 20}= :None
+              - @pireps.each do |pirep|
+                %tr{bgcolor: pirep.status.color}
+                  %td.align-middle{scope: 'row', width: 160}= pirep.date.strftime("%m-%d-%Y")
+                  %td.align-middle= pirep
+                  %td.align-middle= "#{pirep.orig} - #{pirep.dest}"
+                  %td.align-middle{'data-toggle': :tooltip, title: pirep.equipment.name}= pirep.equipment.short_name
+                  %td.align-middle= pirep.simulator.short_name
+                  %td.align-middle= pirep.duration
+                  %td.align-middle
+                    = link_to pirep_path(pirep), class: "btn btn-primary btn-sm" do
+                      %i.fas.fa-plane-departure
+                      View
+
+              %tr
+                %td.text-muted.pt-1.pb-1{colspan: 20}
+                  .row
+                    .col-12
+                      %table.table.p-0.m-0.text-center
+                        %tr.d-flex.justify-content-center
+                          - PirepStatus.all.pluck(:name, :color).each do |status, color|
+                            %th.col-2.p-1.m-1{'bgcolor': color}
+                              = status
+
+          .row.justify-content-center.mt-3
+            = paginate @pireps, theme: 'twitter-bootstrap-4'

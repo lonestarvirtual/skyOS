@@ -1,0 +1,14 @@
+%title
+  Lonestar Cargo
+
+= csrf_meta_tag
+= csp_meta_tag
+
+= favicon_link_tag asset_path('favicon.png')
+= stylesheet_pack_tag 'application', media: 'all', 'data-turbo-links-track': 'reload'
+= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
+
+= stylesheet_link_tag 'application', media: 'all', 'data-turbo-links-track': 'reload'
+
+- if GoogleAnalytics.enabled?
+  = render partial: 'layouts/google_analytics'

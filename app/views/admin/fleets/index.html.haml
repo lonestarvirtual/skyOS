@@ -1,0 +1,46 @@
+= content_for :section, 'Fleet Administration'
+
+= content_for :card_header do
+  %h5.pt-2= :Fleets
+
+  .text-right.pt-1
+    = search_form_for @q, url: admin_fleets_path, class: 'form-inline' do |f|
+      = f.label :airline, 'Airline', class: 'form-inline'
+      = f.collection_select :airline_id_eq, Airline.all, :id, :name, {}, class: 'form-control form-control-sm form-inline ml-2'
+
+      = f.label :icao, class: 'form-inline text-uppercase ml-2'
+      = f.search_field :equipment_icao_cont, class: 'form-control form-control-sm form-inline text-uppercase ml-2', maxlength: 4
+
+      = f.submit class: 'btn btn-sm btn-primary ml-2'
+
+= render 'admin/layout' do
+  %table.table.table-bordered.text-center.p-0.mb-0
+    %thead.thead-dark
+      %th{scope: 'col'}= :Image
+      %th{scope: 'col'}= sort_link @q, :airline_name
+      %th{scope: 'col'}= sort_link @q, :equipment_short_name, 'Short Name'
+      %th{scope: 'col'}= sort_link @q, :equipment_icao, 'ICAO'
+      %th{scope: 'col'}= sort_link @q, :equipment_name, 'Name'
+      %th{scope: 'col'}
+        = link_to new_admin_fleet_path, class: 'btn btn-sm btn-success' do
+          %i.fas.fa-plus
+          Add
+    %tbody
+      - if @fleets.empty?
+        %tr
+          %td.text-muted{colspan: 20}= :None
+      - @fleets.each do |fleet|
+        %tr
+          %th.align-middle{scope: 'row', width: 160}= fleet_image(fleet)
+          %td.align-middle= fleet.airline.name
+          %td.align-middle= fleet.short_name
+          %td.align-middle= fleet.icao
+          %td.align-middle= fleet.name
+          %td
+            - if policy(fleet).edit? || policy(fleet).destroy?
+              = link_to edit_admin_fleet_path(fleet), class: 'btn btn-sm btn-outline-secondary' do
+                %i.fas.fa-edit
+                Edit
+
+  .row.justify-content-center.mt-3
+    = paginate @fleets, theme: 'twitter-bootstrap-4'

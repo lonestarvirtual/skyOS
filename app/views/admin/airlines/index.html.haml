@@ -1,0 +1,35 @@
+= content_for :section, 'Airline Administration'
+
+= content_for :card_header do
+  %h5.pt-2= :Airlines
+
+= render 'admin/layout' do
+  %table.table.table-bordered.text-center.p-0.mb-0
+    %thead.thead-dark
+      %th{scope: 'col'}
+      %th.text-uppercase{scope: 'col'}= sort_link @q, :icao
+      %th.text-uppercase{scope: 'col'}= sort_link @q, :iata
+      %th{scope: 'col'}= sort_link @q, :name
+      %th.text-center{scope: 'col'}
+        = link_to new_admin_airline_path, class: 'btn btn-sm btn-success' do
+          %i.fas.fa-plus
+          Add
+
+    %tbody
+      - if @airlines.empty?
+        %tr
+          %td.text-muted{colspan: 20}= :None
+      - @airlines.each do |airline|
+        %tr
+          %th.align-middle{scope: 'row', width: 160}= airline_logo(airline)
+          %td.align-middle= airline.icao
+          %td.align-middle= airline.iata
+          %td.align-middle= airline.name
+          %td
+            - if policy(airline).edit? || policy(airline).destroy?
+              = link_to edit_admin_airline_path(airline), class: 'btn btn-sm btn-outline-secondary' do
+                %i.fas.fa-edit
+                Edit
+
+  .row.justify-content-center.mt-3
+    = paginate @airlines, theme: 'twitter-bootstrap-4'

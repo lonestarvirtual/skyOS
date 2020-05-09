@@ -1,0 +1,12 @@
+= content_for :section, 'Password Reset'
+
+= content_for :left_column do
+  %h3= 'Forgot password?'
+  %p
+    Did you forget your password?
+    Fill out the form to get reset instructions.
+
+= content_for :card_header, 'Send Password Reset Instructions'
+
+= render 'pilots/devise_layout' do
+  = render partial: 'form'

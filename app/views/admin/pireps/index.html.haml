@@ -1,0 +1,58 @@
+= content_for :section, 'PIREP Administration'
+
+= content_for :card_header do
+  %h5.pt-2= :PIREPs
+
+  .text-right.pt-1
+    = search_form_for @q, url: admin_pireps_path, class: 'form-inline justify-content-end' do |f|
+      = f.label :pid, 'Pilot ID', class: 'form-inline'
+      = f.search_field :pilot_slug_cont, class: 'form-control form-control-sm form-inline text-uppercase ml-2 col-3'
+
+      = f.label :status, 'Status', class: 'form-inline ml-2'
+      = f.collection_select :status_name_eq, PirepStatus.all, :name, :name, {}, class: 'form-control form-control-sm form-inline ml-2'
+
+      = f.submit class: 'btn btn-sm btn-primary ml-2'
+
+= render 'admin/layout' do
+  %table.table.table-bordered.text-center.p-0.mb-0
+    %thead.thead-dark
+      %th{scope: 'col'}= sort_link @q, :date
+      %th{scope: 'col'}= sort_link @q, :pilot_pid, 'Pilot'
+      %th{scope: 'col'}= sort_link @q, :flight, 'Flight'
+      %th{scope: 'col'}= sort_link @q, :orig_icao, 'Origin'
+      %th{scope: 'col'}= sort_link @q, :dest_icao, 'Destination'
+      %th{scope: 'col'}= sort_link @q, :equipment_short_name, 'Equipment'
+      %th{scope: 'col'}= sort_link @q, :duration
+      %th{scope: 'col'}= :Manage
+
+    %tbody
+      - if @pireps.empty?
+        %tr
+          %td.text-muted{colspan: 20}= :None
+      - @pireps.each do |pirep|
+        %tr{'bgcolor': pirep.status.color}
+          %td.align-middle{scope: 'row'}= pirep.date.strftime("%m-%d-%Y")
+          %td.align-middle{'data-toggle': 'tooltip', title: pirep.pilot}= pirep.pilot.slug
+          %td.align-middle= pirep
+          %td.align-middle= pirep.orig
+          %td.align-middle= pirep.dest
+          %td.align-middle= pirep.equipment.short_name
+          %td.align-middle= pirep.duration
+          %td.align-middle
+            - if policy(pirep).edit? || policy(pirep).destroy?
+              = link_to edit_admin_pirep_path(pirep), class: 'btn btn-sm btn-outline-secondary' do
+                %i.fas.fa-edit
+                Edit
+
+      %tr
+        %td.text-muted.pt-1.pb-1{colspan: 20}
+          .row
+            .col-12
+              %table.table.p-0.m-0.text-center
+                %tr.d-flex.justify-content-center
+                  - PirepStatus.all.pluck(:name, :color).each do |status, color|
+                    %th.col-2.p-1.m-1{'bgcolor': color}
+                      = status
+
+  .row.justify-content-center.mt-3
+    = paginate @pireps, theme: 'twitter-bootstrap-4'

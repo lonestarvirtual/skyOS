@@ -1,0 +1,72 @@
+= content_for :section, 'PIREP'
+
+.container.pt-2.pb-4
+  .col-lg-12
+
+    .card.card-shadow
+      .card-header.d-flex.justify-content-between
+        .col-8.pt-1
+          %h5= @pirep
+        .col-4.text-right
+          - if @pirep.status.editable? && @pirep.pilot == current_pilot
+            = link_to edit_pirep_path(@pirep), class: 'btn btn-primary' do
+              %i.fas.fa-edit
+              Edit
+
+      .card-body
+        %table.table.table-bordered.p-0.mb-0
+          %tbody
+            %tr
+              %th.text-right{scope: 'col'}= :Pilot
+              %td
+                = @pirep.pilot
+                \-
+                = link_to "Logbook", pilot_logbook_path(@pirep.pilot)
+            %tr
+              %th.text-right{scope: 'col'}= :Status
+              %td{bgcolor: @pirep.status.color}= pirep_display_audit(@pirep)
+            %tr
+              %th.text-right{scope: 'col'}= :Created
+              %td= @pirep.created_at.strftime("%m-%d-%Y %H:%M %Z")
+            %tr
+              %th.text-right{scope: 'col'}= 'Flight Date'
+              %td= @pirep.date.strftime("%m-%d-%Y")
+            %tr
+              %th.text-right{scope: 'col'}= 'Airline'
+              %td= @pirep.airline.name
+            %tr
+              %th.text-right{scope: 'col'}= 'Equipment Type'
+              %td{'data-toggle': 'tooltip', title: @pirep.equipment.name}
+                = @pirep.equipment.short_name
+            %tr
+              %th.text-right{scope: 'col'}= :Origin
+              %td= @pirep.orig
+            %tr
+              %th.text-right{scope: 'col'}= :Destination
+              %td= @pirep.dest
+            %tr
+              %th.text-right{scope: 'col'}= :Route
+              %td= @pirep.route
+            %tr
+              %th.text-right{scope: 'col'}= :Simulator
+              %td= @pirep.simulator.name
+            %tr
+              %th.text-right{scope: 'col'}= :Network
+              %td= @pirep.network || 'Offline'
+            %tr
+              %th.text-right{scope: 'col'}= :Distance
+              %td= "#{number_with_delimiter(@pirep.distance)} nm"
+            %tr
+              %th.text-right{scope: 'col'}= :Duration
+              %td= '%.1f' % @pirep.duration + ' hours'
+            %tr
+              %th.text-right{scope: 'col'}= :Comments
+              %td
+                - @pirep.comments.each do |comment|
+                  %p
+                    %b
+                      = comment.author
+                      at
+                      = comment.created_at.strftime("%m-%d-%Y %H:%M %Z")
+                  %p
+                    = comment.body

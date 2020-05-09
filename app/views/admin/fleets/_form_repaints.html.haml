@@ -1,0 +1,22 @@
+= f.fields_for :repaints, defaults: {input_html: {class: 'ml-2'}} do |ff|
+  .form-row.form-inline.ml-4.mt-4
+    .col-5
+      = ff.input :name, required: false
+
+    .col-5.ml-4.my-auto
+      - if ff.object.persisted?
+        .form-row
+          = ff.object.file.filename
+
+          %span.form-inline.ml-4
+            = ff.check_box :_destroy, class: 'mr-2'
+            = ff.label :Delete
+
+      - else
+        = ff.file_field :file, class: "form-control-file"
+
+        .invalid-feedback
+          File #{ff.object.errors[:file].join(", ")}
+
+  .field_with_errors
+    .text-danger= ff.error :base

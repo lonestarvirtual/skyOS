@@ -1,0 +1,55 @@
+= content_for :section, 'Flight Schedule Administration'
+
+= content_for :card_header do
+  %h5.pt-2= 'Flight Schedule'
+
+  .text-right.pt-1
+    = search_form_for @q, url: admin_flights_path, class: 'form-inline' do |f|
+      = f.label :airline, 'Airline', class: 'form-inline'
+      = f.collection_select :airline_id_eq, Airline.all, :id, :name, {}, class: 'form-control form-control-sm form-inline ml-2'
+
+      = f.label :flight, class: 'form-inline ml-1'
+      = f.search_field :number_cont, class: 'form-control form-control-sm form-inline text-uppercase ml-2', maxlength: 4
+
+      = f.label :origin, class: 'form-inline ml-1'
+      = f.search_field :orig_icao_cont, class: 'form-control form-control-sm form-inline text-uppercase ml-2', maxlength: 4
+
+      = f.label :dest, 'Dest', class: 'form-inline ml-1'
+      = f.search_field :dest_icao_cont, class: 'form-control form-control-sm form-inline text-uppercase ml-2', maxlength: 4
+      = f.submit class: 'btn btn-sm btn-primary ml-2'
+
+= render 'admin/layout' do
+  %table.table.table-bordered.text-center.p-0.mb-0
+    %thead.thead-dark
+      %th.align-middle{scope: 'col'}= sort_link @q, :airline_name
+      %th.align-middle{scope: 'col'}= sort_link @q, :number, 'Flight'
+      %th.align-middle{scope: 'col'}= sort_link @q, :orig_icao, 'Origin'
+      %th.align-middle{scope: 'col'}= sort_link @q, :dest_icao, 'Destination'
+      %th.align-middle{scope: 'col'}= sort_link @q, :out_time, 'Departs'
+      %th.align-middle{scope: 'col'}= sort_link @q, :in_time, 'Arrives'
+      %th.align-middle{scope: 'col'}= sort_link @q, :equipment_short_name, 'Equipment'
+      %th.align-middle{scope: 'col'}
+        = link_to new_admin_flight_path, class: 'btn btn-sm btn-success' do
+          %i.fas.fa-plus
+          Add
+    %tbody
+      - if @flights.empty?
+        %tr
+          %td.text-muted{colspan: 20}= :None
+      - @flights.each do |flight|
+        %tr
+          %th.align-middle{scope: 'row', width: 160}= airline_logo(flight.airline)
+          %td.align-middle= "#{flight.number} Leg #{flight.leg}"
+          %td.align-middle= flight.orig.to_s
+          %td.align-middle= flight.dest.to_s
+          %td.align-middle= flight.out_time_local.strftime("%l:%M %P (%Z)")
+          %td.align-middle= flight.in_time_local.strftime("%l:%M %P (%Z)")
+          %td.align-middle= flight.equipment.short_name
+          %td
+            - if policy(flight).edit? || policy(flight).destroy?
+              = link_to edit_admin_flight_path(flight), class: 'btn btn-sm btn-outline-secondary' do
+                %i.fas.fa-edit
+                Edit
+
+  .row.justify-content-center.mt-3
+    = paginate @flights, theme: 'twitter-bootstrap-4'

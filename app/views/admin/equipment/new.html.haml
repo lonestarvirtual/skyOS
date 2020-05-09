@@ -1,0 +1,8 @@
+= content_for :section, 'Equipment Type Administration'
+
+= content_for :card_header do
+  %h5= 'New Equipment Type'
+
+= render 'admin/layout' do
+  .p-4
+    = render partial: 'form'

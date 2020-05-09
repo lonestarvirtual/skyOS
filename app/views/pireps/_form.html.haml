@@ -1,0 +1,51 @@
+= simple_form_for target do |f|
+  .form-row
+    .col-4
+      = f.input :date, order: [:month, :day, :year], use_short_month: true
+    .col-4.offset-4
+      = f.association :equipment, label_method: :short_name
+
+  .form-row
+    .col-8
+      = f.association :airline
+    .col-2
+      = f.input :flight
+    .col-2
+      = f.input :leg
+
+  .form-row{'data-controller': :pireps}
+    .col-2
+      = f.input :orig_icao, label: 'Origin ICAO', input_html: { class: 'text-uppercase', maxlength: 4, 'data-target': 'pireps.orig_icao', 'data-action': 'keyup->pireps#find_origin' }
+    .col-4
+      = f.input :orig, label: 'Origin Airport', input_html: { disabled: true, value: origin_airport_name(@pirep), 'data-target': 'pireps.orig' }
+    .col-2
+      = f.input :dest_icao, label: 'Dest ICAO', input_html: { class: 'text-uppercase', maxlength: 4, 'data-target': 'pireps.dest_icao', 'data-action': 'keyup->pireps#find_destination' }
+    .col-4
+      = f.input :dest, label: 'Destination Airport', input_html: { disabled: true, value: dest_airport_name(@pirep), 'data-target': 'pireps.dest' }
+
+  .form-row
+    .col-12
+      = f.input :route, as: :text, input_html: { class: 'text-uppercase', rows: 1 }
+
+  .form-row
+    .col-2
+      = f.input :duration, hint: 'Hours (Decimal #.#)'
+    .col-4
+      = f.association :simulator
+    .col-4
+      = f.association :network, include_blank: 'Offline'
+    .col-2.d-flex
+      - if options[:status_management]
+        = f.association :status
+
+      - else
+        .form-check.ml-3.mt-4.pt-2
+          = f.check_box :draft, class: 'form-check-input'
+          = f.label 'Save as draft?', class: 'form-label'
+
+  = render partial: 'pireps/form_comments', locals: { f: f, options: options }
+
+  .field_with_errors
+    .text-danger= f.error :base
+
+  = f.submit "Save", class: "btn btn-success w-100"

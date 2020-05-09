@@ -1,0 +1,72 @@
+= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
+  .row
+    .col
+      = f.label "First Name"
+      = f.text_field :first_name, class: "form-control", autofocus: true, required: true
+
+      .invalid-feedback
+        = resource.errors[:first_name].join(", ")
+
+    .col
+      = f.label "Last Name"
+      = f.text_field :last_name, class: "form-control", required: true
+
+      .invalid-feedback
+        = resource.errors[:last_name].join(", ")
+
+  .row.mt-1
+    .col
+      = f.label "Email"
+      = f.email_field :email, class: "form-control", required: true
+
+      .invalid-feedback
+        = resource.errors[:email].join(", ")
+
+  .row.mt-1
+    .col
+      = f.label :password
+      = f.password_field :password, class: "form-control", autocomplete: "new-password", required: true
+
+      - if @minimum_password_length && resource.errors[:password].empty?
+        %small.form-text.text-muted#passwordHelp
+          = "#{@minimum_password_length} characters minimum"
+      - else
+        .invalid-feedback
+          = "Password " + resource.errors[:password].join(", ")
+
+  .row.mt-1
+    .col
+      = f.label :password_confirmation
+      = f.password_field :password_confirmation, class: "form-control", autocomplete: "new-password", required: true
+
+      .invalid-feedback
+        = "Password confirmation " + resource.errors[:password_confirmation].join(", ")
+
+  - if GoogleRecaptcha.enabled?
+    .row.mt-2
+      .col
+        = recaptcha_v3(action: 'registration', site_key: GoogleRecaptcha::SITE_KEY, turbolinks: true)
+
+        %small.text-muted
+          This site is protected by reCAPTCHA and the Google
+          = link_to 'Privacy Policy', 'https://policies.google.com/privacy'
+          and
+          = link_to 'Terms of Service', 'https://policies.google.com/terms'
+          apply.
+
+        - unless resource.errors[:recaptcha].empty?
+          .small.text-danger
+            = resource.errors[:recaptcha].join(", ")
+
+  .row.col.mt-4
+    %ul.list-unstyled
+      %li
+        %small= 'You must be at least 13 years of age to join.'
+      %li
+        %small
+          By registering, you agree to our
+          = link_to 'Terms of Use', policy_path('terms')
+          and
+          = link_to 'Privacy Policy', policy_path('privacy')
+
+  = f.submit "Join", class: "btn btn-success mt-1 w-100"

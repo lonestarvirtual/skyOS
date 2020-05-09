@@ -1,0 +1,33 @@
+= content_for :section, 'Pilot Roster'
+
+.container-fluid.pt-2.pb-4
+  .row
+    .col-lg-12
+      .card.card-shadow
+        .card-header
+          %h5.pt-2= 'Pilot Roster'
+
+        .card-body.p-0
+          %table.table.table-bordered.text-center.p-0.mb-0
+            %thead.thead-dark
+              %tr
+                %th{scope: 'col', width: '25%'}= sort_link @q, :pid, 'Pilot ID'
+                %th{scope: 'col'}= sort_link @q, :last_name, 'Name'
+                %th{scope: 'col', width: '10%'}= 'Flights'
+                %th{scope: 'col', width: '10%'}= 'Hours'
+                %th{scope: 'col', width: '10%'}= 'Last Flight'
+
+            %tbody
+              - if @pilots.empty?
+                %tr
+                  %td.text-muted{colspan: 20}= :None
+              - @pilots.each do |pilot|
+                %tr
+                  %td.align-middle= link_to pilot.pid_to_s, pilot_logbook_path(pilot)
+                  %td.align-middle= pilot.full_name
+                  %td.align-middle= number_with_delimiter(pilot.total_flights)
+                  %td.align-middle= number_with_delimiter(pilot.total_hours)
+                  %td.align-middle= pilot_last_flight(pilot)
+
+          .row.justify-content-center.mt-3
+            = paginate @pilots, theme: 'twitter-bootstrap-4'

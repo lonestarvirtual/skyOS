@@ -1,0 +1,15 @@
+= content_for :section, 'Pilot Administration'
+
+= content_for :card_header do
+  .col-8.pt-1
+    %h5= @pilot.full_name
+
+  .col-4.text-right
+    - if policy(@pilot).destroy?
+      = link_to admin_pilot_path(@pilot), method: :delete, class: 'btn btn-sm btn-danger', 'data-confirm': "Are you sure?" do
+        %i.fas.fa-trash
+        Delete
+
+= render 'admin/layout' do
+  .p-4
+    = render partial: 'form'

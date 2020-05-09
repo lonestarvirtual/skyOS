@@ -1,0 +1,32 @@
+= simple_form_for @contact, url: contact_path do |f|
+  .form-row
+    .col
+      = f.input :first_name, disabled: pilot_signed_in?
+    .col
+      = f.input :last_name, disabled: pilot_signed_in?
+
+  .form-row
+    .col
+      = f.input :email, disabled: pilot_signed_in?
+
+  .form-row
+    .col
+      = f.input :message, as: :text, input_html: { rows: 7 }
+
+  - if GoogleRecaptcha.enabled?
+    .row.mt-2
+      .col
+        = recaptcha_v3(action: 'contact', site_key: GoogleRecaptcha::SITE_KEY, turbolinks: true)
+
+        - unless @contact.errors[:recaptcha].empty?
+          .small.text-danger
+            = @contact.errors[:recaptcha].join(', ')
+
+        %small.text-muted
+          This site is protected by reCAPTCHA and the Google
+          = link_to 'Privacy Policy', 'https://policies.google.com/privacy'
+          and
+          = link_to 'Terms of Service', 'https://policies.google.com/terms'
+          apply.
+
+  = f.submit "Save", class: "btn btn-success w-100"

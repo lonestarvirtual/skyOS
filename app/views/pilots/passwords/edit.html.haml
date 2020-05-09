@@ -1,0 +1,32 @@
+= content_for :section, 'Password Reset'
+
+= content_for :left_column do
+  %h3= 'Forgot password?'
+  %p
+    Use the form to set a new password.
+
+= content_for :card_header, 'Password Reset'
+
+= render 'pilots/devise_layout' do
+  = form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f|
+    = f.hidden_field :reset_password_token
+
+    .row.mt-1
+      .col
+        = f.label :new_password
+        = f.password_field :password, class: "form-control", autocomplete: "new-password", required: true
+
+        - if @minimum_password_length && resource.errors[:password].empty?
+          %small.form-text.text-muted#passwordHelp
+            = @minimum_password_length
+            characters minimum
+        - else
+          .invalid-feedback
+            = "Password " + resource.errors[:password].join(", ")
+
+    .row.mt-1
+      .col
+        = f.label :password_confirmation
+        = f.password_field :password_confirmation, class: "form-control", autocomplete: "new-password", required: true
+
+    = f.submit "Change Password", class: "btn btn-success mt-4 w-100"

@@ -1,0 +1,9 @@
+- if pilot_signed_in?
+  %li.nav-item.dropdown
+    %a.nav-link.dropdown-toggle#navbarDropdown{href: '#', role: 'button', 'data-toggle': 'dropdown', 'aria-haspopup': 'true', 'aria-expanded': 'false'}
+      Operations
+
+    .dropdown-menu.dropdown-menu-right{'aria-labelledby': 'navbarDropdown'}
+      = link_to 'File PIREP', new_pirep_path, class: 'dropdown-item'
+      = link_to 'Flight Schedule', flights_path, class: 'dropdown-item'
+      = link_to 'Logbook', pilot_logbook_path(current_pilot), class: 'dropdown-item'

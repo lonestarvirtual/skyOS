@@ -1,0 +1,17 @@
+= content_for :section, 'New Member Registration'
+
+= content_for :left_column do
+  %h3= 'Welcome!'
+  %p
+    Become a star at one of today's premier virtual airlines!
+    We look forward to flying with you soon.
+
+= content_for :card_header, 'Registration Details'
+
+= render 'pilots/devise_layout' do
+  - if Setting.allow_signup?
+    = render partial: 'form'
+  - else
+    .col-12
+      %p
+        Sorry! We are currently not accepting new members at this time.

@@ -1,0 +1,41 @@
+= content_for :section, 'Airport Administration'
+
+= content_for :card_header do
+  %h5.pt-2= :Airports
+
+  .text-right.pt-1
+    = search_form_for @q, url: admin_airports_path, class: 'form-inline' do |f|
+      = f.label :icao, class: 'form-inline text-uppercase'
+      = f.search_field :icao_cont, class: 'form-control form-control-sm form-inline text-uppercase ml-2', maxlength: 4
+      = f.submit class: 'btn btn-sm btn-primary ml-2'
+
+= render 'admin/layout' do
+  %table.table.table-bordered.text-center.p-0.mb-0
+    %thead.thead-dark
+      %th.text-uppercase{scope: 'col'}= sort_link @q, :icao
+      %th.text-uppercase{scope: 'col'}= sort_link @q, :iata
+      %th{scope: 'col'}= sort_link @q, :name
+      %th{scope: 'col'}= sort_link @q, :city
+      %th.text-center{scope: 'col'}
+        = link_to new_admin_airport_path, class: 'btn btn-sm btn-success' do
+          %i.fas.fa-plus
+          Add
+
+    %tbody
+      - if @airports.empty?
+        %tr
+          %td.text-center.text-muted{colspan: 20}= :None
+      - @airports.each do |airport|
+        %tr
+          %td.align-middle= airport.icao
+          %td.align-middle= airport.iata
+          %td.align-middle= airport.name
+          %td.align-middle= airport.city
+          %td.align-middle.text-center
+            - if policy(airport).edit? || policy(airport).destroy?
+              = link_to edit_admin_airport_path(airport), class: 'btn btn-sm btn-outline-secondary' do
+                %i.fas.fa-edit
+                Edit
+
+  .row.justify-content-center.mt-3
+    = paginate @airports, theme: 'twitter-bootstrap-4'

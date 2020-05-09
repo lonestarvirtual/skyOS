@@ -1,0 +1,21 @@
+<script async src="<%= GoogleAnalytics::JS_URL %>"></script>
+<script>
+  this.dataLayer = this.dataLayer || [];
+
+  this.gtag = (function(_this) {
+      return function() {
+          return dataLayer.push(arguments);
+      };
+  })(this);
+
+  this.gtag('js', new Date());
+
+  document.addEventListener('turbolinks:load', (function(_this) {
+      return function(event) {
+          return _this.gtag('config', '<%= GoogleAnalytics::TRACKING_ID %>', {
+              anonymize_ip: false,
+              page_location: event.data.url
+          });
+      };
+  })(this));
+</script>

@@ -1,0 +1,42 @@
+= simple_form_for [:admin, @pilot]  do |f|
+  .form-row.d-flex
+    .col-2
+      = label_tag :pid, 'ICAO'
+      = text_field_tag :icao, Setting.organization_icao, disabled: true, class: 'form-control'
+    .col-2
+      = f.input :pid, label: 'Pilot ID'
+    .col-2.ml-auto.align-self-center.text-right
+      = f.input :active
+
+  .form-row
+    .col
+      .form-group
+        = f.input :first_name
+    .col
+      .form-group
+        = f.input :last_name
+
+  .form-row
+    .col
+      .form-group
+        = f.label :email
+        = f.text_field :email, class: 'form-control'
+        - if @pilot.unconfirmed_email?
+          %small.text-danger
+            Email pending change to #{@pilot.unconfirmed_email}. Please have
+            pilot check email and confirm.
+        - else
+          %small.form-text.text-muted
+            Changes will require pilot confirmation.
+
+  .form-row
+    .col
+      = f.input :time_zone, model: TZInfo::Timezone, include_blank: false
+
+  .form-row
+    .col
+      = f.association :group, label: 'Group', hint: 'Permissions the user is granted'
+
+  .form-row
+    .col
+      = f.submit 'Save', class: 'btn btn-success'

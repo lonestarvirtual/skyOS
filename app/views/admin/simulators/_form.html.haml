@@ -1,0 +1,11 @@
+= simple_form_for [:admin, @simulator] do |f|
+  .form-row
+    .col-3
+      = f.input :short_name
+    .col
+      = f.input :name
+
+  .field_with_errors
+    .text-danger= f.error :base
+
+  = f.submit "Save", class: "btn btn-success w-100"

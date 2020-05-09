@@ -1,0 +1,19 @@
+%footer.footer#footer
+  .container.h-100
+    .row.h-100
+      .col-5.d-flex.justify-content-center.my-auto.small
+        &copy; 2018-#{Time.now.strftime("%Y")}
+        Lonestar Virtual. All Rights Reserved.
+
+      .col-7.d-flex.justify-content-end.my-auto.small
+        %span.nav-link.p-0
+          %i.fas.fa-angle-right
+          = link_to 'Privacy Policy', policy_path('privacy')
+
+        %span.nav-link.p-0.pl-1
+          %i.fas.fa-angle-right
+          = link_to 'Terms of Use', policy_path('terms')
+
+        %span.nav-link.p-0.pl-1
+          %i.fas.fa-angle-right
+          = link_to 'Contact Us', contact_path

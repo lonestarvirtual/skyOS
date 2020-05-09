@@ -1,0 +1,11 @@
+$theme-colors: (
+  "primary": #0b375b
+);
+
+.alert-alert {
+  @extend .alert-primary;
+}
+
+.alert-notice {
+  @extend .alert-warning;
+}
