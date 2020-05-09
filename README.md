@@ -6,13 +6,14 @@ skyOS is the web presence of Lonestar Virtual
 
 ## Development Getting Started
 
-Developed with Ruby: 2.6.3p62 / Rails: 6.0.2.2
+Developed with Ruby: 2.6.3 / Rails: 6
 
 To get the Rails server running locally:
 
 * Clone this repo
 * `bundle install` to install required dependencies
 * `yarn install --check-files` install front-end dependencies
+* configure `.env` file for development/test databases (see `.env.template`)
 * `rake db:setup` to create and seed database
 * `rails s` to start the local server
 

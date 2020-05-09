@@ -16,13 +16,16 @@ before_install:
 
 before_script:
   - psql -c "CREATE DATABASE travis_ci_test;" -U postgres
-  - cp config/database.yml.travis config/database.yml
   - yarn install --check-files
   - bundle exec rake db:setup
 
 env:
   global:
     - "RAILS_ENV=test"
+    - "POSTGRES_HOST=localhost"
+    - "POSTGRES_USER=postgres"
+    - "POSTGRES_PASSWORD=trust"
+    - "POSTGRES_TEST_DB=travis_ci_test"
 
 jobs:
   fast_finish: true
