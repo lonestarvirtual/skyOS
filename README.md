@@ -1,6 +1,6 @@
 # SkyOS
 
-[![Build Status](https://travis-ci.com/lonestarvirtual/skyOS.svg?token=K5U93Dpwry1XesnyC3r8&branch=development)](https://travis-ci.com/lonestarvirtual/skyOS)
+![Verify](https://github.com/lonestarvirtual/skyOS/workflows/Verify/badge.svg)
 
 skyOS is the web presence of Lonestar Virtual
 
@@ -22,6 +22,14 @@ To get the Rails server running locally:
 * [ImageMagick](https://imagemagick.org/)
 
 ## Getting Started with Docker
+
+### Using a release
+
+This repository builds and releases a Docker image to our GitHub Docker
+repository. See `docker-compose.yml.example` for an example on how to pull
+the latest release and customize for your production environment.
+
+### Building your own image
 
 This repository comes equipped to be run within Docker. You will need 
 `docker-compose` to build the image. An example ```docker-compose.yml```
