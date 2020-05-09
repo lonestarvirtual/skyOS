@@ -1,0 +1,22 @@
+name: Build Docker Image
+#on:
+#  release:
+#    tags:
+#      - v*
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Get tag name
+        run: echo ::set-output name=VERSION::${GITHUB_REF/refs\/tags\//}
+
+      - name: Build Docker image
+        run: |
+          docker build . -t ${{ steps.get_tag_name.outputs.VERSION }}
