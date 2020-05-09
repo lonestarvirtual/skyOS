@@ -1,4 +1,4 @@
-name: Build Docker Image
+name: Build and Publish Docker Image
 #on:
 #  release:
 #    tags:
@@ -19,4 +19,6 @@ jobs:
 
       - name: Build Docker image
         run: |
-          docker build . -t ${{ steps.get_tag_name.outputs.VERSION }}
+#          docker build . -t ${{ steps.get_tag_name.outputs.VERSION }}
+          docker build . -t latest
+          
