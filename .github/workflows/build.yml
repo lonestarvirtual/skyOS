@@ -18,7 +18,6 @@ jobs:
         run: echo ::set-output name=VERSION::${GITHUB_REF/refs\/tags\//}
 
       - name: Build Docker image
+        # docker build . -t ${{ steps.get_tag_name.outputs.VERSION }}
         run: |
-#          docker build . -t ${{ steps.get_tag_name.outputs.VERSION }}
           docker build . -t latest
-          
