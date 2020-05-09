@@ -99,7 +99,7 @@ jobs:
       - name: Setup test database
         env:
           RAILS_ENV: test
-          POSTGRES_HOST: localhost
+          POSTGRES_HOST: postgres
           POSTGRES_USER: myapp
           POSTGRES_PASSWORD: ""
           POSTGRES_TEST_DB: myapp_test
