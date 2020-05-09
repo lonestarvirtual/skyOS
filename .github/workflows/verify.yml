@@ -64,7 +64,14 @@ jobs:
         image: postgres:11
         env:
           POSTGRES_DB: skyOS_test
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
         ports: ["5432:5432"]
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
 
     steps:
       - name: Checkout code
@@ -104,12 +111,8 @@ jobs:
           yarn install --pure-lockfile
 
       - name: Setup test database
-        env:
-          POSTGRES_PORT: ${{ job.services.postgres.ports[5432] }}
         run: |
           bin/rails db:setup
 
       - name: Run tests
-        env:
-          POSTGRES_PORT: ${{ job.services.postgres.ports[5432] }}
         run: bundle exec rspec
