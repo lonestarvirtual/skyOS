@@ -76,6 +76,7 @@ GEM
     bootstrap4-kaminari-views (1.0.1)
       kaminari (>= 0.13)
       rails (>= 3.1)
+    brakeman (4.8.1)
     builder (3.2.4)
     byebug (11.1.1)
     concurrent-ruby (1.1.6)
@@ -346,6 +347,7 @@ DEPENDENCIES
   audited (~> 4.9)
   bootsnap (>= 1.4.2)
   bootstrap4-kaminari-views
+  brakeman
   byebug
   database_cleaner-active_record
   devise

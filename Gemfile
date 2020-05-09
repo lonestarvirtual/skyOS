@@ -49,6 +49,7 @@ gem 'simple_form'
 gem 'timezone_finder'
 
 group :development, :test do
+  gem 'brakeman'
   # Call 'byebug' anywhere in the code to stop execution
   # and get a debugger console
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
