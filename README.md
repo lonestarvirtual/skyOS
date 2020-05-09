@@ -23,6 +23,14 @@ To get the Rails server running locally:
 
 ## Getting Started with Docker
 
+### Using a release
+
+This repository builds and releases a Docker image to our GitHub Docker
+repository. See `docker-compose.yml.example` for an example on how to pull
+the latest release and customize for your production environment.
+
+### Building your own image
+
 This repository comes equipped to be run within Docker. You will need 
 `docker-compose` to build the image. An example ```docker-compose.yml```
 is included.
