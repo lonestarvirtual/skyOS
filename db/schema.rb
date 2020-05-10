@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_02_012248) do
+ActiveRecord::Schema.define(version: 2020_05_10_034140) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -56,9 +56,9 @@ ActiveRecord::Schema.define(version: 2020_05_02_012248) do
   end
 
   create_table "audits", force: :cascade do |t|
-    t.integer "auditable_id"
+    t.uuid "auditable_id"
     t.string "auditable_type"
-    t.integer "associated_id"
+    t.uuid "associated_id"
     t.string "associated_type"
     t.uuid "user_id"
     t.string "user_type"
