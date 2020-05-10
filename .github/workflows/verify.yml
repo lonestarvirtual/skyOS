@@ -117,5 +117,5 @@ jobs:
         run: |
           bin/rails db:setup
 
-      - name: Run tests
-        run: bundle exec rspec
+      - name: Run tests with coverage
+        run: COVERAGE=true bundle exec rspec

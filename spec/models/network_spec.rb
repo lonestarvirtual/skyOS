@@ -22,4 +22,10 @@ RSpec.describe Network, type: :model do
     # Inclusion/acceptance of values
     it { expect(network).to validate_uniqueness_of(:name).case_insensitive }
   end
+
+  describe '#to_s' do
+    it 'returns the name of the Network' do
+      expect(network.to_s).to eq network.name
+    end
+  end
 end

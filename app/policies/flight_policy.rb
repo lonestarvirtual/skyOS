@@ -25,13 +25,11 @@ class FlightPolicy < ApplicationPolicy
   end
 
   def permitted_attributes
-    if @user.can?(Flight, :create) || @user.can?(Flight, :update)
-      %i[
-        airline_id equipment_id orig_icao dest_icao number
-        leg out_time in_time duration distance
-      ]
-    else
-      []
-    end
+    return unless @user.can?(Flight, :create) || @user.can?(Flight, :update)
+
+    %i[
+      airline_id equipment_id orig_icao dest_icao number
+      leg out_time in_time duration distance
+    ]
   end
 end

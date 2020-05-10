@@ -15,5 +15,11 @@ FactoryBot.define do
     trait :confirmed do
       confirmed_at { Time.zone.now }
     end
+
+    trait :invalid do
+      first_name { nil }
+      last_name  { nil }
+      email      { nil }
+    end
   end
 end
