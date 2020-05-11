@@ -7,5 +7,9 @@ FactoryBot.define do
     city      { "#{Faker::Address.city} #{Faker::Address.country}" }
     latitude  { Faker::Address.latitude }
     longitude { Faker::Address.longitude }
+
+    trait :invalid do
+      icao { nil }
+    end
   end
 end

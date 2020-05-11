@@ -15,5 +15,11 @@ FactoryBot.define do
     leg { rand(1..9) }
     out_time { Time.zone.now }
     in_time  { Time.zone.now + rand(1.5..12).hours }
+
+    trait :invalid do
+      airline { nil }
+      number { nil }
+      leg { nil }
+    end
   end
 end

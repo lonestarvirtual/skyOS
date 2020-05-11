@@ -16,4 +16,12 @@ RSpec.describe 'Policies', type: :request do
       expect(response).to render_template 'terms'
     end
   end
+
+  describe 'GET a non-existent policy' do
+    it 'raises a Routing Error' do
+      expect do
+        get policy_path('XX_TEST_XX')
+      end.to raise_error ActionController::RoutingError
+    end
+  end
 end

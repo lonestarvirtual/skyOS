@@ -7,4 +7,10 @@ FactoryBot.define do
 
     iata { ('AA'..'ZZ').to_a.sample }
   end
+
+  trait :invalid do
+    icao { nil }
+    iata { nil }
+    name { nil }
+  end
 end

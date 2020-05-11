@@ -24,10 +24,8 @@ class AirportPolicy < ApplicationPolicy
   end
 
   def permitted_attributes
-    if @user.can?(Airport, :create) || @user.can?(Airport, :update)
-      %i[icao iata name city latitude longitude time_zone]
-    else
-      []
-    end
+    return unless @user.can?(Airport, :create) || @user.can?(Airport, :update)
+
+    %i[icao iata name city latitude longitude time_zone]
   end
 end
