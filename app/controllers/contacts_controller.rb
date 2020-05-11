@@ -9,7 +9,7 @@ class ContactsController < ApplicationController
     @contact = Contact.new(contact_params)
 
     if @contact.valid?
-      ContactMailer.contact_email(@contact).deliver
+      ContactMailer.contact_email(@contact).deliver_now
       redirect_to root_path, notice: 'Your message has been sent!'
     else
       render :new

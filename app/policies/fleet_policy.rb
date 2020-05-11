@@ -24,13 +24,11 @@ class FleetPolicy < ApplicationPolicy
   end
 
   def permitted_attributes
-    if @user.can?(Fleet, :create) || @user.can?(Fleet, :update)
-      [
-        :image, :airline_id, :equipment_id, :remove_image,
-        repaints_attributes: %i[id _destroy name file]
-      ]
-    else
-      []
-    end
+    return unless @user.can?(Fleet, :create) || @user.can?(Fleet, :update)
+
+    [
+      :image, :airline_id, :equipment_id, :remove_image,
+      repaints_attributes: %i[id _destroy name file]
+    ]
   end
 end

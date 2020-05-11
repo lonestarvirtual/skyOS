@@ -24,10 +24,8 @@ class AirlinePolicy < ApplicationPolicy
   end
 
   def permitted_attributes
-    if @user.can?(Airline, :create) || @user.can?(Airline, :update)
-      %i[logo icao iata name remove_logo]
-    else
-      []
-    end
+    return unless @user.can?(Airline, :create) || @user.can?(Airline, :update)
+
+    %i[logo icao iata name remove_logo]
   end
 end

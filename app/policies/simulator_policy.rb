@@ -24,10 +24,10 @@ class SimulatorPolicy < ApplicationPolicy
   end
 
   def permitted_attributes
-    if @user.can?(Simulator, :create) || @user.can?(Simulator, :update)
-      %i[short_name name]
-    else
-      []
+    unless @user.can?(Simulator, :create) || @user.can?(Simulator, :update)
+      return
     end
+
+    %i[short_name name]
   end
 end

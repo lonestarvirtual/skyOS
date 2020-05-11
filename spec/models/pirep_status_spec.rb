@@ -22,4 +22,10 @@ RSpec.describe PirepStatus, type: :model do
     # Inclusion/acceptance of values
     it { expect(pirep_status).to validate_uniqueness_of(:name).case_insensitive }
   end
+
+  describe '#to_s' do
+    it 'returns the name of the Pirep status' do
+      expect(pirep_status.to_s).to eq pirep_status.name
+    end
+  end
 end

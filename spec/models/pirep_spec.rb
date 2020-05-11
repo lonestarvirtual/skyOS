@@ -53,4 +53,16 @@ RSpec.describe Pirep, type: :model do
     it { expect(pirep).to validate_numericality_of(:duration).is_greater_than_or_equal_to(0) }
     it { expect(pirep).to validate_numericality_of(:duration).is_less_than_or_equal_to(99.9) }
   end
+
+  describe '#draft=' do
+    it 'sets the status of the Pirep to draft when set to 1' do
+      pirep.draft = 1
+      expect(pirep.status).to eq PirepStatus.find_by(name: 'Draft')
+    end
+
+    it 'sets the status of the Pirep to Submitted set to 0' do
+      pirep.draft = 0
+      expect(pirep.status).to eq PirepStatus.find_by(name: 'Submitted')
+    end
+  end
 end
