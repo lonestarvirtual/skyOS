@@ -90,14 +90,10 @@ smtp:
 ### Rails Settings
 
 The `Setting` model contains settings that can be changed while the application
-is running.
+is running. Administration of these settings can be performed live by visiting
+the `Admin -> Settings` page while logged in with an appropriate user account. 
 
-| Key                   | Description                                              |
-| :-------------------- | :------------------------------------------------------- |
-| admin_emails          | Array of staff emails (used for contact us page requests |
-| allow_signup          | Turn on or off new user registration (default true)      |
-| organization_icao     | Set the organization ICAO (callsign) for Pilot IDs, etc  |
-| recaptcha_min_score   | Minimum reCAPTCHA v3 score, values 0 - 1 (default 0.5)   |
+See `app\models\setting.rb` for defaults.
 
 ### Initial administrator
 
