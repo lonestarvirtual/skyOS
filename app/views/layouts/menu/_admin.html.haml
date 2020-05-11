@@ -30,3 +30,9 @@
 
       - if current_pilot.can? Simulator, [:create, :update, :destroy]
         = link_to 'Simulators', admin_simulators_path, class: 'dropdown-item'
+
+      - if current_pilot.can? Setting, [:edit, :update]
+        %hr
+        = link_to admin_settings_path, class: 'dropdown-item' do
+          %i{class: 'fas fa-sliders-h'}
+          Settings
