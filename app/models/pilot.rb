@@ -123,7 +123,7 @@ class Pilot < ApplicationRecord
   def assign_pid
     return unless pid.nil?
 
-    start = 100
+    start = Setting.starting_pid
 
     if Pilot.all.empty?
       self.pid = start
