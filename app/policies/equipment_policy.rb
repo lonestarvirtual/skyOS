@@ -24,12 +24,10 @@ class EquipmentPolicy < ApplicationPolicy
   end
 
   def permitted_attributes
-    if @user.can?(Equipment, :create) || @user.can?(Equipment, :update)
-      %i[
-        icao iata name short_name description
-      ]
-    else
-      []
+    unless @user.can?(Equipment, :create) || @user.can?(Equipment, :update)
+      return
     end
+
+    %i[icao iata name short_name description]
   end
 end

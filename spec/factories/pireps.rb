@@ -24,5 +24,20 @@ FactoryBot.define do
     trait :approved do
       status { PirepStatus.find_by(approved: true) }
     end
+
+    trait :draft do
+      status { PirepStatus.find_by(editable: true) }
+    end
+
+    trait :invalid do
+      date     { nil }
+      number   { nil }
+      leg      { nil }
+      duration { nil }
+    end
+
+    trait :submitted do
+      status { PirepStatus.find_by(pending: true) }
+    end
   end
 end
