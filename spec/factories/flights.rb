@@ -2,8 +2,14 @@
 
 FactoryBot.define do
   factory :flight do
+    # Create a fleet for the equipment if the airline does not already have one
     after(:build) do |flight|
-      create(:fleet, airline: flight.airline, equipment: flight.equipment)
+      airline   = flight.airline
+      equipment = flight.equipment
+
+      unless airline.fleets.collect(&:equipment).include? equipment
+        create(:fleet, airline: flight.airline, equipment: flight.equipment)
+      end
     end
 
     association :airline,   strategy: :create

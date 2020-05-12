@@ -41,6 +41,18 @@ RSpec.describe Airport, type: :model do
     end
   end
 
+  describe '#to_marker' do
+    it 'returns a hash ready for JSON rendering to maps' do
+      marker_hash = {
+        lat: airport.latitude,
+        lng: airport.longitude,
+        label: airport.to_s
+      }
+
+      expect(airport.to_marker).to eq marker_hash
+    end
+  end
+
   describe '#to_s' do
     it 'returns the display string for the airport' do
       expect(airport.to_s).to eq "#{airport.city} (#{airport.icao})"

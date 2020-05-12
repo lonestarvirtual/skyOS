@@ -6,6 +6,7 @@
 import "bootstrap"
 import "cookieconsent/src/cookieconsent"
 import "@fortawesome/fontawesome-free/js/all"
+import "leaflet/dist/leaflet.css"
 
 import "../stylesheets/application";
 
