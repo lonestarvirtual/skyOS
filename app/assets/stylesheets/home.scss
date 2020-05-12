@@ -3,14 +3,22 @@
 // You can use Sass (SCSS) here: https://sass-lang.com/
 
 .home-box {
-  max-height: 225px;
-  width: 100%;
-  object-fit: cover;
-  overflow: hidden;
+  .banner-img {
+    height: 165px;
+    width: 100%;
+    object-fit: cover;
+  }
 }
 
 #home-card {
   border-radius: 0px;
+}
+
+#home-discord {
+  iframe {
+    height: 500px;
+    border: 0;
+  }
 }
 
 #home-carousel {
