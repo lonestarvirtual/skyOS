@@ -52,6 +52,17 @@ class Airport < ApplicationRecord
 
   default_scope { order(:city) }
 
+  # Return object suitable for JSON export to the StimulusJS
+  # maps_controller
+  #
+  def to_marker
+    {
+      lat: latitude,
+      lng: longitude,
+      label: to_s
+    }
+  end
+
   def to_s
     "#{city} (#{icao})"
   end

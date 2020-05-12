@@ -1,0 +1,3 @@
+#pirepMap.p-0.m-0{ data: { controller: 'maps', target: 'maps.container' } }
+  .d-none{ data: { target: 'maps.routes' } }
+    = [[ @pirep.orig.to_marker, @pirep.dest.to_marker ]].to_json.html_safe

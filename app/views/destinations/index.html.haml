@@ -1,0 +1,14 @@
+= content_for :section, 'Destinations'
+
+.container.pt-2.pb-4
+  .row
+    .col-lg-12
+      .card.card-shadow
+        .card-header.d-flex.justify-content-between
+          .col-8.pt-1
+            %h5= 'Route Map'
+
+        .card-body.p-0
+          #destinationsMap.p-0.m-0{ data: { controller: 'maps', target: 'maps.container' } }
+            .d-none{ data: { target: 'maps.routes' } }
+              = @flights.to_json.html_safe
