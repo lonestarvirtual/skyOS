@@ -7,6 +7,7 @@ class Setting < RailsSettings::Base
   field :copyright_name, { default: 'Lonestar Virtual' }
   field :copyright_year, { default: 2018, type: :integer }
   field :discord_link, { default: 'https://discord.gg/BjTXJPv' }
+  field :discord_widget, { default: '' }
   field :organization_icao, { default: 'LSX' }
   field :organization_name, { default: 'Lonestar Cargo' }
   field :recaptcha_min_score, { default: 0.5, type: :float }

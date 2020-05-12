@@ -1,0 +1,6 @@
+%table.table.text-center.p-0.mb-0
+  %thead.thead-dark
+    - Pilot.order(created_at: :desc).limit(4).each do |pilot|
+      %tr
+        %td= pilot
+        %td= pilot.created_at.strftime('%m-%d-%Y')

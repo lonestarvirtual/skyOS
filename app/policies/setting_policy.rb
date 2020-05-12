@@ -24,7 +24,8 @@ class SettingPolicy < ApplicationPolicy
   def permitted_attributes
     %i[
       admin_emails allow_signup copyright_name copyright_year discord_link
-      organization_icao organization_name recaptcha_min_score starting_pid
+      discord_widget organization_icao organization_name recaptcha_min_score
+      starting_pid
     ]
   end
 end

@@ -1,0 +1,6 @@
+%table.table.text-center.p-0.mb-0
+  %thead.thead-dark
+    - membership_statistics.each_pair do |key, value|
+      %tr
+        %td= key.to_s.titleize
+        %td= number_with_delimiter(value)

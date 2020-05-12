@@ -1,11 +1,16 @@
 %footer.footer#footer
   .container.h-100
     .row.h-100
-      .col-5.d-flex.justify-content-center.my-auto.small
+      .col-5.my-auto.small
         &copy; #{copyright_years}
         #{Setting.copyright_name}. All Rights Reserved.
 
-      .col-7.d-flex.justify-content-end.my-auto.small
+      .col-2.d-flex.justify-content-center.my-auto
+        %span.nav-link.p-0
+          = link_to 'https://github.com/lonestarvirtual/skyOS' do
+            %i.fab.fa-github
+
+      .col-5.d-flex.justify-content-end.my-auto.small
         %span.nav-link.p-0
           %i.fas.fa-angle-right
           = link_to 'Privacy Policy', policy_path('privacy')
