@@ -1,0 +1,8 @@
+= content_for :section, 'System Administration'
+
+= content_for :card_header do
+  %h5.pt-2= 'Site Settings'
+
+= render 'admin/layout' do
+  .p-4
+    = render partial: 'form'
