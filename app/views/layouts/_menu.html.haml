@@ -10,11 +10,14 @@
       %li.nav-item{class: active_class(root_path)}
         = link_to 'Home', root_path, class: 'nav-link'
 
-      %li.nav-item{class: active_class(pilots_path)}
-        = link_to 'Pilots', pilots_path, class: 'nav-link'
+      %li.nav-item{class: active_class(destinations_path)}
+        = link_to 'Destinations', destinations_path, class: 'nav-link'
 
       %li.nav-item{class: active_class(fleet_index_path)}
         = link_to 'Fleet', fleet_index_path, class: 'nav-link'
+
+      %li.nav-item{class: active_class(pilots_path)}
+        = link_to 'Pilots', pilots_path, class: 'nav-link'
 
       - unless pilot_signed_in?
         %li.nav-item{class: active_class(new_pilot_registration_path)}
