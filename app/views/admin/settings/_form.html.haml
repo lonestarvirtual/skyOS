@@ -1,0 +1,80 @@
+= simple_form_for Setting.new, url: admin_settings_path do |f|
+  .form-row.d-flex
+    .col-2.align-self-baseline.pt-2.ml-0
+      = f.label 'Allow Sign Up'
+    .col-10.form-inline
+      = f.check_box :allow_signup, checked: Setting.allow_signup?, class: 'form-control'
+
+  .row.pt-0
+    .col-12.offset-2
+      %small.form-text.text-muted
+        Allow new users to register for an account.
+
+  .form-row.mt-2
+    .col-2
+      = f.label 'Organization ident'
+    .col
+      = f.text_field :organization_icao, value: Setting.organization_icao, class: 'form-control'
+      %small.form-text.text-muted
+        This is the organizational ID/ICAO. Used for Pilot IDs.
+
+  .form-row.mt-2
+    .col-2
+      = f.label 'Organization name'
+    .col
+      = f.text_field :organization_name, value: Setting.organization_name, class: 'form-control'
+      %small.form-text.text-muted
+        This is the organization's name.
+
+  .form-row.mt-2
+    .col-2
+      = f.label 'Starting ID'
+    .col
+      = f.text_field :starting_pid, value: Setting.starting_pid, class: 'form-control'
+      %small.form-text.text-muted
+        This is the starting Pilot ID. Changes to this will not affect existing pilots.
+
+  .form-row.mt-2
+    .col-2
+      = f.label 'Copyright holder'
+    .col
+      = f.text_field :copyright_name, value: Setting.copyright_name, class: 'form-control'
+      %small.form-text.text-muted
+        This is the organization name used in copyrights such as the footer.
+
+  .form-row.mt-2
+    .col-2
+      = f.label 'Copyright start year'
+    .col
+      = f.text_field :copyright_year, value: Setting.copyright_year, class: 'form-control'
+      %small.form-text.text-muted
+        The year in which the copyright should start.
+
+  .form-row.mt-2
+    .col-2
+      = f.label 'Administrator Emails'
+    .col
+      = f.text_area :admin_emails, value: Setting.admin_emails.join(','), class: 'form-control'
+      %small.form-text.text-muted
+        A comma-separated list of email addresses of who should receive contact page requests
+
+  .form-row.mt-2
+    .col-2
+      = f.label 'Discord Link'
+    .col
+      = f.text_field :discord_link, value: Setting.discord_link, class: 'form-control'
+      %small.form-text.text-muted
+        The invite link for the Discord server
+
+  .form-row.mt-2
+    .col-2
+      = f.label 'reCaptcha Minimum Score'
+    .col
+      = f.text_field :recaptcha_min_score, value: Setting.recaptcha_min_score, class: 'form-control'
+      %small.form-text.text-muted
+        Google reCaptcha minimum score required on pages such as registration and contact us
+
+  .field_with_errors
+    .text-danger= f.error :base
+
+  = f.submit "Save", class: "btn btn-success mt-2 w-100"

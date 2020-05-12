@@ -31,6 +31,7 @@ Rails.application.routes.draw do
     resources :networks,   except: [:show]
     resources :pilots,     except: %i[show new create]
     resources :pireps,     except: %i[show new create]
+    resources :settings,   only:   %i[index create]
     resources :simulators, except: [:show]
   end
 
@@ -44,6 +45,7 @@ Rails.application.routes.draw do
     get '/' => 'contacts#new'
   end
 
+  resources :destinations, only: [:index]
   resources :fleet
   resources :flights, only: [:index]
 
