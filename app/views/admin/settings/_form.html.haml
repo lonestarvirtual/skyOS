@@ -68,6 +68,14 @@
 
   .form-row.mt-2
     .col-2
+      = f.label 'Discord Widget'
+    .col
+      = f.text_field :discord_widget, value: Setting.discord_widget, class: 'form-control'
+      %small.form-text.text-muted
+        The pre-made widget URL for Discord. Only include iframe src (https://). Leave blank to disable.
+
+  .form-row.mt-2
+    .col-2
       = f.label 'reCaptcha Minimum Score'
     .col
       = f.text_field :recaptcha_min_score, value: Setting.recaptcha_min_score, class: 'form-control'

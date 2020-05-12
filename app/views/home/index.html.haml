@@ -19,29 +19,44 @@
         = link_to 'Join today', new_pilot_registration_path, class: 'btn btn-warning btn-lg ml-2'
 
 .container
-  .row.mt-4
-    .col-lg-4
-      .card.mb-4.box-shadow
-        = image_tag 'box1.png', class: 'home-box'
-        .card-body
-          %p.card-text
-            Lonestar Cargo is a virtual cargo airline based at the San Antonio
-            International Airport in San Antonio, Texas. Other international
-            hubs include Europe, Asia, South America, and Australia.
+  .row.mt-4.d-flex.justify-content-center
+    .col-lg-8
+      .row.mr-4.mr-lg-0
+        .col-lg-6.home-box.d-flex.align-items-stretch
+          .card.mb-4.box-shadow
+            = image_tag 'box1.png', class: 'banner-img'
+            .card-body
+              %p.card-text
+                Lonestar Cargo is a virtual cargo airline based at the San Antonio
+                International Airport in San Antonio, Texas. Other international
+                hubs include Europe, Asia, South America, and Australia.
 
-    .col-lg-4
-      .card.mb-4.box-shadow
-        = image_tag 'box2.png', class: 'home-box'
-        .card-body
-          %p.card-text
-            We have a diverse fleet of custom aircraft featuring the Boeing
-            737, 747, 757, and 777.
+        .col-lg-6.home-box.d-flex.align-items-stretch
+          .card.mb-4.box-shadow
+            = image_tag 'box3.png', class: 'banner-img'
+            .card-body
+              %p.card-text
+                Lonestar Cargo has two ways to fly: Scheduled flights for those
+                who want a set schedule and charter, for those interested
+                in wherever, whenever operations.
 
-    .col-lg-4
-      .card.mb-4.box-shadow
-        = image_tag 'box3.png', class: 'home-box'
-        .card-body
-          %p.card-text
-            Lonestar Cargo has two ways to fly: Scheduled flights for those
-            who want a set schedule and charter, for those interested
-            in wherever, whenever operations.
+      .row.mr-4.mr-lg-0
+        .col-lg-6.home-box.d-flex.align-items-stretch
+          .card.mb-4.box-shadow.w-100
+            .card-header
+              %b= 'Statistics'
+            .card-body.p-0
+              = render partial: 'statistics'
+
+        .col-lg-6.home-box.d-flex.align-items-stretch
+          .card.mb-4.box-shadow.w-100
+            .card-header
+              %b= 'Newest Pilots'
+            .card-body.p-0
+              = render partial: 'newest_pilots'
+
+    - if Setting.discord_widget.present?
+      .col-lg-4.row
+        #home-discord.col-lg-12
+          .card.mb-4.box-shadow
+            %iframe{src: Setting.discord_widget}
