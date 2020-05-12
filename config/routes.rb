@@ -44,6 +44,7 @@ Rails.application.routes.draw do
     get '/' => 'contacts#new'
   end
 
+  resources :destinations, only: [:index]
   resources :fleet
   resources :flights, only: [:index]
 
