@@ -290,7 +290,6 @@ GEM
       sprockets (> 3.0)
       sprockets-rails
       tilt
-    seed_migration (1.2.3)
     sexp_processor (4.14.1)
     shoulda-callback-matchers (1.1.4)
       activesupport (>= 3)
@@ -378,7 +377,6 @@ DEPENDENCIES
   rubocop-rails
   sass-rails (>= 6)
   sassc (~> 2.3.0)
-  seed_migration
   shoulda-callback-matchers
   shoulda-matchers
   simple_form
