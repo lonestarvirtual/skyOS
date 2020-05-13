@@ -14,7 +14,11 @@ To get the Rails server running locally:
 * `bundle install` to install required dependencies
 * `yarn install --check-files` install front-end dependencies
 * configure `.env` file for development/test databases (see `.env.template`)
-* `rake db:setup` to create and seed database
+* `rake db:prepare` to create and seed database
+* `rake skyos:install` (optional) create an administrative user and load 
+   helpful defaults
+* `rake skyos:create_admin` (optional) *instead of `install`* to create an 
+   administrative user only.
 * `rails s` to start the local server
 
 ### External Dependencies
@@ -23,17 +27,19 @@ To get the Rails server running locally:
 
 ## Getting Started with Docker
 
-### Using a release
+### Container Images
+
+#### From repository
 
 This repository builds and releases a Docker image to our GitHub Docker
-repository. See `docker-compose.yml.example` for an example on how to pull
-the latest release and customize for your production environment.
+repository. See [docker-compose.yml.example](docker-compose.yml.example) for an
+example on how to pull the latest release and customize for your production 
+environment.
 
-### Building your own image
+#### Building your own image
 
-This repository comes equipped to be run within Docker. You will need 
-`docker-compose` to build the image. An example ```docker-compose.yml```
-is included.
+This repository comes equipped to be run within Docker. The easiest way to 
+build your own image is using [docker-compose](https://docs.docker.com/compose/). 
 
 Build the Docker image using:
 
@@ -41,10 +47,22 @@ Build the Docker image using:
 % docker-compose build
 ```
 
-On first boot, you will need to setup and seed the database:
+### Configuration
+
+On first boot, the image will connect to the database specified in your 
+`docker-compose.yml` or to the PostgreSQL server specified via environment
+variables (see [docker-compose.yml.example](docker-compose.yml.example))
+
+Load defaults and create an initial administrative user:
 
 ```
-% docker-compose run --rm app rake db:setup 
+% docker-compose run --rm app rake skyos:install
+```
+
+*Optionally* populate the airports table (courtesy [OurAirports](https://ourairports.com/))
+
+```
+% docker-compose run --rm app rake skyos:load_airports
 ```
 
 After setting up, you can run the application and dependencies:
@@ -85,6 +103,10 @@ smtp:
 | :---                  |   :----:    | :-----------                                        |
 | RAILS_HOSTNAME        |**required** | External hostname for application                   |
 | RAILS_MASTER_KEY      |**required** | Master key used for credential store                |
+| POSTGRES_HOST         |**required** | Hostname for your PostgreSQL server                 |    
+| POSTGRES_DB           |**required** | Database name ex. skyOS_production                  |
+| POSTGRES_USER         |**required** | Database username                                   |
+| POSTGRES_PASSWORD     |**required** | Database password                                   |
 | SKY_OS_REPLY_TO       |**required** | From address used for default mailer correspondence |
 
 ### Rails Settings
@@ -106,3 +128,14 @@ rake skyos:create_admin
 
 This will prompt you for the user attributes and assign the user administrative
 privileges.
+
+## Contributing
+
+1. Fork it
+2. Create your feature branch (`git checkout -b my-new-feature`)
+3. Ensure all test pass with appropriate coverage (`COVERAGE=true rake spec`)
+4. Lint your changes appropriately (`rubocop`)
+5. Check for any new security issues (`brakeman`) 
+6. Commit your changes (`git commit -am 'Add some feature'`)
+7. Push to the branch (`git push origin my-new-feature`)
+8. Create new Pull Request

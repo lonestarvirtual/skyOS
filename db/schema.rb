@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_10_034140) do
+ActiveRecord::Schema.define(version: 2020_05_13_142124) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -136,6 +136,7 @@ ActiveRecord::Schema.define(version: 2020_05_10_034140) do
     t.string "model", null: false
     t.string "action", null: false
     t.string "description", null: false
+    t.index ["model", "action"], name: "index_permissions_on_model_and_action", unique: true
   end
 
   create_table "pilots", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
