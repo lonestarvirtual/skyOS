@@ -5,4 +5,5 @@ class Permission < ApplicationRecord
   has_many :groups, through: :group_permissions
 
   validates :model, :action, :description, presence: true
+  validates :action, uniqueness: { scope: :model }
 end
