@@ -59,6 +59,12 @@ Load defaults and create an initial administrative user:
 % docker-compose run --rm app rake skyos:install
 ```
 
+*Optionally* populate the airports table (courtesy [OurAirports](https://ourairports.com/))
+
+```
+% docker-compose run --rm app rake skyos:load_airports
+```
+
 After setting up, you can run the application and dependencies:
 
 ```
