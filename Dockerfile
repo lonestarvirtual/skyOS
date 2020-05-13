@@ -62,4 +62,6 @@ EXPOSE 3000
 
 USER app
 
+ENTRYPOINT ["bin/docker-entrypoint.sh"]
+
 CMD ["bundle", "exec", "puma", "-C", "config/puma.rb"]
