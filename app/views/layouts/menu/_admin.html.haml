@@ -10,6 +10,9 @@
       - if current_pilot.can? Airport, [:create, :update, :destroy]
         = link_to 'Airports', admin_airports_path, class: 'dropdown-item'
 
+      - if current_pilot.can? Announcement, [:create, :update, :destroy]
+        = link_to 'Announcements', admin_announcements_path, class: 'dropdown-item'
+
       - if current_pilot.can? Equipment, [:create, :update, :destroy]
         = link_to 'Equipment Types', admin_equipment_index_path, class: 'dropdown-item'
 

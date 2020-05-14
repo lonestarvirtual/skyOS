@@ -1,0 +1,22 @@
+= content_for :section, 'Announcement Administration'
+
+= content_for :card_header do
+  %h5= 'Add Announcement'
+
+= render 'admin/layout' do
+  .row.p-4
+    .col-4.pt-4
+      Announcements display on the front page and are useful for placing
+      a time constrained banner to relay important information about the
+      organization.
+    .col-7
+      #admin-announcement-example.card
+        .card-body
+          %h5.card-title= 'Example!'
+          %p
+            I'm an example of what an announcement looks like!
+
+  .row
+    .col-12
+      .p-4
+        = render partial: 'form'

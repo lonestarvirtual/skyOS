@@ -1,0 +1,38 @@
+= content_for :section, 'Announcement Administration'
+
+= content_for :card_header do
+  %h5.pt-2= :Announcements
+
+  .text-right.pt-1
+    = link_to admin_announcements_path, method: :delete, class: 'btn btn-sm btn-danger', 'data-confirm': "Are you sure?" do
+      %i.fas.fa-trash
+      Purge Expired
+
+= render 'admin/layout' do
+  %table.table.table-bordered.text-center.p-0.mb-0
+    %thead.thead-dark
+      %th{scope: 'col', width: '150px'}= sort_link @q, :start_at
+      %th{scope: 'col', width: '150px'}= sort_link @q, :end_at
+      %th{scope: 'col'}= sort_link @q, :title
+      %th.text-center{scope: 'col', width: '150px'}
+        = link_to new_admin_announcement_path, class: 'btn btn-sm btn-success' do
+          %i.fas.fa-plus
+          Add
+
+    %tbody
+      - if @announcements.empty?
+        %tr
+          %td.text-muted{colspan: 20}= :None
+      - @announcements.each do |announcement|
+        %tr
+          %td.align-middle= announcement.start_at.strftime('%m-%d-%Y %H:%M %Z')
+          %td.align-middle= announcement.end_at.strftime('%m-%d-%Y %H:%M %Z')
+          %td.align-middle= announcement.title
+          %td
+            - if policy(announcement).edit? || policy(announcement).destroy?
+              = link_to edit_admin_announcement_path(announcement), class: 'btn btn-sm btn-outline-secondary' do
+                %i.fas.fa-edit
+                Edit
+
+  .row.justify-content-center.mt-3
+    = paginate @announcements, theme: 'twitter-bootstrap-4'

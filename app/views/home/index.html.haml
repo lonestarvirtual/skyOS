@@ -8,6 +8,13 @@
   .carousel-inner
     .carousel-item.active= image_tag 'header1.png', class: 'carousel-image'
 
+    - if @announcement.present?
+      #home-announcement.card{role: 'announcement'}
+        .card-body
+          %h5.card-title= @announcement.title
+          %p
+            = @announcement.body
+
 .card.bg-dark.text-light#home-card
   .card-body.container.mt-0
     .row
