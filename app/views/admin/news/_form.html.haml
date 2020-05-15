@@ -1,4 +1,4 @@
-= simple_form_for [:admin, @article], url: admin_news_index_path do |f|
+= simple_form_for [:admin, @article] do |f|
   = f.input :title, label: false
   = f.input_field :content, as: :rich_text_area, label: false, class: "trix-content mb-2"
   = f.button :submit, class: "btn-success"

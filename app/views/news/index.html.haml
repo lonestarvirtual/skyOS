@@ -9,6 +9,9 @@
           %i
             Written By:
             = article.author
+            - if article.edited?
+              %br
+              = article.editor
             %br
             = article.created_at
         = article.content

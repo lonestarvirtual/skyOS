@@ -30,7 +30,7 @@ Rails.application.routes.draw do
     resources :fleets,        except: [:show]
     resources :flights,       except: [:show]
     resources :networks,      except: [:show]
-    resources :news,          except: [:show]
+    resources :news,          except: [:show], as: :articles
     resources :pilots,        except: %i[show new create]
     resources :pireps,        except: %i[show new create]
     resources :settings,      only:   %i[index create]
@@ -55,7 +55,7 @@ Rails.application.routes.draw do
   post '/fleet/download' => 'fleet#download'
 
   resources :flights, only: [:index]
-  resources :news, only: %i[index show]
+  resources :news, only: %i[index show], as: :articles
 
   resources :pilots, only: [:index] do
     resource :logbook, only: [:show]

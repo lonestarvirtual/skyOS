@@ -1,9 +1,8 @@
 # frozen_string_literal: true
 
 class Article < ApplicationRecord
-  audited
+  audited associated_with: :content
   has_rich_text :content
-
   def updated_at
     audits.last.created_at
   end
@@ -21,6 +20,6 @@ class Article < ApplicationRecord
   end
 
   def edited?
-    audits.last.user != audits.first.user
+    audits.last != audits.first
   end
 end

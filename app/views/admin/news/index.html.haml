@@ -22,7 +22,7 @@
       -#%th{scope: 'col'}= sort_link @q, :equipment_icao, 'ICAO'
       -#%th{scope: 'col'}= sort_link @q, :equipment_name, 'Name'
       %th{scope: 'col'}
-        = link_to new_admin_news_path, class: 'btn btn-sm btn-success' do
+        = link_to new_admin_article_path, class: 'btn btn-sm btn-success' do
           %i.fas.fa-plus
           Add
     %tbody
@@ -35,9 +35,9 @@
           %td.align-middle= article.updated_at
           %td
             - if policy(article).edit? || policy(article).destroy?
-              = link_to edit_admin_news_path(article), class: 'btn btn-sm btn-outline-secondary' do
+              = link_to edit_admin_article_path(article), class: 'btn btn-sm btn-outline-secondary' do
                 %i.fas.fa-edit
                 Edit
 
   .row.justify-content-center.mt-3
-    = paginate @articles, theme: 'twitter-bootstrap-4'
+    = paginate @articles
