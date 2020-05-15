@@ -13,6 +13,7 @@
 %w(
   Airline
   Airport
+  Announcement
   Equipment
   Fleet
   Flight

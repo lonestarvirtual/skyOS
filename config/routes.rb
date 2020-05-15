@@ -23,16 +23,19 @@ Rails.application.routes.draw do
   root to: 'home#index'
 
   namespace :admin do
-    resources :airlines,   except: [:show]
-    resources :airports,   except: [:show]
-    resources :equipment,  except: [:show]
-    resources :fleets,     except: [:show]
-    resources :flights,    except: [:show]
-    resources :networks,   except: [:show]
-    resources :pilots,     except: %i[show new create]
-    resources :pireps,     except: %i[show new create]
-    resources :settings,   only:   %i[index create]
-    resources :simulators, except: [:show]
+    resources :airlines,      except: [:show]
+    resources :airports,      except: [:show]
+    resources :announcements, except: [:show]
+    resources :equipment,     except: [:show]
+    resources :fleets,        except: [:show]
+    resources :flights,       except: [:show]
+    resources :networks,      except: [:show]
+    resources :pilots,        except: %i[show new create]
+    resources :pireps,        except: %i[show new create]
+    resources :settings,      only:   %i[index create]
+    resources :simulators,    except: [:show]
+
+    delete :announcements, controller: 'announcements', action: :purge
   end
 
   namespace :api do
