@@ -5,8 +5,9 @@ class NewsController < ApplicationController
   skip_after_action  :verify_authorized, only: %i[index]
 
   def index
-    authorize Article, :index?
-    @q = policy_scope(Article).ransack(params[:q])
+    # FIXME: Deal with anonymous user access in pundit.
+    # authorize Article, :index?
+    @q = Article.ransack(params[:q])
     @articles = @q.result.page(params[:page])
   end
 end

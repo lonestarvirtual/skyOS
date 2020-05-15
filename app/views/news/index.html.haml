@@ -1,0 +1,14 @@
+= content_for :section, 'News'
+
+.container.pt-2.pb-4
+  - @articles.each do |article|
+    .row.mb-5
+      .col.mx-auto
+        %h2= article.title
+        %p
+          %i
+            Written By:
+            = article.author
+            %br
+            = article.created_at
+        = article.content
