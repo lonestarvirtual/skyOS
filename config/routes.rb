@@ -55,6 +55,7 @@ Rails.application.routes.draw do
   post '/fleet/download' => 'fleet#download'
 
   resources :flights, only: [:index]
+  resources :news, only: %i[index show]
 
   resources :pilots, only: [:index] do
     resource :logbook, only: [:show]
