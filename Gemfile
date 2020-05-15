@@ -33,7 +33,6 @@ gem 'bootsnap', '>= 1.4.2', require: false
 
 # SkyOS gems
 gem 'audited', '~> 4.9'
-gem 'bootstrap4-kaminari-views'
 gem 'devise'
 gem 'exception_handler', '~> 0.8.0.0'
 gem 'friendly_id', '~> 5.2.4'
