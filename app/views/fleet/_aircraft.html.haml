@@ -19,9 +19,13 @@
       .d-flex
         .mr-auto.my-auto= fleet.equipment.short_name
 
-        - fleet.repaints.each do |repaint|
-          - if repaint.file.attached?
-            %span.ml-2
-              = link_to rails_blob_path(repaint.file, disposition: "attachment"), class: "btn btn-outline-secondary" do
+        - unless fleet.repaints.empty?
+          = form_tag fleet_download_path, remote: true do
+
+            - options = fleet.repaints.collect{ |p| [p.name, p.id] }
+
+            .form-inline
+              = select_tag 'repaint_id', options_for_select(options), class: 'form-control form-control-sm'
+              = button_tag type: :submit, class: 'btn btn-outline-secondary btn-sm ml-2' do
                 %i.fas.fa-download
-                = repaint.name
+                Download
