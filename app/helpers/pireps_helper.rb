@@ -3,10 +3,11 @@
 module PirepsHelper
   def pirep_display_audit(pirep)
     status = pirep.status
-    return status.name if status.editable? || pirep.audits.empty?
+    return status.name if status.editable? || pirep.versions.empty?
 
-    audit = pirep.audits.last
+    audit = pirep.versions.last
     timef = '%m-%d-%Y %H:%M %Z'
-    "#{status.name} by #{audit.user} at #{audit.created_at.strftime(timef)}"
+    "#{status.name} by #{audit.version_author}" \
+    " at #{audit.created_at.strftime(timef)}"
   end
 end

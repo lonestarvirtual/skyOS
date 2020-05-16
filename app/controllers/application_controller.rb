@@ -6,6 +6,7 @@ class ApplicationController < ActionController::Base
 
   around_action :use_time_zone, if: :current_pilot
   before_action :authenticate_pilot!, unless: :exception_controller?
+  before_action :set_paper_trail_whodunnit
   after_action  :verify_authorized, unless: :skip_authorization?
 
   private
@@ -27,6 +28,10 @@ class ApplicationController < ActionController::Base
   # Override pundit user lookup to use Pilot model
   #
   def pundit_user
+    current_pilot
+  end
+
+  def user_for_paper_trail
     current_pilot
   end
 
