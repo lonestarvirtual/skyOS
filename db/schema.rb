@@ -10,21 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_16_123046) do
+ActiveRecord::Schema.define(version: 2020_05_16_140121) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
-
-  create_table "action_text_rich_texts", force: :cascade do |t|
-    t.string "name", null: false
-    t.text "body"
-    t.string "record_type", null: false
-    t.uuid "record_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["record_type", "record_id", "name"], name: "index_action_text_rich_texts_uniqueness", unique: true
-  end
 
   create_table "active_storage_attachments", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name", null: false
@@ -56,7 +46,7 @@ ActiveRecord::Schema.define(version: 2020_05_16_123046) do
 
   create_table "airports", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "icao", limit: 4, null: false
-    t.string "iata", limit: 3
+    t.string "iata", limit: 4
     t.string "name"
     t.string "city"
     t.string "time_zone", default: "UTC", null: false
@@ -70,14 +60,6 @@ ActiveRecord::Schema.define(version: 2020_05_16_123046) do
     t.text "body", null: false
     t.datetime "start_at", null: false
     t.datetime "end_at", null: false
-  end
-
-  create_table "articles", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.string "slug"
-    t.string "title", null: false
-    t.boolean "private", default: true, null: false
-    t.boolean "published", default: false, null: false
-    t.index ["slug"], name: "index_articles_on_slug", unique: true
   end
 
   create_table "equipment", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -243,6 +225,17 @@ ActiveRecord::Schema.define(version: 2020_05_16_123046) do
     t.string "name"
     t.index ["name"], name: "index_simulators_on_name", unique: true
     t.index ["short_name"], name: "index_simulators_on_short_name", unique: true
+  end
+
+  create_table "versions", force: :cascade do |t|
+    t.string "item_type", null: false
+    t.uuid "item_id", null: false
+    t.string "event", null: false
+    t.string "whodunnit"
+    t.jsonb "object"
+    t.datetime "created_at"
+    t.jsonb "object_changes"
+    t.index ["item_type", "item_id"], name: "index_versions_on_item_type_and_item_id"
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
