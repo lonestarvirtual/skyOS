@@ -8,8 +8,7 @@
         = image_tag fleet.airline.logo.variant(resize_to_limit: [170, 260])
       - else
         %span.h6= fleet.airline.name
-
-
+          
   .card-block.px-2.p-4.col-lg-8.col-md-12
     %h4.card-title= fleet.equipment.name
     %p.card-text.small= fleet.equipment.description
@@ -21,11 +20,9 @@
 
         - unless fleet.repaints.empty?
           = form_tag fleet_download_path, remote: true do
-
-            - options = fleet.repaints.collect{ |p| [p.name, p.id] }
-
             .form-inline
-              = select_tag 'repaint_id', options_for_select(options), class: 'form-control form-control-sm'
+              = select_tag 'repaint_id', options_from_collection_for_select(fleet.repaints, 'id', 'name'), class: 'form-control form-control-sm'
+
               = button_tag type: :submit, class: 'btn btn-outline-secondary btn-sm ml-2' do
                 %i.fas.fa-download
                 Download
