@@ -8,6 +8,8 @@ class Repaint < ApplicationRecord
 
   validate :acceptable_file
 
+  default_scope { order :name }
+
   private
 
   def acceptable_file

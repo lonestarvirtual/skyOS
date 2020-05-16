@@ -49,7 +49,10 @@ Rails.application.routes.draw do
   end
 
   resources :destinations, only: [:index]
-  resources :fleet
+
+  resources :fleet, only: [:index]
+  post '/fleet/download' => 'fleet#download'
+
   resources :flights, only: [:index]
 
   resources :pilots, only: [:index] do
