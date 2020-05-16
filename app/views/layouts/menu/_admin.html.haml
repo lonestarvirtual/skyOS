@@ -1,41 +1,26 @@
-- if pilot_signed_in? && current_pilot.group.name == 'Admin'
+- if pilot_signed_in?
+  = content_for :admin_menu do
+    = admin_link_to 'Airlines', Airline, admin_airlines_path, class: 'dropdown-item'
+    = admin_link_to 'Airports', Airport, admin_airports_path, class: 'dropdown-item'
+    = admin_link_to 'Announcements', Announcement, admin_announcements_path, class: 'dropdown-item'
+    = admin_link_to 'Equipment Types', Equipment, admin_equipment_index_path, class: 'dropdown-item'
+    = admin_link_to 'Fleets', Fleet, admin_fleets_path, class: 'dropdown-item'
+    = admin_link_to 'Flight Schedule', Flight, admin_flights_path, class: 'dropdown-item'
+    = admin_link_to 'Networks', Network, admin_networks_path, class: 'dropdown-item'
+    = admin_link_to 'Pilots', Pilot, admin_pilots_path, class: 'dropdown-item'
+    = admin_link_to 'PIREPs', Pirep, admin_pireps_path, class: 'dropdown-item'
+    = admin_link_to 'Simulators', Simulator, admin_simulators_path, class: 'dropdown-item'
+
+    - if current_pilot.can? Setting, [:edit, :update]
+      %hr
+        = link_to admin_settings_path, class: 'dropdown-item' do
+          %i{class: 'fas fa-sliders-h'}
+          Site Settings
+
+
+- if content_for? :admin_menu
   %li.nav-item.dropdown
     %a.nav-link.dropdown-toggle#navbarDropdown{href: '#', role: 'button', 'data-toggle': 'dropdown', 'aria-haspopup': 'true', 'aria-expanded': 'false'}
       Admin
-
     .dropdown-menu.dropdown-menu-right{'aria-labelledby': 'navbarDropdown'}
-      - if current_pilot.can? Airline, [:create, :update, :destroy]
-        = link_to 'Airlines', admin_airlines_path, class: 'dropdown-item'
-
-      - if current_pilot.can? Airport, [:create, :update, :destroy]
-        = link_to 'Airports', admin_airports_path, class: 'dropdown-item'
-
-      - if current_pilot.can? Announcement, [:create, :update, :destroy]
-        = link_to 'Announcements', admin_announcements_path, class: 'dropdown-item'
-
-      - if current_pilot.can? Equipment, [:create, :update, :destroy]
-        = link_to 'Equipment Types', admin_equipment_index_path, class: 'dropdown-item'
-
-      - if current_pilot.can? Fleet, [:create, :update, :destroy]
-        = link_to 'Fleets', admin_fleets_path, class: 'dropdown-item'
-
-      - if current_pilot.can? Flight, [:create, :update, :destroy]
-        = link_to 'Flight Schedule', admin_flights_path, class: 'dropdown-item'
-
-      - if current_pilot.can? Network, [:create, :update, :destroy]
-        = link_to 'Networks', admin_networks_path, class: 'dropdown-item'
-
-      - if current_pilot.can? Pilot, [:create, :update, :destroy]
-        = link_to 'Pilots', admin_pilots_path, class: 'dropdown-item'
-
-      - if current_pilot.can? Pirep, [:create, :update, :destroy]
-        = link_to 'PIREPs', admin_pireps_path, class: 'dropdown-item'
-
-      - if current_pilot.can? Simulator, [:create, :update, :destroy]
-        = link_to 'Simulators', admin_simulators_path, class: 'dropdown-item'
-
-      - if current_pilot.can? Setting, [:edit, :update]
-        %hr
-        = link_to admin_settings_path, class: 'dropdown-item' do
-          %i{class: 'fas fa-sliders-h'}
-          Settings
+      = yield :admin_menu
