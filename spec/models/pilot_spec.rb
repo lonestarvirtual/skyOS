@@ -10,6 +10,7 @@ RSpec.describe Pilot, type: :model do
   let(:pilot) { build(:pilot) }
 
   describe 'ActiveRecord associations' do
+    it { expect(pilot).to have_many(:notifications) }
     it { expect(pilot).to have_many(:pireps) }
 
     it do

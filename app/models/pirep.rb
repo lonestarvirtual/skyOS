@@ -64,6 +64,7 @@ class Pirep < ApplicationRecord
             }
 
   scope :approved, -> { joins(:status).where('pirep_statuses.approved': true) }
+  scope :pending, -> { joins(:status).where('pirep_statuses.pending': true) }
 
   def dest_icao
     dest.try(:icao)

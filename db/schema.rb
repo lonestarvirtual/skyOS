@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_14_042636) do
+ActiveRecord::Schema.define(version: 2020_05_16_140121) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -60,28 +60,6 @@ ActiveRecord::Schema.define(version: 2020_05_14_042636) do
     t.text "body", null: false
     t.datetime "start_at", null: false
     t.datetime "end_at", null: false
-  end
-
-  create_table "audits", force: :cascade do |t|
-    t.uuid "auditable_id"
-    t.string "auditable_type"
-    t.uuid "associated_id"
-    t.string "associated_type"
-    t.uuid "user_id"
-    t.string "user_type"
-    t.string "username"
-    t.string "action"
-    t.jsonb "audited_changes"
-    t.integer "version", default: 0
-    t.string "comment"
-    t.string "remote_address"
-    t.string "request_uuid"
-    t.datetime "created_at"
-    t.index ["associated_type", "associated_id"], name: "associated_index"
-    t.index ["auditable_type", "auditable_id", "version"], name: "auditable_index"
-    t.index ["created_at"], name: "index_audits_on_created_at"
-    t.index ["request_uuid"], name: "index_audits_on_request_uuid"
-    t.index ["user_id", "user_type"], name: "user_index"
   end
 
   create_table "equipment", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -137,6 +115,15 @@ ActiveRecord::Schema.define(version: 2020_05_14_042636) do
   create_table "networks", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name", null: false
     t.index ["name"], name: "index_networks_on_name", unique: true
+  end
+
+  create_table "notifications", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "pilot_id", null: false
+    t.string "title", null: false
+    t.string "body", null: false
+    t.boolean "read", default: false
+    t.datetime "created_at"
+    t.index ["pilot_id"], name: "index_notifications_on_pilot_id"
   end
 
   create_table "permissions", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -247,6 +234,17 @@ ActiveRecord::Schema.define(version: 2020_05_14_042636) do
     t.string "name"
     t.index ["name"], name: "index_simulators_on_name", unique: true
     t.index ["short_name"], name: "index_simulators_on_short_name", unique: true
+  end
+
+  create_table "versions", force: :cascade do |t|
+    t.string "item_type", null: false
+    t.uuid "item_id", null: false
+    t.string "event", null: false
+    t.string "whodunnit"
+    t.jsonb "object"
+    t.datetime "created_at"
+    t.jsonb "object_changes"
+    t.index ["item_type", "item_id"], name: "index_versions_on_item_type_and_item_id"
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"

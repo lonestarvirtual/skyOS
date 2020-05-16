@@ -1,0 +1,15 @@
+%ul.dropdown-menu.dropdown-menu-right.notifications.m-0#notification-container
+  %audio#notification-bell
+    %source{type: 'audio/ogg', src: asset_path('notification.ogg')}
+
+  %li.head.text-light.small
+    .row.d-flex.justify-content-between.p-2
+      .col-6
+        Notifications
+        = surround '(', ')' do
+          %span#notification-counter= notifications_unread.count
+      .col-6.text-right{data: {controller: 'notifications'}}
+        = link_to 'Delete all', '#', class: 'text-light', data: {action: 'click->notifications#delete_all'}
+
+  .notification-box#notifications
+    = render partial: 'notifications/notification', collection: notifications_unread
