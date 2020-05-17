@@ -129,6 +129,24 @@ rake skyos:create_admin
 This will prompt you for the user attributes and assign the user administrative
 privileges.
 
+## Upgrading
+
+### Docker
+
+[docker-entrypoint.sh](/bin/docker-entrypoint.sh) runs at container start and 
+will automatically attempt to migrate and seed the database with changes as
+necessary.
+
+### Manual
+
+If the app is using a different environment then it may be necessary to run the 
+following steps after upgrade:
+
+```
+rake db:migrate
+rake db:seed
+```
+
 ## Contributing
 
 1. Fork it
