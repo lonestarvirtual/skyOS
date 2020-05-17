@@ -32,7 +32,7 @@
       - @articles.each do |article|
         %tr
           %th.align-middle= article.title
-          %td.align-middle= article.updated_at
+          %td.align-middle= article.edited_at
           %td
             - if policy(article).edit? || policy(article).destroy?
               = link_to edit_admin_article_path(article), class: 'btn btn-sm btn-outline-secondary' do

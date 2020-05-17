@@ -2,6 +2,6 @@
 
 FactoryBot.define do
   factory :article do
-    title { 'MyString' }
+    title { 'My Epic Article' }
   end
 end

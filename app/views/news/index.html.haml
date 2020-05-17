@@ -4,14 +4,16 @@
   - @articles.each do |article|
     .row.mb-5
       .col.mx-auto
-        %h2= article.title
+        = image_tag 'cowboy.png', class: 'blog_spot'
+        %h2.d-inline-block= article.title
         %p
           %i
             Written By:
             = article.author
-            - if article.edited?
+            - if article.edited? && article.author != article.editor
               %br
+              Edited By:
               = article.editor
             %br
-            = article.created_at
+            = article.published_at
         = article.content

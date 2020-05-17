@@ -16,7 +16,7 @@ ActiveRecord::Schema.define(version: 2020_05_16_140121) do
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
 
-  create_table "action_text_rich_texts", force: :cascade do |t|
+  create_table "action_text_rich_texts", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name", null: false
     t.text "body"
     t.string "record_type", null: false
@@ -70,6 +70,14 @@ ActiveRecord::Schema.define(version: 2020_05_16_140121) do
     t.text "body", null: false
     t.datetime "start_at", null: false
     t.datetime "end_at", null: false
+  end
+
+  create_table "articles", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "slug"
+    t.string "title", null: false
+    t.boolean "private", default: true, null: false
+    t.boolean "published", default: false, null: false
+    t.index ["slug"], name: "index_articles_on_slug", unique: true
   end
 
   create_table "equipment", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|

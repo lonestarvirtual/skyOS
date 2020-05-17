@@ -1,25 +1,33 @@
 # frozen_string_literal: true
 
 class Article < ApplicationRecord
-  audited associated_with: :content
+  extend FriendlyId
+  friendly_id :title, use: :slugged
+
+  has_paper_trail
   has_rich_text :content
-  def updated_at
-    audits.last.created_at
+
+  validates :title, presence: true
+  # Force published true
+  attribute :published, :boolean, default: true
+
+  def edited_at
+    versions.last.created_at
   end
 
-  def created_at
-    audits.first.created_at
+  def published_at
+    versions.first.created_at
   end
 
   def author
-    audits.first.user
+    versions.first.version_author
   end
 
   def editor
-    audits.last.user
+    paper_trail.originator
   end
 
   def edited?
-    audits.last != audits.first
+    !versions.empty?
   end
 end

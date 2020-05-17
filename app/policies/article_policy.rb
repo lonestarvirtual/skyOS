@@ -3,28 +3,32 @@
 class ArticlePolicy < ApplicationPolicy
   class Scope < Scope
     def resolve
-      scope.all
+      if @user
+        scope.all
+      else
+        scope.where(private: false)
+      end
     end
   end
 
   def index?
-    @user.can?(Article, :read)
+    true
   end
 
   def create?
-    @user.can?(Article, :create)
+    @user&.can?(Article, :create)
   end
 
   def destroy?
-    @user.can?(Article, :destroy)
+    @user&.can?(Article, :destroy)
   end
 
   def update?
-    @user.can?(Article, :update)
+    @user&.can?(Article, :update)
   end
 
   def permitted_attributes
-    unless @user.can?(Equipment, :create) || @user.can?(Equipment, :update)
+    unless @user&.can?(Equipment, :create) || @user&.can?(Equipment, :update)
       return
     end
 
