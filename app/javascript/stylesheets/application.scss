@@ -11,6 +11,8 @@ $fa-font-path: '~@fortawesome/fontawesome-free/webfonts';
 @import '~@fortawesome/fontawesome-free/scss/regular';
 @import '~@fortawesome/fontawesome-free/scss/brands';
 @import '~@fortawesome/fontawesome-free/scss/v4-shims';
+@import '~trix/dist/trix';
+@import 'actiontext';
 
 body {
   background-color: #333;
@@ -76,4 +78,8 @@ main {
 // Ransack overrides
 .sort_link {
   color: inherit !important;
+}
+
+.custom-control, .custom-switch {
+  line-height: 1.5rem;
 }

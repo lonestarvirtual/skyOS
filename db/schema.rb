@@ -10,11 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_16_140121) do
+ActiveRecord::Schema.define(version: 2020_05_17_050638) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
+
+  create_table "action_text_rich_texts", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "name", null: false
+    t.text "body"
+    t.string "record_type", null: false
+    t.uuid "record_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["record_type", "record_id", "name"], name: "index_action_text_rich_texts_uniqueness", unique: true
+  end
 
   create_table "active_storage_attachments", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name", null: false
@@ -60,6 +70,20 @@ ActiveRecord::Schema.define(version: 2020_05_16_140121) do
     t.text "body", null: false
     t.datetime "start_at", null: false
     t.datetime "end_at", null: false
+  end
+
+  create_table "articles", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "slug"
+    t.string "title", null: false
+    t.boolean "private", default: true, null: false
+    t.boolean "published", default: false, null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.uuid "author_id"
+    t.uuid "editor_id"
+    t.index ["author_id"], name: "index_articles_on_author_id"
+    t.index ["editor_id"], name: "index_articles_on_editor_id"
+    t.index ["slug"], name: "index_articles_on_slug", unique: true
   end
 
   create_table "equipment", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|

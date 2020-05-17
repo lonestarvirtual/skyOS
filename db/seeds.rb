@@ -14,6 +14,7 @@
   Airline
   Airport
   Announcement
+  Article
   Equipment
   Fleet
   Flight
