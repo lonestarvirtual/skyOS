@@ -139,8 +139,8 @@ necessary.
 
 ### Manual
 
-If the app is using a different environment then after changes it may
-be necessary to run the following steps after upgrade:
+If the app is using a different environment then it may be necessary to run the 
+following steps after upgrade:
 
 ```
 rake db:migrate
