@@ -3,24 +3,11 @@
 = content_for :card_header do
   %h5.pt-2= :News
 
-  -#.text-right.pt-1
-  -#  = search_form_for @q, url: admin_fleets_path, class: 'form-inline' do |f|
-  -#    = f.label :airline, 'Airline', class: 'form-inline'
-  -#    = f.collection_select :airline_id_eq, Airline.all, :id, :name, {}, class: 'form-control form-control-sm form-inline ml-2'
-  -#
-  -#    = f.label :icao, class: 'form-inline text-uppercase ml-2'
-  -#    = f.search_field :equipment_icao_cont, class: 'form-control form-control-sm form-inline text-uppercase ml-2', maxlength: 4
-  -#
-  -#    = f.submit class: 'btn btn-sm btn-primary ml-2'
-
 = render 'admin/layout' do
   %table.table.table-bordered.text-center.p-0.mb-0
     %thead.thead-dark
       %th{scope: 'col'} Title
       %th{scope: 'col'} Last Updated
-      -#%th{scope: 'col'}= sort_link @q, :equipment_short_name, 'Short Name'
-      -#%th{scope: 'col'}= sort_link @q, :equipment_icao, 'ICAO'
-      -#%th{scope: 'col'}= sort_link @q, :equipment_name, 'Name'
       %th{scope: 'col'}
         = link_to new_admin_article_path, class: 'btn btn-sm btn-success' do
           %i.fas.fa-plus
