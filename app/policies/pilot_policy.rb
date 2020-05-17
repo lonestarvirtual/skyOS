@@ -37,6 +37,6 @@ class PilotPolicy < ApplicationPolicy
     return unless @user.can?(Pilot, :update)
 
     %i[pid active first_name last_name email password
-       password_confirmation time_zone]
+       password_confirmation time_zone group_id]
   end
 end

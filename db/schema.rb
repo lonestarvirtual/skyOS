@@ -46,7 +46,7 @@ ActiveRecord::Schema.define(version: 2020_05_16_140121) do
 
   create_table "airports", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "icao", limit: 4, null: false
-    t.string "iata", limit: 4
+    t.string "iata", limit: 3
     t.string "name"
     t.string "city"
     t.string "time_zone", default: "UTC", null: false
