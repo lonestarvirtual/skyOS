@@ -9,6 +9,10 @@ RSpec.describe Announcement, type: :model do
 
   let(:announcement) { build(:announcement) }
 
+  describe 'ActiveModel callbacks' do
+    it { expect(announcement).to callback(:set_initial_times).after(:initialize) }
+  end
+
   describe 'ActiveRecord validations' do
     # Basic validations
     it { expect(announcement).to validate_presence_of(:title) }
@@ -59,6 +63,13 @@ RSpec.describe Announcement, type: :model do
       expect do
         Announcement.purge
       end.to change(Announcement, :count).by(-4)
+    end
+  end
+
+  describe '#set_initial_times' do
+    it 'should set the time to the current time' do
+      expect(announcement.start_at.class).to eq ActiveSupport::TimeWithZone
+      expect(announcement.end_at.class).to eq ActiveSupport::TimeWithZone
     end
   end
 end
