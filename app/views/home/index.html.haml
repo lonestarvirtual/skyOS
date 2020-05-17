@@ -23,7 +23,11 @@
         %span.card-text.text-center
           Today's premier virtual airline.
       .col-4
-        = link_to 'Join today', new_pilot_registration_path, class: 'btn btn-warning btn-lg ml-2'
+        - if pilot_signed_in?
+          %h5.pt-2= "Welcome #{current_pilot.full_name}!"
+        - else
+          = link_to 'Join today', new_pilot_registration_path, class: 'btn btn-warning btn-lg ml-2'
+
 
 .container
   .row.mt-4.d-flex.justify-content-center
