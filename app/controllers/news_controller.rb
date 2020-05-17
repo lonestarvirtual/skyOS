@@ -7,11 +7,14 @@ class NewsController < ApplicationController
     authorize Article, :index?
 
     # Forgive me Matz, for I have sinned.
-    @q = policy_scope(Article).friendly.includes(:versions)
-                              .joins(:versions)
-                              .where(versions: { event: :create })
-                              .with_rich_text_content
-                              .order('versions.created_at DESC')
-    @articles = @q.page(params[:page]).per(10)
+    query = policy_scope(Article).friendly
+                                 .with_rich_text_content
+                                 .order('articles.created_at DESC')
+    @articles = query.page(params[:page]).per(10)
+  end
+
+  def show
+    authorize Article, :show?
+    @article = policy_scope(Article).friendly.find(params[:id])
   end
 end

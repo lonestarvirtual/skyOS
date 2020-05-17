@@ -1,0 +1,11 @@
+.row.mb-5
+  .col.mx-auto
+    - if defined? article_iteration
+      = link_to article_path(article) do
+        %h2.d-inline-block= article.title
+    - else
+      %h2.d-inline-block= article.title
+    %i.d-block.mt-n2= article.author
+    %i.d-block= human_date article
+
+    .row.col.mt-2= article.content

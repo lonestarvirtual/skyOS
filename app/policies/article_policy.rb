@@ -15,6 +15,10 @@ class ArticlePolicy < ApplicationPolicy
     true
   end
 
+  def show?
+    true
+  end
+
   def create?
     @user&.can?(Article, :create)
   end

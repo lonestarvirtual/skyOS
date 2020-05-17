@@ -5,13 +5,11 @@ module Admin
     def index
       authorize Article, :index?
 
-      @q = policy_scope(Article).friendly.includes(:versions)
-                                .joins(:versions)
-                                .where(versions: { event: :create })
-                                .with_rich_text_content
-                                .order('versions.created_at DESC')
+      query = policy_scope(Article).friendly
+                                   .with_rich_text_content
+                                   .order('articles.created_at DESC')
 
-      @articles = @q.page params[:page]
+      @articles = query.page params[:page]
     end
 
     def new
@@ -22,7 +20,7 @@ module Admin
     def create
       authorize Article, :create?
       @article = Article.new(permitted_attributes(Article))
-
+      @article.author = current_pilot
       if @article.save
         flash[:success] = 'Article Published'
         redirect_to admin_articles_path
@@ -52,6 +50,7 @@ module Admin
     def update
       @article = Article.friendly.find(params[:id])
       authorize @article, :update?
+      @article.editor = current_pilot
 
       if @article.update(permitted_attributes(@article))
         flash[:success] = 'Article updated'
