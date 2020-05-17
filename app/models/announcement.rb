@@ -4,6 +4,8 @@ class Announcement < ApplicationRecord
   validates :title, :body, :start_at, :end_at, presence: true
   validate :ends_in_the_future, :starts_before_end_time
 
+  after_initialize :set_initial_times, if: :new_record?
+
   # Grab whatever announcement should be displayed right now
   #
   def self.now
@@ -27,6 +29,11 @@ class Announcement < ApplicationRecord
     return unless end_at.present? && Time.current > end_at
 
     errors.add(:end_at, 'must be in the future')
+  end
+
+  def set_initial_times
+    self.start_at = Time.current if start_at.nil?
+    self.end_at = Time.current if end_at.nil?
   end
 
   # Validates the start_at time is before the end_at time
