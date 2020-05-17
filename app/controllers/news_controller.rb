@@ -8,10 +8,10 @@ class NewsController < ApplicationController
 
     # Forgive me Matz, for I have sinned.
     @q = policy_scope(Article).friendly.includes(:versions)
-                               .joins(:versions)
-                               .where(versions: { event: :create })
-                               .with_rich_text_content
-                               .order('versions.created_at DESC')
+                              .joins(:versions)
+                              .where(versions: { event: :create })
+                              .with_rich_text_content
+                              .order('versions.created_at DESC')
     @articles = @q.page(params[:page]).per(10)
   end
 end

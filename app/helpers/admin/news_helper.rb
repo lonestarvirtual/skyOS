@@ -1,4 +1,6 @@
 # frozen_string_literal: true
 
-module Admin::NewsHelper
+module Admin
+  module NewsHelper
+  end
 end
