@@ -42,7 +42,8 @@ class ContactsController < ApplicationController
       action: 'contact',
       model: @contact,
       attribute: :recaptcha,
-      minimum_score: Setting.recaptcha_min_score,
+      # FIXME: remove following rails_settings_cached supports float casting
+      minimum_score: Setting.recaptcha_min_score.to_f,
       secret_key: GoogleRecaptcha::SECRET_KEY
     )
 
