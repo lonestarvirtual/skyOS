@@ -19,11 +19,6 @@ class Notification < ApplicationRecord
   # Broadcasts new notification via ActionCable to user
   #
   def notify_pilot
-    ActionCable.server.broadcast "notifications_#{pilot.id}", {
-      template: ApplicationController.render(
-        partial: 'notifications/notification',
-        locals: { notification: self }
-      )
-    }
+    NotificationBroadcastJob.perform_later(self)
   end
 end
