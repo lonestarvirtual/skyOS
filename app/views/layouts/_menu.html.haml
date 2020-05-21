@@ -10,6 +10,9 @@
       %li.nav-item{class: active_class(root_path)}
         = link_to 'Home', root_path, class: 'nav-link'
 
+      %li.nav-item{class: active_class(articles_path)}
+        = link_to 'News', articles_path, class: 'nav-link'
+
       %li.nav-item{class: active_class(destinations_path)}
         = link_to 'Destinations', destinations_path, class: 'nav-link'
 

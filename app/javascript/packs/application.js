@@ -17,6 +17,9 @@ require("channels")
 
 require("custom/cookieconsent")
 
+require("trix")
+require("@rails/actiontext")
+
 // Enable Bootstrap4 tooltips
 //
 document.addEventListener("turbolinks:load", () => {
@@ -39,5 +42,3 @@ application.load(definitionsFromContext(controllers))
 //
 // const images = require.context('../images', true)
 // const imagePath = (name) => images(name, true)
-
-

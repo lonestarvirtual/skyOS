@@ -32,7 +32,6 @@ gem 'jbuilder', '~> 2.7'
 gem 'bootsnap', '>= 1.4.2', require: false
 
 # SkyOS gems
-gem 'audited', '~> 4.9'
 gem 'devise'
 gem 'exception_handler', '~> 0.8.0.0'
 gem 'friendly_id', '~> 5.2.4'
@@ -41,6 +40,8 @@ gem 'gravtastic'
 gem 'haml-rails', '~> 2.0'
 gem 'image_processing', '~> 1.0'
 gem 'kaminari'
+gem 'paper_trail'
+gem 'paper_trail-association_tracking'
 gem 'pundit'
 gem 'rails-settings-cached', '~> 2.0'
 gem 'ransack'

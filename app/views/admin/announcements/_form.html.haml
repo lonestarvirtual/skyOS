@@ -1,11 +1,11 @@
 = simple_form_for [:admin, @announcement] do |f|
   .form-row
     .col-6
-      = f.input :start_at, label: "Start (#{Time.now.zone})", order: [:month, :day, :year], use_short_month: true
+      = f.input :start_at, label: "Start (#{@announcement.start_at.zone})", order: [:month, :day, :year], use_short_month: true
 
   .form-row
     .col-6
-      = f.input :end_at, label: "End (#{Time.now.zone})", order: [:month, :day, :year], use_short_month: true
+      = f.input :end_at, label: "End (#{@announcement.end_at.zone})", order: [:month, :day, :year], use_short_month: true
 
   .form-row
     .col

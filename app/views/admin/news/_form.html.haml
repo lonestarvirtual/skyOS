@@ -1,0 +1,5 @@
+= simple_form_for [:admin, @article] do |f|
+  = f.input :title, label: false
+  = f.input_field :content, as: :rich_text_area, label: false, class: "trix-content mb-2"
+  = f.button :submit, class: "btn-success"
+  = f.input :private, label: "Pilots Only?", wrapper: :custom_boolean_switch, wrapper_html: { class: "form-check-inline ml-2" }

@@ -5,10 +5,11 @@
 
     .dropdown-menu.dropdown-menu-right{'aria-labelledby': 'navbarDropdown'}
       .dropdown-item.font-weight-bold.small= current_pilot
-      %hr
-      = link_to Setting.discord_link, class: 'dropdown-item' do
-        %i.fab.fa-discord.mr-1
-        Join Discord
+      - if Setting.discord_link.present?
+        %hr
+        = link_to Setting.discord_link, class: 'dropdown-item' do
+          %i.fab.fa-discord.mr-1
+          Join Discord
       %hr
       = link_to 'Profile', edit_profile_path, class: 'dropdown-item'
       = link_to 'Sign out', destroy_pilot_session_path, method: :delete, class: 'dropdown-item'
