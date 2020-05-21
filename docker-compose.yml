@@ -34,9 +34,32 @@ services:
       RAILS_SERVE_STATIC_FILES: 1
       REDIS_URL: redis://redis:6379
       SKY_OS_REPLY_TO: staff@lonestar-virtual.org
+    networks:
+      - backend
+      - public
     volumes:
       - storage:/app/storage
     ports:
       - "3000:3000"
     depends_on:
       - db
+      - redis
+
+  worker:
+    build: .
+    command: bundle exec sidekiq
+    environment:
+      POSTGRES_DB: skyOS_production
+      POSTGRES_USER: test
+      POSTGRES_PASSWORD: test
+      POSTGRES_HOST: db
+      RAILS_HOSTNAME: demo.lonestar-virtual.org
+      RAILS_LOG_TO_STDOUT: 1
+      # RAILS_MASTER_KEY: blahblahblah
+      REDIS_URL: redis://redis:6379
+      SKY_OS_REPLY_TO: staff@lonestar-virtual.org
+    networks:
+      - backend
+    depends_on:
+      - db
+      - redis

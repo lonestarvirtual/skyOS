@@ -50,3 +50,25 @@ services:
       - storage:/app/storage
     depends_on:
       - db
+      - redis
+
+  worker:
+    image: docker.pkg.github.com/lonestarvirtual/skyos/skyos:latest
+    command: bundle exec sidekiq
+    environment:
+      POSTGRES_DB: skyOS_production
+      POSTGRES_USER: skyOS
+      POSTGRES_PASSWORD: super_secret_password
+      POSTGRES_HOST: db
+      RAILS_HOSTNAME: my_va_url.org
+      RAILS_LOG_TO_STDOUT: 1
+      RAILS_MASTER_KEY: super_secret_rails_master_key_here
+      REDIS_URL: redis://redis:6379
+      SKY_OS_REPLY_TO: noreply@my_va_url.org
+    networks:
+      - backend
+    volumes:
+      - storage:/app/storage
+    depends_on:
+      - db
+      - redis
