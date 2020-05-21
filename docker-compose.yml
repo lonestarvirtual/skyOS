@@ -16,6 +16,11 @@ services:
     volumes:
       - db:/var/lib/postgresql/data
 
+  redis:
+    image: redis:6-alpine
+    networks:
+      - backend
+
   app:
     build: .
     environment:
@@ -27,6 +32,7 @@ services:
       RAILS_LOG_TO_STDOUT: 1
       # RAILS_MASTER_KEY: blahblahblah
       RAILS_SERVE_STATIC_FILES: 1
+      REDIS_URL: redis://redis:6379
       SKY_OS_REPLY_TO: staff@lonestar-virtual.org
     volumes:
       - storage:/app/storage
