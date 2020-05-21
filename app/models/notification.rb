@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Notification < ApplicationRecord
-  after_create :notify_pilot
+  after_commit :notify_pilot, on: :create
 
   belongs_to :pilot, optional: false
 

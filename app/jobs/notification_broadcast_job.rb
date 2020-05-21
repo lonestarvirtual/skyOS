@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class NotificationBroadcastJob < ApplicationJob
-  queue_as :high_priority
+  queue_as :default
 
   def perform(notification)
     channel_id = notification.pilot.id

@@ -4,8 +4,7 @@ networks:
   backend:
     driver: bridge
   public:
-    external:
-      name: public
+    driver: bridge
 
 volumes:
   db:

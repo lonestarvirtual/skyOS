@@ -1,5 +1,11 @@
 version: "2"
 
+networks:
+  backend:
+    driver: bridge
+  public:
+    driver: bridge
+
 volumes:
   db:
     external: false
@@ -13,6 +19,8 @@ services:
       POSTGRES_USER: test
       POSTGRES_PASSWORD: test
     image: postgres:10-alpine
+    networks:
+      - backend
     volumes:
       - db:/var/lib/postgresql/data
 

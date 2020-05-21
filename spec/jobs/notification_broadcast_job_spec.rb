@@ -11,8 +11,7 @@ RSpec.describe NotificationBroadcastJob, type: :job do
     it 'enqueues the job for later' do
       expect do
         NotificationBroadcastJob.perform_later(@notification)
-      end.to have_enqueued_job.on_queue('skyOS_test_high_priority').at(:no_wait)
-      # queue prefix skyOS_test configured in /config/environments/test.rb
+      end.to have_enqueued_job.on_queue('default').at(:no_wait)
     end
 
     it 'sends an ActionCable broadcast' do

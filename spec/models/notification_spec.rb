@@ -13,6 +13,10 @@ RSpec.describe Notification, type: :model do
     it { expect(notification).to belong_to(:pilot).optional(false) }
   end
 
+  describe 'ActiveRecord callbacks' do
+    it { is_expected.to callback(:notify_pilot).after(:commit) }
+  end
+
   describe 'ActiveRecord validations' do
     # Basic validations
     it { expect(notification).to validate_presence_of(:title) }
