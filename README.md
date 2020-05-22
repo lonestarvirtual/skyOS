@@ -99,15 +99,13 @@ smtp:
 
 ### Environment Variables
 
-| Syntax                |             | Description                                         |
-| :---                  |   :----:    | :-----------                                        |
-| RAILS_HOSTNAME        |**required** | External hostname for application                   |
-| RAILS_MASTER_KEY      |**required** | Master key used for credential store                |
-| POSTGRES_HOST         |**required** | Hostname for your PostgreSQL server                 |    
-| POSTGRES_DB           |**required** | Database name ex. skyOS_production                  |
-| POSTGRES_USER         |**required** | Database username                                   |
-| POSTGRES_PASSWORD     |**required** | Database password                                   |
-| SKY_OS_REPLY_TO       |**required** | From address used for default mailer correspondence |
+| Syntax                |             | Description                                               |
+| :---                  |   :----:    | :-----------                                              |
+| DATABASE_URL          |**required** | Database URL see [docker-compose.yml](docker-compose.yml) |
+| RAILS_HOSTNAME        |**required** | External hostname for application                         |
+| RAILS_MASTER_KEY      |**required** | Master key used for credential store                      |
+| REDIS_URL             |**required** | Redis URL see [docker-compose.yml](docker-compose.yml)    |
+| SKY_OS_REPLY_TO       |**required** | From address used for default mailer correspondence       |
 
 ### Rails Settings
 

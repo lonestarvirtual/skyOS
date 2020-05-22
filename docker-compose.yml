@@ -32,10 +32,7 @@ services:
   app:
     build: .
     environment:
-      POSTGRES_DB: skyOS_production
-      POSTGRES_USER: test
-      POSTGRES_PASSWORD: test
-      POSTGRES_HOST: db
+      DATABASE_URL: postgres://test:test@db:5432/skyOS_production
       RAILS_HOSTNAME: demo.lonestar-virtual.org
       RAILS_LOG_TO_STDOUT: 1
       # RAILS_MASTER_KEY: blahblahblah
@@ -57,10 +54,7 @@ services:
     build: .
     command: bundle exec sidekiq
     environment:
-      POSTGRES_DB: skyOS_production
-      POSTGRES_USER: test
-      POSTGRES_PASSWORD: test
-      POSTGRES_HOST: db
+      DATABASE_URL: postgres://test:test@db:5432/skyOS_production
       RAILS_HOSTNAME: demo.lonestar-virtual.org
       RAILS_LOG_TO_STDOUT: 1
       # RAILS_MASTER_KEY: blahblahblah
