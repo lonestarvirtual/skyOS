@@ -1,0 +1,16 @@
+%li.row.notification-text
+  .col-10.small
+    .row
+      .col-12
+        %strong.text-info= notification.title
+    .row
+      .col-12.pl-3= notification.body
+    .row
+      .col-12.pl-3
+        %small.text-primary
+          = notification.created_at.strftime("%b %d %Y %l:%M%P %Z")
+
+  .col-2.bg-white.align-self-center.text-right.small{data: {controller: 'notifications'}}
+    = hidden_field_tag :id, notification.id, data: {target: 'notifications.id'}
+    = link_to '#', data: {action: 'click->notifications#delete'} do
+      %i.fas.fa-trash

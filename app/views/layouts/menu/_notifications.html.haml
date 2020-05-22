@@ -1,0 +1,20 @@
+- if pilot_signed_in?
+  -# PIREP Administration Notifications
+  -#
+  - if show_pirep_notification?
+    %li.nav-item.pl-2#pending-pireps{class: ('show' if Pirep.pending.count.positive?)}
+      %audio#pending-pireps-bell
+        %source{type: 'audio/ogg', src: asset_path('ding.ogg')}
+      = link_to admin_pireps_path, id: 'pending-pireps-href', class: 'nav-link', title: 'Pending PIREPs', data: { toggle: 'tooltip', placement: 'bottom', title: 'Pending PIREPs' } do
+        %i.fas.fa-plane-arrival
+        %sup
+          %span.badge.badge-success#pending-pireps-count
+            = number_with_delimiter(Pirep.pending.count)
+
+  -# Pilot User notifications
+  -#
+  %li.nav-item.position-relative
+    %a.nav-link.pb-0{role: 'button', 'data-toggle': 'dropdown', 'aria-haspopup': 'true', 'aria-expanded': 'false'}
+      %span#notification-indicator.notifications-unread
+      %i.fas.fa-bell
+    = render partial: 'notifications/dropdown'

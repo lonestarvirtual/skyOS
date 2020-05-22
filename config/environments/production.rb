@@ -46,12 +46,21 @@ Rails.application.configure do
   # (see config/storage.yml for options).
   config.active_storage.service = :local
 
-  # Mount Action Cable outside main process or domain.
-  # config.action_cable.mount_path = nil
   # config.action_cable.url = 'wss://example.com/cable'
-  # rubocop:disable Layout/LineLength
-  # config.action_cable.allowed_request_origins = [ 'http://example.com', /http:\/\/example.*/ ]
-  # rubocop:enable Layout/LineLength
+
+  # Mount Action Cable outside main process or domain.
+  config.action_cable.mount_path = '/cable'
+
+  config.action_cable.allowed_request_origins = [
+    %r{http[s]?://(www.)?#{ENV['RAILS_HOSTNAME']}.*}
+  ]
+
+  # Configure log tags with user ID if available
+  config.action_cable.log_tags = [
+    ->(request) { request.env['warden'].user.id || 'no-account' },
+    :action_cable,
+    ->(request) { request.uuid }
+  ]
 
   # Force all access to the app over SSL, use
   # Strict-Transport-Security, and use secure cookies.
@@ -69,8 +78,8 @@ Rails.application.configure do
 
   # Use a real queuing backend for Active Job
   # (and separate queues per environment).
-  # config.active_job.queue_adapter     = :resque
-  # config.active_job.queue_name_prefix = "skyOS_production"
+  config.active_job.queue_adapter = :sidekiq
+  # config.active_job.queue_name_prefix = 'skyOS_production'
 
   config.action_mailer.perform_caching = false
 

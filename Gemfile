@@ -46,6 +46,7 @@ gem 'pundit'
 gem 'rails-settings-cached', '~> 2.0'
 gem 'ransack'
 gem 'recaptcha'
+gem 'sidekiq'
 gem 'simple_form'
 gem 'timezone_finder'
 

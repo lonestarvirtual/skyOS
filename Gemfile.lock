@@ -75,6 +75,7 @@ GEM
     builder (3.2.4)
     byebug (11.1.1)
     concurrent-ruby (1.1.6)
+    connection_pool (2.2.2)
     crass (1.0.6)
     database_cleaner (1.8.4)
     database_cleaner-active_record (1.8.0)
@@ -189,6 +190,8 @@ GEM
     pundit-matchers (1.6.0)
       rspec-rails (>= 3.0.0)
     rack (2.2.2)
+    rack-protection (2.0.8.1)
+      rack
     rack-proxy (0.6.5)
       rack
     rack-test (1.1.0)
@@ -238,6 +241,7 @@ GEM
       ffi (~> 1.0)
     recaptcha (5.5.0)
       json
+    redis (4.1.4)
     request_store (1.5.0)
       rack (>= 1.4)
     responders (3.0.0)
@@ -294,6 +298,11 @@ GEM
       activesupport (>= 3)
     shoulda-matchers (4.3.0)
       activesupport (>= 4.2.0)
+    sidekiq (6.0.7)
+      connection_pool (>= 2.2.2)
+      rack (~> 2.0)
+      rack-protection (>= 2.0.0)
+      redis (>= 4.1.0)
     simple_form (5.0.2)
       actionpack (>= 5.0)
       activemodel (>= 5.0)
@@ -378,6 +387,7 @@ DEPENDENCIES
   sassc (~> 2.3.0)
   shoulda-callback-matchers
   shoulda-matchers
+  sidekiq
   simple_form
   simplecov
   spring

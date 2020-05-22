@@ -4,6 +4,11 @@
 = csrf_meta_tag
 = csp_meta_tag
 
+- if pilot_signed_in?
+  -# this meta tag is used to determine whether the Notifications Channel
+  -# should attempt to connect by checking for this tag's existence
+  = tag :meta, name: 'current-pilot', data: { id: current_pilot.id }
+
 = favicon_link_tag asset_path('favicon.png')
 = stylesheet_pack_tag 'application', media: 'all', 'data-turbo-links-track': 'reload'
 = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'

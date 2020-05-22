@@ -8,9 +8,10 @@ class Pilot < ApplicationRecord
   include Gravtastic
   gravtastic secure: true, filetype: :png, default: :identicon
 
-  belongs_to :group, optional: false
-  has_many   :permissions, through: :group
-  has_many   :pireps, dependent: :destroy
+  belongs_to :group,         optional:  false
+  has_many   :notifications, dependent: :destroy
+  has_many   :permissions,   through:   :group
+  has_many   :pireps,        dependent: :destroy
 
   devise :confirmable, :database_authenticatable, :lockable, :registerable,
          :recoverable, :rememberable, :trackable, :timeoutable, :validatable

@@ -1,0 +1,66 @@
+#notification-indicator {
+  display: none;
+  position: absolute;
+  top: 3px;
+  right: 2px;
+  z-index: 2;
+  width: 14px;
+  height: 14px;
+  color: #fff;
+  background-clip: padding-box;
+  border: 2px solid #0b375b;
+  border-radius: 50%;
+}
+
+.notifications-read {
+  background-image: linear-gradient(#54a3ff, #006eed);
+}
+
+.notifications-unread {
+  background-image: linear-gradient(#ff4c4c, #bf0a30);
+}
+
+.notifications {
+  right: 0px;
+  left: unset;
+  width: 400px;
+  border: 2px solid #5e5e5e;
+  background: #4c4c4c;
+  padding-bottom: 0px;
+  padding: 0px;
+}
+
+.notifications::before {
+  content: "";
+  position: absolute;
+  top: -20px;
+  right: 3px;
+  border: 10px solid #4c4c4c;
+  border-top-color: rgb(92, 92, 92);
+  border-right-color: rgb(92, 92, 92);
+  border-bottom-color: rgb(92, 92, 92);
+  border-left-color: rgb(92, 92, 92);
+  border-color: transparent transparent #4c4c4c transparent;
+}
+
+.notification-box {
+  max-height: 40vh;
+  overflow-y: auto;
+}
+
+.notification-text{
+  background: #fff;
+  margin-left: 0;
+  margin-right: 0;
+  padding-top: 4px;
+  padding-bottom: 2px;
+  border-bottom: 1px solid #5e5e5e;
+}
+
+#pending-pireps{
+  display: none;
+}
+
+#pending-pireps.show{
+  display: initial;
+}

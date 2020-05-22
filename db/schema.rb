@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_17_050638) do
+ActiveRecord::Schema.define(version: 2020_05_22_163631) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -141,6 +141,15 @@ ActiveRecord::Schema.define(version: 2020_05_17_050638) do
     t.index ["name"], name: "index_networks_on_name", unique: true
   end
 
+  create_table "notifications", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "title", null: false
+    t.string "body", null: false
+    t.boolean "read", default: false
+    t.datetime "created_at"
+    t.uuid "pilot_id", null: false
+    t.index ["pilot_id", "id"], name: "index_notifications_on_pilot_id_and_id", unique: true
+  end
+
   create_table "permissions", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "model", null: false
     t.string "action", null: false
@@ -269,6 +278,7 @@ ActiveRecord::Schema.define(version: 2020_05_17_050638) do
   add_foreign_key "flights", "equipment"
   add_foreign_key "group_permissions", "groups"
   add_foreign_key "group_permissions", "permissions"
+  add_foreign_key "notifications", "pilots"
   add_foreign_key "pilots", "groups"
   add_foreign_key "pirep_comments", "pilots", column: "author_id"
   add_foreign_key "pirep_comments", "pireps"
