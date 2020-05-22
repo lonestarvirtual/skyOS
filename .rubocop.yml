@@ -25,6 +25,10 @@ Metrics/BlockLength:
     - lib/tasks/**/*
     - spec/**/*
 
+Metrics/ClassLength:
+  Exclude:
+    - app/models/*
+
 Rails/SkipsModelValidations:
   Exclude:
     - spec/**/*
