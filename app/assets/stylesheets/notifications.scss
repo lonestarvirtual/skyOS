@@ -56,3 +56,11 @@
   padding-bottom: 2px;
   border-bottom: 1px solid #5e5e5e;
 }
+
+#pending-pireps{
+  display: none;
+}
+
+#pending-pireps.show{
+  display: initial;
+}

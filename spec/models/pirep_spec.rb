@@ -23,6 +23,7 @@ RSpec.describe Pirep, type: :model do
 
   describe 'ActiveRecord callbacks' do
     it { is_expected.to callback(:calculate_distance).before(:validation) }
+    it { is_expected.to callback(:notify_admin).after(:commit) }
   end
 
   describe 'ActiveRecord validations' do

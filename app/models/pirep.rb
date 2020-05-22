@@ -3,6 +3,8 @@
 class Pirep < ApplicationRecord
   has_paper_trail only: [:status_id], on: [:update]
 
+  after_commit :notify_admin
+
   belongs_to :pilot, optional: false
   belongs_to :airline, optional: false
   belongs_to :orig, class_name: 'Airport', optional: false
@@ -109,6 +111,10 @@ class Pirep < ApplicationRecord
     return if orig.nil? || dest.nil? || distance.present?
 
     self.distance = orig.distance_to(dest, :nm).round
+  end
+
+  def notify_admin
+    PirepBroadcastJob.perform_later
   end
 
   def set_status

@@ -23,6 +23,9 @@ class PirepPolicy < ApplicationPolicy
     true
   end
 
+  # TODO: this permission check is also used on the PirepsChannel
+  # we will need to update that administrative check if this is changed
+  #
   def update?
     if @user.can?(Pirep, :update)
       true

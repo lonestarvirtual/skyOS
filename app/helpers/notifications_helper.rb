@@ -6,6 +6,6 @@ module NotificationsHelper
   end
 
   def show_pirep_notification?
-    admin_link_to('PIREPs', Pirep).present? && Pirep.pending.count.positive?
+    admin_link_to('PIREPs', Pirep).present?
   end
 end

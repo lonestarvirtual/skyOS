@@ -2,11 +2,13 @@
   -# PIREP Administration Notifications
   -#
   - if show_pirep_notification?
-    %li.nav-item.pl-2
-      = link_to admin_pireps_path, class: 'nav-link', title: 'Pending PIREPs', data: { toggle: 'tooltip', placement: 'bottom', title: 'Pending PIREPs' } do
+    %li.nav-item.pl-2#pending-pireps{class: ('show' if Pirep.pending.count.positive?)}
+      %audio#pending-pireps-bell
+        %source{type: 'audio/ogg', src: asset_path('ding.ogg')}
+      = link_to admin_pireps_path, id: 'pending-pireps-href', class: 'nav-link', title: 'Pending PIREPs', data: { toggle: 'tooltip', placement: 'bottom', title: 'Pending PIREPs' } do
         %i.fas.fa-plane-arrival
         %sup
-          %span.badge.badge-success
+          %span.badge.badge-success#pending-pireps-count
             = number_with_delimiter(Pirep.pending.count)
 
   -# Pilot User notifications
