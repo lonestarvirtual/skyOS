@@ -24,6 +24,7 @@ RSpec.describe Pirep, type: :model do
   describe 'ActiveRecord callbacks' do
     it { is_expected.to callback(:calculate_distance).before(:validation) }
     it { is_expected.to callback(:notify_admin).after(:commit) }
+    it { is_expected.to callback(:notify_pilot).after(:commit) }
   end
 
   describe 'ActiveRecord validations' do
@@ -64,6 +65,18 @@ RSpec.describe Pirep, type: :model do
     it 'sets the status of the Pirep to Submitted set to 0' do
       pirep.draft = 0
       expect(pirep.status).to eq PirepStatus.find_by(name: 'Submitted')
+    end
+  end
+
+  describe '#notify_pilot' do
+    it 'creates a notification when the PIREP has been approved' do
+      pirep = create(:pirep, :approved)
+      expect(pirep.pilot.notifications).to_not be_empty
+    end
+
+    it 'does not create a notification unless the PIREP has been approved' do
+      pirep = create(:pirep, :draft)
+      expect(pirep.pilot.notifications).to be_empty
     end
   end
 end

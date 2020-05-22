@@ -4,6 +4,7 @@ class Pirep < ApplicationRecord
   has_paper_trail only: [:status_id], on: [:update]
 
   after_commit :notify_admin
+  after_commit :notify_pilot, if: :approved?
 
   belongs_to :pilot, optional: false
   belongs_to :airline, optional: false
@@ -22,6 +23,8 @@ class Pirep < ApplicationRecord
 
   before_validation :calculate_distance, :upcase_route
   before_validation :set_status, on: :create
+
+  delegate :approved?, to: :status
 
   validates :pilot,
             :date,
@@ -115,6 +118,14 @@ class Pirep < ApplicationRecord
 
   def notify_admin
     PirepBroadcastJob.perform_later
+  end
+
+  def notify_pilot
+    msg = "Your flight on #{date.strftime('%b %d, %Y')}"
+    msg += " from #{orig.icao} to #{dest.icao}"
+    msg += " (#{airline.icao}#{flight} Leg #{leg}) has been approved"
+
+    Notification.create(pilot: pilot, title: 'PIREP Approved', body: msg)
   end
 
   def set_status
