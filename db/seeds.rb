@@ -63,6 +63,14 @@ admin_group.update_attribute(:permissions, Permission.all)
         sequence: 2
     },
     {
+        name:     'Held',
+        editable: false,
+        approved: false,
+        pending:  false,
+        color:    '#ffefc0',
+        sequence: 3
+    },
+    {
         name:     'Approved',
         editable: false,
         approved: true,
