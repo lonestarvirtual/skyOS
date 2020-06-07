@@ -28,6 +28,14 @@
 
   .form-row.mt-2
     .col-2
+      = f.label 'Organization tag line'
+    .col
+      = f.text_field :organization_tag_line, value: Setting.organization_tag_line, class: 'form-control'
+      %small.form-text.text-muted
+        The organization's tag line. Displayed on the front page.
+
+  .form-row.mt-2
+    .col-2
       = f.label 'Starting ID'
     .col
       = f.text_field :starting_pid, value: Setting.starting_pid, class: 'form-control'
@@ -52,6 +60,14 @@
 
   .form-row.mt-2
     .col-2
+      = f.label 'Reply to address'
+    .col
+      = f.text_field :reply_to, value: Setting.reply_to, class: 'form-control'
+      %small.form-text.text-muted
+        The default from/reply-to email address in mailings.
+
+  .form-row.mt-2
+    .col-2
       = f.label 'Administrator Emails'
     .col
       = f.text_area :admin_emails, value: Setting.admin_emails.join(','), class: 'form-control'
@@ -73,6 +89,67 @@
       = f.text_field :discord_widget, value: Setting.discord_widget, class: 'form-control'
       %small.form-text.text-muted
         The pre-made widget URL for Discord. Only include iframe src (https://). Leave blank to disable.
+
+  .form-row.d-flex
+    .col-2.align-self-baseline.pt-2.ml-0
+      = f.label 'Google Analytics'
+    .col-10.form-inline
+      = f.check_box :google_analytics, checked: Setting.google_analytics?, class: 'form-control'
+
+  .row.pt-0
+    .col-12.offset-2
+      %small.form-text.text-muted
+        Enable Google Analytics. Requires an
+        = link_to 'Analytics', 'https://analytics.google.com', target: '_blank'
+        account and Tracking ID.
+
+  .form-row.mt-2
+    .col-2
+      Tracking ID
+    .col
+      = f.text_field :google_analytics_id, value: Setting.google_analytics_id, class: 'form-control'
+      %small.form-text.text-muted
+        Google Analytics Tracking ID: UA-000000-1
+
+  .form-row.d-flex
+    .col-2.align-self-baseline.pt-2.ml-0
+      = f.label 'Anonymous'
+    .col-10.form-inline
+      = f.check_box :google_analytics_anonymous, checked: Setting.google_analytics_anonymous?, class: 'form-control'
+
+  .row.pt-0
+    .col-12.offset-2
+      %small.form-text.text-muted
+        Anonymize visitor's IP addresses when reporting analytics to Google
+
+  .form-row.d-flex
+    .col-2.align-self-baseline.pt-2.ml-0
+      = f.label 'reCaptcha Enabled'
+    .col-10.form-inline
+      = f.check_box :recaptcha_enabled, checked: Setting.recaptcha_enabled?, class: 'form-control'
+
+  .row.pt-0
+    .col-12.offset-2
+      %small.form-text.text-muted
+        Enable
+        = link_to 'Google reCaptcha', 'https://www.google.com/recaptcha/intro/v3.html', target: '_blank'
+        v3 for public facing forms. Requires Site Key and Secret Key
+
+  .form-row.mt-2
+    .col-2
+      = f.label 'reCaptcha site key'
+    .col
+      = f.text_field :recaptcha_site_key, value: Setting.recaptcha_site_key, class: 'form-control'
+      %small.form-text.text-muted
+        Google reCaptcha site key
+
+  .form-row.mt-2
+    .col-2
+      = f.label 'reCaptcha secret key'
+    .col
+      = f.text_field :recaptcha_secret_key, value: Setting.recaptcha_secret_key, class: 'form-control'
+      %small.form-text.text-muted
+        Google reCaptcha secret key
 
   .form-row.mt-2
     .col-2

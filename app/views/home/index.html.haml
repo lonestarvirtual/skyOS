@@ -19,9 +19,8 @@
   .card-body.container.mt-0
     .row
       .col-7.offset-1
-        %h5.card-title.mb-0= 'Lonestar Cargo'
-        %span.card-text.text-center
-          Today's premier virtual airline.
+        %h5.card-title.mb-0= Setting.organization_name
+        %span.card-text.text-center= Setting.organization_tag_line
       .col-4
         - if pilot_signed_in?
           %h5.pt-2= "Welcome #{current_pilot.full_name}!"
