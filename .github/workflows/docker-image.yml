@@ -18,6 +18,7 @@ jobs:
 
   publish:
     if: github.event_name == 'push'
+    needs: build
     runs-on: ubunut-latest
     steps:
       - name: 'Publish to GitHub Registry (tag: experimental)'
