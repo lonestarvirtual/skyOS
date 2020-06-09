@@ -47,7 +47,8 @@ Clone the repository and build the Docker image using the included Dockerfile:
 
 One-click installation is available via the Deploy button above. For demo 
 purposes, free resources are selected. Production customization will 
-be necessary.
+be necessary. *For demo environments SMTP options can be left blank if you do 
+not wish to use functionality requiring email (registrations, contacts, etc).*
 
 See [Configuration](#configuration) for details on `Config Vars` 
 environment variables. The `DATABASE_URL` and `REDIS_URL` are automatically
