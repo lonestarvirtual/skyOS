@@ -13,5 +13,27 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
         
-      - name: Build the Docker image
+      - name: Build Docker image
         run: docker build . --file Dockerfile
+
+  publish:
+    if: github.event_name == 'push'
+    needs: build
+    runs-on: ubunut-latest
+    steps:
+      - name: 'Publish to GitHub Registry (tag: experimental)'
+        uses: elgohr/Publish-Docker-Github-Action@master
+        with:
+          name: lonestarvirtual/skyos/skyos
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+          registry: docker.pkg.github.com
+          tags: experimental
+
+      - name: 'Publish Docker Hub (tag: experimental)'
+        uses: elgohr/Publish-Docker-Github-Action@master
+        with:
+          name: lonestarvirtual/skyos
+          username: ${{ secrets.DOCKER_HUB_USERNAME }}
+          password: ${{ secrets.DOCKER_HUB_PASSWORD }}
+          tags: experimental
