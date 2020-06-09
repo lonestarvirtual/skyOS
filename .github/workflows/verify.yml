@@ -1,9 +1,11 @@
 name: Verify
+
 on:
   push:
     branches:
       - master
   pull_request:
+
 jobs:
   linters:
     name: Linters
@@ -14,6 +16,7 @@ jobs:
 
       - name: Setup Ruby
         uses: ruby/setup-ruby@v1
+
       - name: Ruby gem cache
         uses: actions/cache@v1
         with:
@@ -21,6 +24,7 @@ jobs:
           key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
           restore-keys: |
             ${{ runner.os }}-gems-
+
       - name: Install gems
         run: |
           bundle config path vendor/bundle
@@ -30,9 +34,11 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: 10.13.0
+
       - name: Find yarn cache location
         id: yarn-cache
         run: echo "::set-output name=dir::$(yarn cache dir)"
+
       - name: JS package cache
         uses: actions/cache@v1
         with:
@@ -40,6 +46,7 @@ jobs:
           key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
             ${{ runner.os }}-yarn-
+
       - name: Install packages
         run: |
           yarn install --pure-lockfile
@@ -47,6 +54,7 @@ jobs:
       - name: Run linters
         run: |
           bundle exec rubocop --parallel
+
       - name: Run security checks
         run: |
           bundle exec brakeman -q -w2
@@ -82,6 +90,7 @@ jobs:
 
       - name: Setup Ruby
         uses: ruby/setup-ruby@v1
+
       - name: Ruby gem cache
         uses: actions/cache@v1
         with:
@@ -89,6 +98,7 @@ jobs:
           key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
           restore-keys: |
             ${{ runner.os }}-gems-
+
       - name: Install gems
         run: |
           sudo apt-get -yqq install libpq-dev
@@ -99,9 +109,11 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: 10.13.0
+
       - name: Find yarn cache location
         id: yarn-cache
         run: echo "::set-output name=dir::$(yarn cache dir)"
+
       - name: JS package cache
         uses: actions/cache@v1
         with:
@@ -109,6 +121,7 @@ jobs:
           key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
             ${{ runner.os }}-yarn-
+
       - name: Install packages
         run: |
           yarn install --pure-lockfile
@@ -118,4 +131,7 @@ jobs:
           bin/rails db:setup
 
       - name: Run tests with coverage
-        run: COVERAGE=true bundle exec rspec
+        run: bundle exec rspec
+        env:
+          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+          COVERAGE: true

@@ -1,6 +1,8 @@
 # SkyOS
 
 ![Verify](https://github.com/lonestarvirtual/skyOS/workflows/Verify/badge.svg)
+[![Maintainability](https://api.codeclimate.com/v1/badges/5d90db83c1ed525e2beb/maintainability)](https://codeclimate.com/github/lonestarvirtual/skyOS/maintainability)
+[![codecov](https://codecov.io/gh/lonestarvirtual/skyOS/branch/master/graph/badge.svg)](https://codecov.io/gh/lonestarvirtual/skyOS)
 
 skyOS is a web-based virtual airline management system written in Rails and 
 used by [Lonestar Cargo](https://lonestarcargo.org). 
