@@ -2,7 +2,12 @@
 
 ![Verify](https://github.com/lonestarvirtual/skyOS/workflows/Verify/badge.svg)
 
-skyOS is the web presence of Lonestar Virtual
+skyOS is a web-based virtual airline management system written in Rails and 
+used by [Lonestar Cargo](https://lonestarcargo.org). 
+
+It is an open-source project that may be used by anyone running a [Virtual 
+Airline](https://en.wikipedia.org/wiki/Virtual_airline_(hobby)). We 
+encourage forks and pull-requests for new features and fixes!
 
 ## Development Getting Started
 
@@ -73,39 +78,20 @@ After setting up, you can run the application and dependencies:
 
 ## Configuration
 
-This site uses the Rails encrypted credential store per environment. The 
-following credentials may be configured with 
-`rails credentials:edit --environment development`
-
-```yaml
-# Google Analytics
-# Remove entire section/environment or leave blank to disable
-google_analytics:
-  tracking_id: UA-XXXXXXX-X
-
-# Google reCAPTCHA
-# Remove section/environment or leave blank to disable
-google_recaptcha:
-  site_key: <SITE_KEY> 
-  secret_key: <SECRET_KEY>
-
-# Mail server settings
-smtp:
-  address: 'smtp.server.com'
-  domain: 'this-app.com'
-  username: 'someuser@this-app.com'
-  password: 'password'
-```
-
 ### Environment Variables
 
-| Syntax                |             | Description                                               |
-| :---                  |   :----:    | :-----------                                              |
-| DATABASE_URL          |**required** | Database URL see [docker-compose.yml](docker-compose.yml) |
-| RAILS_HOSTNAME        |**required** | External hostname for application                         |
-| RAILS_MASTER_KEY      |**required** | Master key used for credential store                      |
-| REDIS_URL             |**required** | Redis URL see [docker-compose.yml](docker-compose.yml)    |
-| SKY_OS_REPLY_TO       |**required** | From address used for default mailer correspondence       |
+| Syntax                |             | Description                                                               |
+| :---                  |   :----:    | :-----------                                                              |
+| DATABASE_URL          |**required** | Database URL see [docker-compose.yml.example](docker-compose.yml.example) |
+| RAILS_HOSTNAME        |**required** | External hostname for application                                         |
+| REDIS_URL             |**required** | Redis URL see [docker-compose.yml.example](docker-compose.yml.example)    |
+| SECRET_KEY_BASE       |**required** | Key used to sign messages and encrypt cookies                             |
+| SMTP_SERVER           |**required** | Mail server, example: `smtp.example.com`                                  |
+| SMTP_PORT             | *optional*  | Mail server port, default: `25`                                           |
+| SMTP_DOMAIN           | *optional*  | Defaults to `RAILS_HOSTNAME`                                              |
+| SMTP_USERNAME         |**required** | Mail service username                                                     |
+| SMTP_PASSWORD         |**required** | Mail service password                                                     |
+| SMTP_AUTH             | *optional*  | Defaults to `plain`                                                       |
 
 ### Rails Settings
 

@@ -1,67 +1,97 @@
 version: "2"
 
+# SkyOS runtime configuration settings
+#
+x-skyOS-environment: &environment
+  DATABASE_URL: postgres://skyOS:super_secret_password@db:5432/skyOS_production
+  RAILS_HOSTNAME: my_va_url.org
+  RAILS_LOG_TO_STDOUT: 1
+  RAILS_SERVE_STATIC_FILES: 1
+  REDIS_URL: redis://redis:6379
+  SECRET_KEY_BASE: change_me_to_a_super_secret_long_key_here
+  SMTP_SERVER: smtp.example.com
+  SMTP_PORT: 587
+  SMTP_USERNAME: smtp_user
+  SMTP_PASSWORD: smtp_password
+
 networks:
   backend:
     driver: bridge
   public:
     driver: bridge
 
-volumes:
-  db:
-    external: false
-  storage:
-    external: false
-
 services:
-  db:
-    environment:
-      POSTGRES_DB: skyOS_production
-      POSTGRES_USER: skyOS
-      POSTGRES_PASSWORD: super_secret_password
-    image: postgres:10-alpine
-    networks:
-      - backend
-    volumes:
-      - db:/var/lib/postgresql/data
+  # PostgreSQL container (if you do not have an external database server)
+  #
+  # db:
+  #   environment:
+  #     POSTGRES_DB: skyOS_production
+  #     POSTGRES_USER: skyOS
+  #     POSTGRES_PASSWORD: super_secret_password
+  #   image: postgres:10-alpine
+  #   networks:
+  #     - backend
+  #   volumes:
+  #     - db:/var/lib/postgresql/data
 
-  redis:
-    image: redis:6-alpine
-    networks:
-      - backend
+  # Redis container (if you do not have an external redis server)
+  #
+  # redis:
+  #   image: redis:6-alpine
+  #   networks:
+  #     - backend
 
+  # skyOS web server (serves public requests on port 3000)
+  # Typically this will sit behind a load balancer or other TLS middleware
+  #
   app:
-    image: docker.pkg.github.com/lonestarvirtual/skyos/skyos:latest
+    # Choose one of the following (build, image (Github), image (DockerHub))
+    #
+    # build: .
+    # image: docker.pkg.github.com/lonestarvirtual/skyos/skyos:latest
+    # image: lonestarvirtual/skyos:latest
+    #
     environment:
-      DATABASE_URL: postgres://skyOS:super_secret_password@db:5432/skyOS_production
-      RAILS_HOSTNAME: my_va_url.org
-      RAILS_LOG_TO_STDOUT: 1
-      RAILS_MASTER_KEY: super_secret_rails_master_key_here
-      RAILS_SERVE_STATIC_FILES: 1
-      REDIS_URL: redis://redis:6379
-      SKY_OS_REPLY_TO: noreply@my_va_url.org
+      <<: *environment
+    # Expose and map the web port to your host (if necessary)
+    # ports:
+    #   - "3000:3000"
     networks:
       - backend
       - public
     volumes:
       - storage:/app/storage
-    depends_on:
-      - db
-      - redis
+    # Uncomment if you are using the above DB and Redis containers
+    #
+    # depends_on:
+    #  - db
+    #  - redis
 
+  # skyOS job worker (processes background jobs)
+  #
   worker:
-    image: docker.pkg.github.com/lonestarvirtual/skyos/skyos:latest
+    # Choose one of the following (build, image (Github), image (DockerHub))
+    #
+    # build: .
+    # image: docker.pkg.github.com/lonestarvirtual/skyos/skyos:latest
+    # image: lonestarvirtual/skyos:latest
+    #
     command: bundle exec sidekiq
     environment:
-      DATABASE_URL: postgres://skyOS:super_secret_password@db:5432/skyOS_production
-      RAILS_HOSTNAME: my_va_url.org
-      RAILS_LOG_TO_STDOUT: 1
-      RAILS_MASTER_KEY: super_secret_rails_master_key_here
-      REDIS_URL: redis://redis:6379
-      SKY_OS_REPLY_TO: noreply@my_va_url.org
+      <<: *environment
     networks:
       - backend
     volumes:
       - storage:/app/storage
-    depends_on:
-      - db
-      - redis
+    # Uncomment if you are using the above DB and Redis containers
+    #
+    # depends_on:
+    #   - db
+    #   - redis
+
+volumes:
+  # Uncomment if you are using the included Postgres container
+  # db:
+  #  external: false
+  storage:
+    external: false

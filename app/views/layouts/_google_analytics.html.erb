@@ -1,4 +1,5 @@
-<script async src="<%= GoogleAnalytics::JS_URL %>"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=<%= Setting.google_analytics_id %>"></script>
+
 <script>
   this.dataLayer = this.dataLayer || [];
 
@@ -12,8 +13,10 @@
 
   document.addEventListener('turbolinks:load', (function(_this) {
       return function(event) {
-          return _this.gtag('config', '<%= GoogleAnalytics::TRACKING_ID %>', {
-              anonymize_ip: false,
+          return _this.gtag('config', '<%= Setting.google_analytics_id %>', {
+              <% if Setting.google_analytics_anonymous? %>
+              anonymize_ip: true,
+              <% end %>
               page_location: event.data.url
           });
       };

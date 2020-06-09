@@ -1,13 +1,18 @@
 # frozen_string_literal: true
 
 class ApplicationMailer < ActionMailer::Base
-  default from: (ENV['SKY_OS_REPLY_TO'] || 'configure_reply_to@example.com'),
-          'X-skyOS-Organization': 'Lonestar Virtual'
+  # NOTE `default` is unusable for dynamic variables due to Rails eager loading
+  # in production. See `after_action` for dynamically set headers used by skyOS
+  #
+  # default from: Setting.reply_to,
+  #         'X-skyOS-Organization': Setting.organization_name
 
   layout 'mailer'
   add_template_helper(EmailHelper)
 
   after_action do
-    mail.subject.prepend('[Lonestar Cargo] ')
+    mail.from(Setting.reply_to) if mail.from.blank?
+    mail.subject.prepend("[#{Setting.organization_name}] ")
+    mail['X-skyOS-Org'] = Setting.organization_name
   end
 end

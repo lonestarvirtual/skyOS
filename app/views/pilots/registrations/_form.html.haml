@@ -45,7 +45,7 @@
   - if GoogleRecaptcha.enabled?
     .row.mt-2
       .col
-        = recaptcha_v3(action: 'registration', site_key: GoogleRecaptcha::SITE_KEY, turbolinks: true)
+        = recaptcha_v3(action: 'registration', site_key: GoogleRecaptcha.site_key, turbolinks: true)
 
         %small.text-muted
           This site is protected by reCAPTCHA and the Google
