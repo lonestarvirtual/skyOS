@@ -1,14 +1,16 @@
 # frozen_string_literal: true
 
 if ENV['COVERAGE']
+  require 'codecov'
   require 'simplecov'
 
   SimpleCov.start 'rails' do
     minimum_coverage 90
 
-    formatter SimpleCov::Formatter::MultiFormatter.new(
-      [SimpleCov::Formatter::HTMLFormatter]
-    )
+    formatters = [SimpleCov::Formatter::HTMLFormatter]
+    formatters.push(SimpleCov::Formatter::Codecov) if ENV['CODECOV_TOKEN']
+
+    formatter SimpleCov::Formatter::MultiFormatter.new(formatters)
 
     add_filter '/lib/tasks/'
   end
