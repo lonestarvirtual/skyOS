@@ -19,7 +19,7 @@ jobs:
   publish:
     if: github.event_name == 'push'
     needs: build
-    runs-on: ubunut-latest
+    runs-on: ubuntu-latest
     steps:
       - name: 'Publish to GitHub Registry (tag: experimental)'
         uses: elgohr/Publish-Docker-Github-Action@master
