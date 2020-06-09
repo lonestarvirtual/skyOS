@@ -1,0 +1,76 @@
+{
+  "name": "skyOS",
+  "description": "A web-based virtual airline management system written in Rails",
+  "keywords": [
+    "rails",
+    "hobby-game",
+    "virtual-airlines-manager-system",
+    "virtual-airline"
+  ],
+  "repository": "https://github.com/lonestarvirtual/skyOS",
+  "env": {
+    "RAILS_HOSTNAME": {
+      "description": "Set the public hostname: app-name.herokuapp.com",
+      "value": ""
+    },
+    "RAILS_SERVE_STATIC_FILES": {
+      "description": "Have the application directly serve static assets",
+      "value": "enabled",
+      "required": false
+    },
+    "SECRET_KEY_BASE": {
+      "description": "A secret key for verifying the integrity of signed cookies.",
+      "generator": "secret"
+    },
+    "SMTP_SERVER": {
+      "description": "SMTP server hostname: smtp.server.com",
+      "value": "",
+      "required": false
+    },
+    "SMTP_PORT": {
+      "description": "SMTP server port",
+      "value": "587",
+      "required": false
+    },
+    "SMTP_USERNAME": {
+      "description": "SMTP username",
+      "value": "",
+      "required": false
+    },
+    "SMTP_PASSWORD": {
+      "description": "SMTP password",
+      "value": "",
+      "required": false
+    }
+  },
+  "addons": [
+    {
+      "plan": "heroku-postgresql:hobby-dev"
+    },
+    {
+      "plan": "rediscloud:30",
+      "as": "REDIS"
+    }
+  ],
+  "buildpacks": [
+    {
+      "url": "heroku/ruby"
+    },
+    {
+      "url": "https://github.com/DuckyTeam/heroku-buildpack-imagemagick"
+    }
+  ],
+  "formation": {
+    "web": {
+      "quantity": 1,
+      "size": "free"
+    },
+    "worker": {
+      "quantity": 1,
+      "size": "free"
+    }
+  },
+  "scripts": {
+    "postdeploy": "./bin/heroku-postdeploy.sh"
+  }
+}
