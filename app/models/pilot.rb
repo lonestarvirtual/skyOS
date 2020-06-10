@@ -19,7 +19,7 @@ class Pilot < ApplicationRecord
   after_validation :titleize_name
 
   before_validation :assign_group, only: :create
-  before_validation :assign_pid
+  before_validation :assign_pid, if: :pid_needed?
 
   validates :pid,
             numericality: { only_integer: true },
@@ -122,16 +122,20 @@ class Pilot < ApplicationRecord
   # the starting value
   #
   def assign_pid
-    return unless pid.nil?
-
     start = Setting.starting_pid
 
-    if Pilot.all.empty?
-      self.pid = start
-    else
-      last = Pilot.order(pid: :desc).first
-      self.pid = (last.pid >= start ? last.pid + 1 : start)
-    end
+    self.pid = if Pilot.exists?
+                 last = Pilot.order(pid: :asc).last
+                 (last.pid >= start ? last.pid + 1 : start)
+               else
+                 start
+               end
+  end
+
+  # Used in callbacks to determine whether a Pilot ID should be assigned
+  #
+  def pid_needed?
+    pid.blank?
   end
 
   def slug_candidates
