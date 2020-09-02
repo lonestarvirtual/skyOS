@@ -74,10 +74,9 @@ GEM
     brakeman (4.8.1)
     builder (3.2.4)
     byebug (11.1.1)
-    codecov (0.1.16)
+    codecov (0.2.9)
       json
       simplecov
-      url
     concurrent-ruby (1.1.7)
     connection_pool (2.2.2)
     crass (1.0.6)
@@ -137,7 +136,7 @@ GEM
     jaro_winkler (1.5.4)
     jbuilder (2.10.0)
       activesupport (>= 5.0.0)
-    json (2.3.0)
+    json (2.3.1)
     kaminari (1.2.1)
       activesupport (>= 4.1.0)
       kaminari-actionview (= 1.2.1)
@@ -310,7 +309,7 @@ GEM
     simple_form (5.0.2)
       actionpack (>= 5.0)
       activemodel (>= 5.0)
-    simplecov (0.18.5)
+    simplecov (0.19.0)
       docile (~> 1.1)
       simplecov-html (~> 0.11)
     simplecov-html (0.12.2)
@@ -336,7 +335,6 @@ GEM
     tzinfo (1.2.7)
       thread_safe (~> 0.1)
     unicode-display_width (1.7.0)
-    url (0.3.2)
     warden (1.2.8)
       rack (>= 2.0.6)
     web-console (4.0.1)
