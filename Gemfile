@@ -11,7 +11,7 @@ gem 'websocket-extensions', '>= 0.1.5' # CVE-2020-7663
 # Use postgresql as the database for Active Record
 gem 'pg', '>= 0.18', '< 2.0'
 # Use Puma as the app server
-gem 'puma', '~> 4.3'
+gem 'puma', '~> 5.5'
 # Use SCSS for stylesheets
 gem 'sass-rails', '>= 6'
 gem 'sassc', '~> 2.3.0'
