@@ -33,7 +33,7 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v1
         with:
-          node-version: 10.X
+          node-version: 12.X
 
       - name: Find yarn cache location
         id: yarn-cache
@@ -108,7 +108,7 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v1
         with:
-          node-version: 10.X
+          node-version: 12.X
 
       - name: Find yarn cache location
         id: yarn-cache
