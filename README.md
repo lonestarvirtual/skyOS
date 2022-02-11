@@ -13,7 +13,7 @@ encourage forks and pull-requests for new features and fixes!
 
 ## Development Getting Started
 
-Developed with Ruby: 2.6.3 / Rails: 6
+Developed with Ruby: 2.6.9 / Rails: 6
 
 To get the Rails server running locally:
 
