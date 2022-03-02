@@ -8,6 +8,6 @@ module PirepsHelper
     audit = pirep.versions.last
     timef = '%m-%d-%Y %H:%M %Z'
     "#{status.name} by #{audit.version_author}" \
-    " at #{audit.created_at.strftime(timef)}"
+      " at #{audit.created_at.strftime(timef)}"
   end
 end

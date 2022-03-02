@@ -4,7 +4,7 @@ class Repaint < ApplicationRecord
   belongs_to :fleet
   has_one_attached :file
 
-  validates :fleet, :name, :file, presence: true
+  validates :name, :file, presence: true
 
   validate :acceptable_file
 

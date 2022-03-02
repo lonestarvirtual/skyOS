@@ -29,16 +29,10 @@ RSpec.describe Pirep, type: :model do
 
   describe 'ActiveRecord validations' do
     # Basic validations
-    it { expect(pirep).to validate_presence_of(:pilot) }
     it { expect(pirep).to validate_presence_of(:date) }
-    it { expect(pirep).to validate_presence_of(:airline_id) }
     it { expect(pirep).to validate_presence_of(:flight) }
     it { expect(pirep).to validate_presence_of(:leg) }
-    it { expect(pirep).to validate_presence_of(:orig_id) }
-    it { expect(pirep).to validate_presence_of(:dest_id) }
     it { expect(pirep).to validate_presence_of(:route) }
-    it { expect(pirep).to validate_presence_of(:equipment_id) }
-    it { expect(pirep).to validate_presence_of(:simulator_id) }
     it { expect(pirep).to validate_presence_of(:duration) }
     # it { expect(pirep).to validate_presence_of(:distance) }
     # it { expect(pirep).to validate_presence_of(:status_id) }

@@ -30,7 +30,7 @@ RSpec.describe Announcement, type: :model do
     end
 
     it 'is invalid if the end time is before now' do
-      announcement.end_at = Time.current - 1.second
+      announcement.end_at = 1.second.ago
       expect(announcement).to_not be_valid
     end
   end
@@ -55,7 +55,7 @@ RSpec.describe Announcement, type: :model do
 
   describe '#purge' do
     before :each do
-      end_time = Time.current - 1.day
+      end_time = 1.day.ago
       create_list(:announcement, 4, :skip_validation, end_at: end_time)
     end
 

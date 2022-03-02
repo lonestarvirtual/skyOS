@@ -24,9 +24,7 @@ class SimulatorPolicy < ApplicationPolicy
   end
 
   def permitted_attributes
-    unless @user.can?(Simulator, :create) || @user.can?(Simulator, :update)
-      return
-    end
+    return unless @user.can?(Simulator, :create) || @user.can?(Simulator, :update)
 
     %i[short_name name]
   end

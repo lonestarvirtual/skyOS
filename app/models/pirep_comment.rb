@@ -2,8 +2,8 @@
 
 class PirepComment < ApplicationRecord
   belongs_to :pirep, optional: false
-  belongs_to :author, class_name: 'Pilot'
+  belongs_to :author, class_name: 'Pilot', optional: false
 
-  validates :pirep, :author, :body, presence: true
+  validates :body, presence: true
   validates :body, presence: { allow_blank: false }
 end

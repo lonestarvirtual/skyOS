@@ -3,6 +3,8 @@
 class Pirep < ApplicationRecord
   has_paper_trail only: [:status_id], on: [:update]
 
+  before_validation :calculate_distance, :upcase_route
+  before_validation :set_status, on: :create
   after_commit :notify_admin
   after_commit :notify_pilot, if: :approved?
 
@@ -21,25 +23,16 @@ class Pirep < ApplicationRecord
                                 allow_destroy: true,
                                 reject_if: :all_blank
 
-  before_validation :calculate_distance, :upcase_route
-  before_validation :set_status, on: :create
-
   delegate :approved?, to: :status
 
-  validates :pilot,
-            :date,
-            :airline_id,
+  validates :date,
             :flight,
             :leg,
-            :orig_id,
-            :dest_id,
             :route,
-            :equipment_id,
-            :simulator_id,
             :duration,
             :distance,
-            :status_id,
-            presence: true
+            presence: true,
+            allow_blank: false
 
   validates :flight,
             numericality: {

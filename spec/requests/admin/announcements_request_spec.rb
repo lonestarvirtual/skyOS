@@ -103,7 +103,7 @@ RSpec.describe 'Admin::Announcements', type: :request do
 
   describe 'DELETE #purge' do
     before :each do
-      end_time = Time.current - 1.day
+      end_time = 1.day.ago
       create_list(:announcement, 4, :skip_validation, end_at: end_time)
     end
 

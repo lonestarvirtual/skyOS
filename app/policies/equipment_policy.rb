@@ -24,9 +24,7 @@ class EquipmentPolicy < ApplicationPolicy
   end
 
   def permitted_attributes
-    unless @user.can?(Equipment, :create) || @user.can?(Equipment, :update)
-      return
-    end
+    return unless @user.can?(Equipment, :create) || @user.can?(Equipment, :update)
 
     %i[icao iata name short_name description]
   end

@@ -16,18 +16,17 @@ class Pilot < ApplicationRecord
   devise :confirmable, :database_authenticatable, :lockable, :registerable,
          :recoverable, :rememberable, :trackable, :timeoutable, :validatable
 
-  after_validation :titleize_name
-
   before_validation :assign_group, only: :create
   before_validation :assign_pid, if: :pid_needed?
+  after_validation :titleize_name
 
   validates :pid,
             numericality: { only_integer: true },
             uniqueness: true,
-            null: false
+            allow_blank: false
 
-  validates :last_name,  presence: true, null: false
-  validates :first_name, presence: true, null: false
+  validates :last_name,  presence: true, allow_blank: false
+  validates :first_name, presence: true, allow_blank: false
 
   validate :valid_time_zone
 
@@ -36,9 +35,7 @@ class Pilot < ApplicationRecord
   #
   def can?(klass, *actions)
     actions.each do |action|
-      if permissions.find_by(model: klass.to_s, action: action).present?
-        return true
-      end
+      return true if permissions.find_by(model: klass.to_s, action: action).present?
     end
     false
   end
