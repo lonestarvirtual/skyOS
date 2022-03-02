@@ -30,7 +30,7 @@ RUN mv config/credentials/production.yml.enc \
 
 RUN SECRET_KEY_BASE=dummy \
     RAILS_MASTER_KEY=dummy \
-    bundle exec rails assets:precompile
+    rails assets:precompile
 
 RUN mv config/credentials/production.yml.enc.bak \
        config/credentials/production.yml.enc 2>/dev/null || true
@@ -65,4 +65,4 @@ USER app
 
 ENTRYPOINT ["bin/docker-entrypoint.sh"]
 
-CMD ["bundle", "exec", "puma", "-C", "config/puma.rb"]
+CMD ["puma", "-C", "config/puma.rb"]
