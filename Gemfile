@@ -6,15 +6,15 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby '~> 2.7.5'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 6.0.3', '>= 6.0.3.7'
+gem 'rails', '~> 6.0.4.6'
 gem 'websocket-extensions', '>= 0.1.5' # CVE-2020-7663
 # Use postgresql as the database for Active Record
 gem 'pg', '>= 0.18', '< 2.0'
 # Use Puma as the app server
 gem 'puma', '~> 5.6'
 # Use SCSS for stylesheets
-gem 'sass-rails', '>= 6'
 gem 'sassc', '~> 2.3.0'
+gem 'sass-rails', '>= 6'
 # Transpile app-like JavaScript. Read more: https://github.com/rails/webpacker
 gem 'webpacker', '~> 5.0'
 # Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
@@ -42,7 +42,7 @@ gem 'haml-rails', '~> 2.0'
 gem 'image_processing', '~> 1.12'
 gem 'kaminari'
 gem 'paper_trail'
-gem 'paper_trail-association_tracking'
+gem 'paper_trail-association_tracking', '~> 2.1.3'
 gem 'pundit'
 gem 'rails-settings-cached', '~> 2.0'
 gem 'ransack'

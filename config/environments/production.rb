@@ -57,7 +57,7 @@ Rails.application.configure do
   config.action_cable.mount_path = '/cable'
 
   config.action_cable.allowed_request_origins = [
-    %r{http[s]?://(www.)?#{ENV['RAILS_HOSTNAME']}.*}
+    %r{https?://(www.)?#{ENV['RAILS_HOSTNAME']}.*}
   ]
 
   # Configure log tags with user ID if available
@@ -113,12 +113,9 @@ Rails.application.configure do
 
   # Use a different logger for distributed setups.
   # require 'syslog/logger'
-  # rubocop:disable Layout/LineLength
   # config.logger = ActiveSupport::TaggedLogging.new(Syslog::Logger.new 'app-name')
-  # rubocop:enable Layout/LineLength
-
   if ENV['RAILS_LOG_TO_STDOUT'].present?
-    logger           = ActiveSupport::Logger.new(STDOUT)
+    logger           = ActiveSupport::Logger.new($stdout)
     logger.formatter = config.log_formatter
     config.logger    = ActiveSupport::TaggedLogging.new(logger)
   end
@@ -143,10 +140,8 @@ Rails.application.configure do
   # DatabaseSelector middleware is designed as such you can define your own
   # strategy for connection switching and pass that into the middleware through
   # these configuration options.
-  # rubocop:disable Layout/LineLength
   # config.active_record.database_selector = { delay: 2.seconds }
   # config.active_record.database_resolver = ActiveRecord::Middleware::DatabaseSelector::Resolver
   # config.active_record.database_resolver_context = ActiveRecord::Middleware::DatabaseSelector::Resolver::Session
-  # rubocop:enable Layout/LineLength
 end
 # rubocop:enable Metrics/BlockLength

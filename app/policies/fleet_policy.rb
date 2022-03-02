@@ -28,7 +28,7 @@ class FleetPolicy < ApplicationPolicy
 
     [
       :image, :airline_id, :equipment_id, :remove_image,
-      repaints_attributes: %i[id _destroy name file]
+      { repaints_attributes: %i[id _destroy name file] }
     ]
   end
 end

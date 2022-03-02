@@ -23,12 +23,8 @@ RSpec.describe Flight, type: :model do
 
   describe 'ActiveRecord validations' do
     # Basic validations
-    it { expect(flight).to validate_presence_of(:airline) }
-    it { expect(flight).to validate_presence_of(:equipment) }
     it { expect(flight).to validate_presence_of(:number) }
     it { expect(flight).to validate_presence_of(:leg) }
-    it { expect(flight).to validate_presence_of(:orig_id) }
-    it { expect(flight).to validate_presence_of(:dest_id) }
     it { expect(flight).to validate_presence_of(:out_time) }
     it { expect(flight).to validate_presence_of(:in_time) }
     # it { expect(flight).to validate_presence_of(:duration) }

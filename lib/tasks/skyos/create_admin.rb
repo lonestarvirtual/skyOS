@@ -19,13 +19,13 @@ namespace :skyos do
   # rubocop:disable Rails/Output
   def build_pilot
     print 'First name: '
-    first_name = STDIN.gets.chomp
+    first_name = $stdin.gets.chomp
     print 'Last name: '
-    last_name = STDIN.gets.chomp
+    last_name = $stdin.gets.chomp
     print 'email: '
-    email = STDIN.gets.chomp
+    email = $stdin.gets.chomp
     print 'Password: '
-    password = STDIN.noecho(&:gets).chomp
+    password = $stdin.noecho(&:gets).chomp
     puts
     Pilot.new(
       first_name: first_name,

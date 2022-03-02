@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class ApplicationMailer < ActionMailer::Base
-  # NOTE `default` is unusable for dynamic variables due to Rails eager loading
+  # NOTE: `default` is unusable for dynamic variables due to Rails eager loading
   # in production. See `after_action` for dynamically set headers used by skyOS
   #
   # default from: Setting.reply_to,

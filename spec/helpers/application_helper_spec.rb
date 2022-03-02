@@ -50,8 +50,8 @@ RSpec.describe ApplicationHelper, type: :helper do
     end
 
     it 'returns a copyright string for multiple years' do
-      Setting.copyright_year = (Time.current - 1.year).year
-      start_year = (Time.current - 1.year).year
+      Setting.copyright_year = 1.year.ago.year
+      start_year = 1.year.ago.year
       expect_str = "#{start_year}-#{Time.current.year}"
       expect(helper.copyright_years).to eq expect_str
     end

@@ -15,9 +15,7 @@ module ApplicationHelper
   # "YYYY" is the current year
   #
   def copyright_years
-    if Time.zone.now.year == Setting.copyright_year
-      return Setting.copyright_year
-    end
+    return Setting.copyright_year if Time.zone.now.year == Setting.copyright_year
 
     "#{Setting.copyright_year}-#{Time.current.year}"
   end

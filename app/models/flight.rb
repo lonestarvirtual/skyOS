@@ -11,12 +11,8 @@ class Flight < ApplicationRecord
 
   before_validation :calculate_distance, :calculate_duration
 
-  validates :airline,
-            :equipment,
-            :number,
+  validates :number,
             :leg,
-            :orig_id,
-            :dest_id,
             :out_time,
             :in_time,
             :duration,
@@ -107,8 +103,7 @@ class Flight < ApplicationRecord
     self.distance = orig.distance_to(dest, :nm).round
   end
 
-  # rubocop:disable Metrics/AbcSize
-  # TODO rubocop thinks this is too complex, refactor?
+  # TODO: rubocop thinks this is too complex, refactor?
   def calculate_duration
     return if out_time.nil? || in_time.nil? || duration.present?
 
@@ -119,7 +114,6 @@ class Flight < ApplicationRecord
 
     self.duration = ((in_time - out_time) / 1.hour).round(1)
   end
-  # rubocop:enable Metrics/AbcSize
 
   def slug_candidates
     [

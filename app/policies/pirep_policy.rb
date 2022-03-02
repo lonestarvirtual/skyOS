@@ -29,7 +29,9 @@ class PirepPolicy < ApplicationPolicy
   def update?
     if @user.can?(Pirep, :update)
       true
+    # rubocop:disable Lint/DuplicateBranch
     elsif (@record.pilot == @user) && @record.status.editable?
+      # rubocop:enable Lint/DuplicateBranch
       true
     end
   end
@@ -43,13 +45,13 @@ class PirepPolicy < ApplicationPolicy
       [
         :date, :airline_id, :flight, :leg, :orig_icao, :dest_icao,
         :route, :equipment_id, :simulator_id, :duration, :network_id,
-        :status_id, :draft, comments_attributes: %i[_destroy id body]
+        :status_id, :draft, { comments_attributes: %i[_destroy id body] }
       ]
     else
       [
         :date, :airline_id, :flight, :leg, :orig_icao, :dest_icao,
         :route, :equipment_id, :simulator_id, :duration, :network_id, :draft,
-        comments_attributes: %i[id body]
+        { comments_attributes: %i[id body] }
       ]
     end
   end

@@ -11,12 +11,11 @@ RSpec.describe PirepComment, type: :model do
 
   describe 'ActiveRecord associations' do
     it { expect(pirep_comment).to belong_to(:pirep).required }
+    it { expect(pirep_comment).to belong_to(:author).required }
   end
 
   describe 'ActiveRecord validations' do
     # Basic validations
-    it { expect(pirep_comment).to validate_presence_of(:pirep) }
-    it { expect(pirep_comment).to validate_presence_of(:author) }
 
     # Format validations
 

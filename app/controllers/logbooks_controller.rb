@@ -4,7 +4,6 @@ class LogbooksController < ApplicationController
   skip_before_action :authenticate_pilot!, only: :show
   skip_after_action  :verify_authorized, only: :show
 
-  # rubocop:disable Metrics/AbcSize
   def show
     authorize Pirep, :index?
     @pilot = Pilot.friendly.find(params[:pilot_id])
@@ -14,5 +13,4 @@ class LogbooksController < ApplicationController
 
     @pireps = @q.result.page(params[:page])
   end
-  # rubocop:enable Metrics/AbcSize
 end
