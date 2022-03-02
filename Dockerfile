@@ -1,4 +1,4 @@
-FROM ruby:2.6.9-alpine AS Builder
+FROM ruby:2.7.5-alpine AS Builder
 
 RUN apk add --update --no-cache \
     build-base \
@@ -40,7 +40,7 @@ RUN mkdir -p tmp/pids
 
 ###########################################################
 
-FROM ruby:2.6.3-alpine
+FROM ruby:2.7.5-alpine
 
 RUN apk add --update --no-cache \
     postgresql-client \
