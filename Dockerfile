@@ -1,4 +1,4 @@
-FROM ruby:2.7.5-alpine AS Builder
+FROM ruby:3.1.3-alpine AS Builder
 
 RUN apk add --update --no-cache \
     build-base \
@@ -17,7 +17,7 @@ WORKDIR /app
 
 COPY . .
 
-RUN gem install bundler:1.17.3 && \
+RUN gem install bundler:2.4.7 && \
     bundle config --local without 'development test' && \
     bundle install -j4 --retry 3 && \
     bundle clean --force && \
@@ -30,6 +30,7 @@ RUN mv config/credentials/production.yml.enc \
 
 RUN SECRET_KEY_BASE=dummy \
     RAILS_MASTER_KEY=dummy \
+    NODE_OPTIONS=--openssl-legacy-provider \
     rails assets:precompile
 
 RUN mv config/credentials/production.yml.enc.bak \
@@ -41,7 +42,7 @@ RUN mkdir -p tmp/pids
 
 ###########################################################
 
-FROM ruby:2.7.5-alpine
+FROM ruby:3.1.3-alpine
 
 RUN apk add --update --no-cache \
     postgresql-client \
@@ -49,6 +50,7 @@ RUN apk add --update --no-cache \
     tzdata \
     file
 
+ENV NODE_OPTIONS --openssl-legacy-provider
 ENV RAILS_ENV production
 
 WORKDIR /app

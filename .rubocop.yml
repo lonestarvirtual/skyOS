@@ -31,6 +31,9 @@ Metrics/ClassLength:
   Exclude:
     - app/models/*
 
+Naming/BlockForwarding:
+  Enabled: false # brakeman cant deal with anonymous block forwarding
+
 Rails/SkipsModelValidations:
   Exclude:
     - spec/**/*
@@ -41,8 +44,14 @@ Style/Documentation:
 Style/HashEachMethods:
   Enabled: true
 
+Style/HashSyntax:
+  Enabled: false
+
 Style/HashTransformKeys:
   Enabled: true
 
 Style/HashTransformValues:
   Enabled: true
+
+Style/RedundantConstantBase:
+  Enabled: false
