@@ -28,10 +28,10 @@ namespace :skyos do
     password = $stdin.noecho(&:gets).chomp
     puts
     Pilot.new(
-      first_name: first_name,
-      last_name: last_name,
-      email: email,
-      password: password,
+      first_name:,
+      last_name:,
+      email:,
+      password:,
       group: Group.find_by(name: 'Admin'),
       active: true,
       confirmed_at: Time.zone.now

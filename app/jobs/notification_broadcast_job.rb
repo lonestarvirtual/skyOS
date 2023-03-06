@@ -18,7 +18,7 @@ class NotificationBroadcastJob < ApplicationJob
     Time.use_zone notification.pilot.time_zone do
       NotificationsController.render(
         partial: 'notification',
-        locals: { notification: notification }
+        locals: { notification: }
       ).squish
     end
   end

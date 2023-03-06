@@ -21,9 +21,9 @@ RSpec.describe Fleet, type: :model do
 
     # Inclusion/acceptance of values
     it {
-      expect(fleet).to validate_uniqueness_of(:equipment_id)\
-        .scoped_to(:airline_id)\
-        .case_insensitive\
+      expect(fleet).to validate_uniqueness_of(:equipment_id) \
+        .scoped_to(:airline_id) \
+        .case_insensitive \
         .with_message('already in use with this airline')
     }
   end
