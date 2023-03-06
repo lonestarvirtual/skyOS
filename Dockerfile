@@ -30,6 +30,7 @@ RUN mv config/credentials/production.yml.enc \
 
 RUN SECRET_KEY_BASE=dummy \
     RAILS_MASTER_KEY=dummy \
+    NODE_OPTIONS=--openssl-legacy-provider \
     rails assets:precompile
 
 RUN mv config/credentials/production.yml.enc.bak \
@@ -49,6 +50,7 @@ RUN apk add --update --no-cache \
     tzdata \
     file
 
+ENV NODE_OPTIONS --openssl-legacy-provider
 ENV RAILS_ENV production
 
 WORKDIR /app
