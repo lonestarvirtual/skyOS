@@ -118,7 +118,7 @@ class Pirep < ApplicationRecord
     msg += " from #{orig.icao} to #{dest.icao}"
     msg += " (#{airline.icao}#{flight} Leg #{leg}) has been approved"
 
-    Notification.create(pilot: pilot, title: 'PIREP Approved', body: msg)
+    Notification.create(pilot:, title: 'PIREP Approved', body: msg)
   end
 
   def set_status
