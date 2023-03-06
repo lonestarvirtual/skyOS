@@ -8,7 +8,7 @@ class ContactMailer < ApplicationMailer
     # Email each staff member
     #
     Setting.admin_emails.each do |address|
-      mail(to: address, reply_to: contact.email, subject:)
+      mail(to: address, reply_to: contact.email, subject: subject)
     end
   end
 end

@@ -2,10 +2,10 @@
 
 if Rails.env.production? && !ENV['RAILS_BUILD_IN_PROGRESS']
   SMTP_SETTINGS = {
-    address: ENV.fetch('SMTP_SERVER', nil),
-    domain: ENV['SMTP_DOMAIN'] || ENV.fetch('RAILS_HOSTNAME', nil),
-    user_name: ENV.fetch('SMTP_USERNAME', nil),
-    password: ENV.fetch('SMTP_PASSWORD', nil),
+    address: ENV['SMTP_SERVER'],
+    domain: ENV['SMTP_DOMAIN'] || ENV['RAILS_HOSTNAME'],
+    user_name: ENV['SMTP_USERNAME'],
+    password: ENV['SMTP_PASSWORD'],
     authentication: ENV['SMTP_AUTH'] || :plain,
     port: ENV['SMTP_PORT'] || 25
   }.freeze

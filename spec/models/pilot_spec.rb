@@ -129,7 +129,7 @@ RSpec.describe Pilot, type: :model do
     it 'should return the total distance of approved flights' do
       sum    = 0
       pilot  = create(:pilot)
-      pireps = create_list(:pirep, 4, :approved, pilot:)
+      pireps = create_list(:pirep, 4, :approved, pilot: pilot)
       pireps.each { |p| sum += p.distance }
 
       expect(pilot.total_distance).to eq sum
@@ -139,7 +139,7 @@ RSpec.describe Pilot, type: :model do
   describe '#total_flights' do
     it 'should return the total number of approved flights' do
       pilot = create(:pilot)
-      create_list(:pirep, 4, :approved, pilot:)
+      create_list(:pirep, 4, :approved, pilot: pilot)
       expect(pilot.total_flights).to eq 4
     end
   end
@@ -148,7 +148,7 @@ RSpec.describe Pilot, type: :model do
     it 'should return the total hours of approved flights' do
       sum    = 0
       pilot  = create(:pilot)
-      pireps = create_list(:pirep, 4, :approved, pilot:)
+      pireps = create_list(:pirep, 4, :approved, pilot: pilot)
       pireps.each { |p| sum += p.duration }
 
       expect(pilot.total_hours).to eq sum

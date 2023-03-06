@@ -35,7 +35,7 @@ class Pilot < ApplicationRecord
   #
   def can?(klass, *actions)
     actions.each do |action|
-      return true if permissions.find_by(model: klass.to_s, action:).present?
+      return true if permissions.find_by(model: klass.to_s, action: action).present?
     end
     false
   end

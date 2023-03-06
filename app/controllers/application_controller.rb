@@ -35,8 +35,8 @@ class ApplicationController < ActionController::Base
     current_pilot
   end
 
-  def use_time_zone(&)
-    Time.use_zone(current_pilot.time_zone, &)
+  def use_time_zone(&block)
+    Time.use_zone(current_pilot.time_zone, &block)
   end
 
   def after_sign_in_path_for(_resource)
