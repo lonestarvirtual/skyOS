@@ -44,6 +44,7 @@ gem 'kaminari'
 gem 'net-smtp', require: false
 gem 'paper_trail'
 gem 'paper_trail-association_tracking', '~> 2.1.3'
+gem 'psych', '< 4.0.0' # keep until rails 7.0.2.4
 gem 'pundit'
 gem 'rails-settings-cached', '~> 2.0'
 gem 'ransack'
