@@ -17,7 +17,7 @@ WORKDIR /app
 
 COPY . .
 
-RUN gem install bundler:1.17.3 && \
+RUN gem install bundler:2.4.7 && \
     bundle config --local without 'development test' && \
     bundle install -j4 --retry 3 && \
     bundle clean --force && \
