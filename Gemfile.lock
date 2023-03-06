@@ -286,7 +286,7 @@ GEM
     ruby-progressbar (1.13.0)
     ruby-vips (2.1.4)
       ffi (~> 1.12)
-    ruby_parser (3.18.1)
+    ruby_parser (3.20.0)
       sexp_processor (~> 4.16)
     sass-rails (6.0.0)
       sassc-rails (~> 2.1, >= 2.1.1)
@@ -299,7 +299,7 @@ GEM
       sprockets-rails
       tilt
     semantic_range (3.0.0)
-    sexp_processor (4.16.0)
+    sexp_processor (4.16.1)
     shoulda-callback-matchers (1.1.4)
       activesupport (>= 3)
     shoulda-matchers (5.1.0)
