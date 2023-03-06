@@ -3,7 +3,7 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '~> 2.7.5'
+ruby '~> 3.1.3'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 6.0.4.8'
@@ -41,6 +41,7 @@ gem 'gravtastic'
 gem 'haml-rails', '~> 2.0'
 gem 'image_processing', '~> 1.12'
 gem 'kaminari'
+gem 'net-smtp', require: false
 gem 'paper_trail'
 gem 'paper_trail-association_tracking', '~> 2.1.3'
 gem 'pundit'
@@ -60,7 +61,7 @@ group :development, :test do
   gem 'database_cleaner-active_record'
   gem 'dotenv-rails'
   gem 'factory_bot_rails'
-  gem 'faker', git: 'https://github.com/faker-ruby/faker.git', branch: 'master'
+  gem 'faker', git: 'https://github.com/faker-ruby/faker.git', branch: 'main'
   gem 'pundit-matchers', '~> 1.6.0'
   gem 'rails-controller-testing'
   gem 'rspec-rails', '~> 4.0.0'
