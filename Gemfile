@@ -41,6 +41,7 @@ gem 'gravtastic'
 gem 'haml-rails', '~> 2.0'
 gem 'image_processing', '~> 1.12'
 gem 'kaminari'
+gem 'net-smtp', require: false
 gem 'paper_trail'
 gem 'paper_trail-association_tracking', '~> 2.1.3'
 gem 'pundit'
